@@ -73,17 +73,15 @@ const tools: Tool[] = [
     href: "/level-zero/exercise-swap",
     icon: "/icons/exercise-swapper.webp",
   },
-  // TODO (Session Builder): when built, limit free use to 1 session per 7 days
-  // so people can't pull unlimited free sessions. Static site = soft client-side
-  // limit only (localStorage cooldown + countdown to next allowed use); bypassable
-  // via incognito / clearing storage / another device. True per-user enforcement
-  // needs accounts or a backend. Optionally email-gate each generation (Mailchimp).
+  // Soft limit only: SessionBuilder caps free use to 1 build / 7 days via a
+  // localStorage cooldown (bypassable via incognito / clearing storage / another
+  // device). True per-user enforcement would need accounts or a backend.
   {
-    kind: "soon",
+    kind: "internal",
     n: "05",
     title: "Session Builder",
-    desc: "Put together a balanced training session in minutes.",
-    note: "Coming soon",
+    desc: "Answer a few questions and get a balanced training program.",
+    href: "/level-zero/session-builder",
     icon: "/icons/session-builder.webp",
   },
   ...Array.from({ length: 4 }, (_, i) => ({

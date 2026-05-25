@@ -33,3 +33,8 @@ export const LazyExerciseSwapper = dynamic(
   () => import("./ExerciseSwapper").then((m) => m.ExerciseSwapper),
   { ssr: false, loading: () => <Skeleton /> }
 );
+
+export const LazySessionBuilder = dynamic(
+  () => import("./SessionBuilder").then((m) => m.SessionBuilder),
+  { ssr: false, loading: () => <Skeleton /> }
+);

@@ -12,11 +12,6 @@ export function Hero() {
         {/* Left column: copy (rendered statically so it paints instantly — LCP) */}
         <div className="md:col-span-7">
           <div className="flex flex-col gap-7">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border hairline bg-canvas/60 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-600 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-ember animate-ember-pulse" />
-              Now accepting 4 athletes · Spring intake
-            </div>
-
             <h1 className="font-display text-[clamp(3rem,8.4vw,7rem)] font-bold uppercase leading-[0.85] tracking-[-0.02em] text-ink-900">
               Bodies are built<br />
               in <span className="text-ember-grad">twelve weeks.</span><br />
