@@ -30,9 +30,8 @@ export function CtaBanner() {
                 You need a programme that <span className="text-ember-grad">survives Tuesday.</span>
               </h2>
               <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-canvas/70 md:text-lg">
-                Coaching is application-only and capped at twelve active clients.
-                If we're a fit, you'll hear back in 48 hours with a calendar link
-                for the diagnostic call.
+                Coaching is application-only. If we're a fit, you'll hear back in
+                48 hours with a calendar link for the diagnostic call.
               </p>
             </div>
             <div className="md:col-span-4 md:justify-self-end">
