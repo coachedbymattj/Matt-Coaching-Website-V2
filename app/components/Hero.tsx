@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight, Barbell } from "@phosphor-icons/react";
-import { CountUp } from "./motion";
 
 export function Hero() {
   return (
@@ -41,29 +39,12 @@ export function Hero() {
               </Link>
               <Link
                 href="/results"
-                className="inline-flex items-center gap-2 rounded-full border hairline px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-ink-700 transition hover:bg-ink-100 active:translate-y-[1px]"
+                className="group inline-flex items-center gap-2 rounded-full border hairline px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-ink-700 transition hover:bg-ink-100 active:translate-y-[1px]"
               >
-                See transformations
-                <span className="font-mono text-[11px] text-ember">/47</span>
+                See the results
+                <ArrowUpRight size={16} weight="bold" className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
-
-            <dl className="mt-6 grid max-w-2xl grid-cols-3 divide-x divide-ink-200/70 border-y hairline py-5">
-              {[
-                { value: 47.2, decimals: 1, suffix: "%", l: "Avg. body-fat reduction · 16 wk" },
-                { value: 1284, decimals: 0, suffix: "", l: "Sessions programmed in 2025" },
-                { value: 9.4, decimals: 1, suffix: " / 10", l: "Client NPS, rolling Q1" },
-              ].map((s) => (
-                <div key={s.l} className="px-4 first:pl-0 last:pr-0">
-                  <dt className="font-mono text-2xl tracking-tight text-ink-900 md:text-3xl">
-                    <CountUp value={s.value} decimals={s.decimals} suffix={s.suffix} />
-                  </dt>
-                  <dd className="mt-1 text-[11px] uppercase tracking-[0.16em] text-ink-500">
-                    {s.l}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
 
@@ -91,50 +72,11 @@ export function Hero() {
               <div className="pointer-events-none absolute inset-0 rounded-5xl border border-white/10 shadow-inner-glass" />
 
               <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-ink-950/60 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-canvas/90 backdrop-blur">
-                <Barbell size={14} weight="bold" /> Live block · Wk 7 / 12
+                <Barbell size={14} weight="bold" /> Online & in-person
               </div>
 
-              <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-3">
-                <div>
-                  <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-canvas/70">
-                    Currently coaching
-                  </div>
-                  <div className="mt-1 text-lg font-medium leading-tight text-canvas">
-                    Aoife Ní Bhriain<br />
-                    <span className="text-canvas/70 text-sm font-normal">
-                      Lawyer · Dublin · −9.4kg in 14wk
-                    </span>
-                  </div>
-                </div>
-                <div className="rounded-full bg-canvas px-3 py-1.5 font-mono text-[11px] text-ink-900">
-                  +1 (312) 847-1928
-                </div>
-              </div>
             </div>
 
-            {/* Floating data chip (decorative bob only — does not gate LCP) */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-6 bottom-12 hidden rounded-3xl border hairline bg-canvas p-4 shadow-diffusion-sm md:block"
-            >
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
-                Adherence · 28-day
-              </div>
-              <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-mono text-2xl tracking-tight text-ink-900">94.3</span>
-                <span className="text-xs text-ink-500">%</span>
-              </div>
-              <div className="mt-3 flex items-end gap-1">
-                {[8, 12, 6, 14, 10, 16, 13].map((h, i) => (
-                  <span
-                    key={i}
-                    className="w-1.5 rounded-sm bg-ember"
-                    style={{ height: `${h * 2}px`, opacity: 0.5 + i * 0.07 }}
-                  />
-                ))}
-              </div>
-            </motion.div>
           </div>
         </aside>
       </div>

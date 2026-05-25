@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Lifebuoy,
-  Scales,
-  ForkKnife,
   LockSimple,
-  ArrowsLeftRight,
-  ListChecks,
   ArrowUpRight,
   ArrowRight,
 } from "@phosphor-icons/react/dist/ssr";
@@ -26,7 +21,7 @@ type Tool =
       title: string;
       desc: string;
       href: string;
-      icon: ReactNode;
+      icon: string;
     }
   | {
       kind: "internal";
@@ -34,7 +29,7 @@ type Tool =
       title: string;
       desc: string;
       href: string;
-      icon: ReactNode;
+      icon: string;
     }
   | {
       kind: "soon";
@@ -42,7 +37,7 @@ type Tool =
       title: string;
       desc?: string;
       note: string;
-      icon: ReactNode;
+      icon: string;
     };
 
 const tools: Tool[] = [
@@ -52,7 +47,7 @@ const tools: Tool[] = [
     title: "Panic Button",
     desc: "In-the-moment coaching when you're struggling.",
     href: "https://panicbtn-mhvwst4c.manus.space/",
-    icon: <Lifebuoy size={20} weight="bold" />,
+    icon: "/icons/panic-button.webp",
   },
   {
     kind: "internal",
@@ -60,7 +55,7 @@ const tools: Tool[] = [
     title: "Goal Weight Calculator",
     desc: "Find your ideal goal weight from your body-fat %.",
     href: "/level-zero/goal-weight",
-    icon: <Scales size={20} weight="bold" />,
+    icon: "/icons/goal-weight.webp",
   },
   {
     kind: "internal",
@@ -68,7 +63,7 @@ const tools: Tool[] = [
     title: "Macro Calculator",
     desc: "Work out your daily macros.",
     href: "/level-zero/macro",
-    icon: <ForkKnife size={20} weight="bold" />,
+    icon: "/icons/macro.webp",
   },
   {
     kind: "internal",
@@ -76,7 +71,7 @@ const tools: Tool[] = [
     title: "Exercise Swaps",
     desc: "Find a smart alternative for any exercise.",
     href: "/level-zero/exercise-swap",
-    icon: <ArrowsLeftRight size={20} weight="bold" />,
+    icon: "/icons/exercise-swapper.webp",
   },
   // TODO (Session Builder): when built, limit free use to 1 session per 7 days
   // so people can't pull unlimited free sessions. Static site = soft client-side
@@ -89,14 +84,14 @@ const tools: Tool[] = [
     title: "Session Builder",
     desc: "Put together a balanced training session in minutes.",
     note: "Coming soon",
-    icon: <ListChecks size={20} weight="bold" />,
+    icon: "/icons/session-builder.webp",
   },
   ...Array.from({ length: 4 }, (_, i) => ({
     kind: "soon" as const,
     n: String(i + 6).padStart(2, "0"),
     title: "New tool incoming",
     note: "Coming soon",
-    icon: <LockSimple size={20} weight="bold" />,
+    icon: "/icons/coming-soon.webp",
   })),
 ];
 
@@ -107,7 +102,7 @@ function ToolCardChrome({
   children,
   footer,
 }: {
-  icon: ReactNode;
+  icon: string;
   n: string;
   muted?: boolean;
   children: ReactNode;
@@ -117,13 +112,14 @@ function ToolCardChrome({
     <>
       <div>
         <div className="flex items-center justify-between">
-          <span
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${
-              muted ? "bg-ink-100 text-ink-400" : "bg-ember/10 text-ember-deep"
-            }`}
-          >
-            {icon}
-          </span>
+          <img
+            src={icon}
+            alt=""
+            width={48}
+            height={48}
+            loading="lazy"
+            className={`h-12 w-12 rounded-2xl object-cover ${muted ? "opacity-80" : ""}`}
+          />
           <span
             className={`font-mono text-[10px] uppercase tracking-[0.2em] ${
               muted ? "text-ink-300" : "text-ink-400"

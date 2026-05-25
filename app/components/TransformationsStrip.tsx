@@ -1,18 +1,19 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { results } from "../lib/results";
 
-// Same source as the Results page; show the 3 most recent.
-const cases = results.slice(0, 3);
-
 export function TransformationsStrip() {
+  const reduce = useReducedMotion();
+  // Duplicate for a seamless loop; reduced motion gets a single, scrollable row.
+  const items = reduce ? results : [...results, ...results];
+
   return (
     <section className="grain relative overflow-hidden bg-ink-950 py-24 text-canvas md:py-32">
       <div className="pointer-events-none absolute inset-0 speed-stripes" />
-      <div className="relative mx-auto max-w-[1400px] px-6">
+      <div className="relative mx-auto mb-12 max-w-[1400px] px-6">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-soft">
@@ -31,45 +32,35 @@ export function TransformationsStrip() {
             <ArrowUpRight size={16} weight="bold" />
           </Link>
         </div>
+      </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {cases.map((c, i) => (
-            <motion.article
-              key={c.slug}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ type: "spring", stiffness: 90, damping: 20, delay: i * 0.08 }}
+      <div className={`relative overflow-hidden ${reduce ? "overflow-x-auto" : ""}`}>
+        <div
+          className={`flex w-max gap-4 ${
+            reduce ? "px-6" : "animate-marquee hover:[animation-play-state:paused]"
+          }`}
+        >
+          {items.map((c, i) => (
+            <Link
+              key={i}
+              href="/results"
+              className="group block w-[280px] shrink-0 sm:w-[340px]"
             >
-              <Link href="/results" className="group block">
-                <div
-                  className="relative overflow-hidden rounded-5xl border border-canvas/10 bg-ink-900 shadow-diffusion"
-                  style={{ aspectRatio: "10 / 9" }}
-                >
-                  <img
-                    src={c.img}
-                    alt={`${c.name} transformation: ${c.headline}, ${c.detail}.`}
-                    width={900}
-                    height={825}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain transition duration-700 group-hover:scale-[1.03]"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-5xl border border-white/10 shadow-inner-glass" />
-
-                  <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-ink-950/55 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-canvas/90 backdrop-blur">
-                    <span className="h-1.5 w-1.5 rounded-full bg-ember animate-breathe" />
-                    Case · 0{i + 1}
-                  </div>
-
-                  <div className="absolute inset-x-5 bottom-5 flex justify-end">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-canvas/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-900 opacity-0 transition duration-300 group-hover:opacity-100">
-                      See all results
-                      <ArrowUpRight size={12} weight="bold" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
+              <div
+                className="relative overflow-hidden rounded-4xl border border-canvas/10 bg-ink-900 shadow-diffusion"
+                style={{ aspectRatio: "10 / 9" }}
+              >
+                <img
+                  src={c.img}
+                  alt={`${c.name} transformation: ${c.headline}.`}
+                  width={900}
+                  height={825}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-contain transition duration-700 group-hover:scale-[1.03]"
+                />
+                <div className="pointer-events-none absolute inset-0 rounded-4xl border border-white/10 shadow-inner-glass" />
+              </div>
+            </Link>
           ))}
         </div>
       </div>
