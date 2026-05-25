@@ -98,6 +98,10 @@ export function ResultsShowcase({ cases }: { cases: ShowcaseCase[] }) {
                 <img
                   src={active.img}
                   alt={`${active.name} before and after. ${active.headline}, ${active.detail}.`}
+                  width={900}
+                  height={825}
+                  loading="eager"
+                  fetchPriority="high"
                   className="pointer-events-none absolute inset-0 h-full w-full object-contain"
                   draggable={false}
                 />

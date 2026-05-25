@@ -28,7 +28,7 @@ export function ReviewsFeed() {
         </div>
       </div>
 
-      <Script src={FEATURABLE_BUNDLE} strategy="afterInteractive" />
+      <Script src={FEATURABLE_BUNDLE} strategy="lazyOnload" />
     </section>
   );
 }

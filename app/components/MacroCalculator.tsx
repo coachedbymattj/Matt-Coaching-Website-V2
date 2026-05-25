@@ -14,7 +14,7 @@ import {
   isValidEmail,
   cleanMailchimpMessage,
 } from "../lib/mailchimpClient";
-import { BodyFatSelector } from "./BodyFatSelector";
+import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 
 const PACES = [
   { key: "gentle", label: "Gentle", rate: 0.005, sub: "0.5% / wk" },
@@ -121,6 +121,7 @@ export function MacroCalculator() {
   // client-facing inputs
   const [bodyweight, setBodyweight] = useState("");
   const [bodyFat, setBodyFat] = useState(20);
+  const [sex, setSex] = useState<Sex>("male");
   const [activity, setActivity] = useState(1.5);
   const [pace, setPace] = useState(0.0075);
 
@@ -227,12 +228,15 @@ export function MacroCalculator() {
           )}
         </div>
 
-        {/* body fat selector */}
-        <div className="mt-8">
-          <BodyFatSelector
+        {/* body fat tile: figure + slider (matches the goal calc tiles) */}
+        <div className="mt-7 flex flex-col gap-4">
+          <BodyFatFigure sex={sex} value={bodyFat} />
+          <BodyFatControls
             label="Body fat %"
             value={bodyFat}
             onChange={setBodyFat}
+            sex={sex}
+            onSexChange={setSex}
             idPrefix="mc-bf"
           />
         </div>

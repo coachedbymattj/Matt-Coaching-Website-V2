@@ -24,7 +24,53 @@ const NOTES: Record<Sex, Record<number, string>> = {
   },
 };
 
-type Props = {
+/**
+ * The morphing body-fat figure. Stands on its own so it can sit in a column
+ * beside the calculator (see GoalWeightCalculator / MacroCalculator).
+ */
+export function BodyFatFigure({
+  sex,
+  value,
+  caption,
+}: {
+  sex: Sex;
+  value: number;
+  caption?: string;
+}) {
+  // Preload the current sex's figures so sliding swaps instantly (smooth morph).
+  useEffect(() => {
+    BF_STOPS.forEach((s) => {
+      const img = new window.Image();
+      img.src = `/bodyfat/${sex}-${s}.webp`;
+    });
+  }, [sex]);
+
+  return (
+    <div className="relative mx-auto aspect-[3/4] w-full max-w-[320px] overflow-hidden rounded-3xl border hairline bg-ink-950">
+      <img
+        src={`/bodyfat/${sex}-${value}.webp`}
+        alt={`${sex === "male" ? "Male" : "Female"} figure at approximately ${value}% body fat`}
+        width={600}
+        height={804}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-950/85 to-transparent" />
+      {caption && (
+        <div className="absolute left-4 top-4 rounded-full bg-ink-950/55 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-canvas/80 backdrop-blur">
+          {caption}
+        </div>
+      )}
+      <div className="absolute bottom-3 left-4">
+        <div className="font-display text-4xl font-bold leading-none tracking-[-0.01em] text-canvas">
+          {value}
+          <span className="ml-0.5 text-xl text-canvas/60">%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type ControlsProps = {
   label: string;
   value: number;
   onChange: (v: number) => void;
@@ -37,7 +83,8 @@ type Props = {
   idPrefix?: string;
 };
 
-export function BodyFatSelector({
+/** Sex toggle + snapping slider + health note. Pairs with BodyFatFigure. */
+export function BodyFatControls({
   label,
   value,
   onChange,
@@ -47,19 +94,10 @@ export function BodyFatSelector({
   showSexToggle = true,
   showDisclaimers = true,
   idPrefix = "bf",
-}: Props) {
+}: ControlsProps) {
   const [internalSex, setInternalSex] = useState<Sex>(defaultSex);
   const sex = controlledSex ?? internalSex;
-  const setSex = (s: Sex) =>
-    onSexChange ? onSexChange(s) : setInternalSex(s);
-
-  // Preload the current sex's figures so sliding swaps instantly (smooth morph).
-  useEffect(() => {
-    BF_STOPS.forEach((s) => {
-      const img = new window.Image();
-      img.src = `/bodyfat/${sex}-${s}.png`;
-    });
-  }, [sex]);
+  const setSex = (s: Sex) => (onSexChange ? onSexChange(s) : setInternalSex(s));
 
   const note = NOTES[sex][value] ?? "";
   const labelClass =
@@ -95,70 +133,39 @@ export function BodyFatSelector({
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-[260px,1fr] sm:items-center">
-        {/* Fixed image frame: the figure swaps in place as the value changes */}
-        <div className="relative mx-auto aspect-[3/4] w-full max-w-[260px] overflow-hidden rounded-3xl border hairline bg-ink-950">
-          <img
-            src={`/bodyfat/${sex}-${value}.png`}
-            alt={`${sex === "male" ? "Male" : "Female"} figure at approximately ${value}% body fat`}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-ink-950/80 to-transparent" />
-          <div className="absolute bottom-3 left-4">
-            <div className="font-display text-4xl font-bold leading-none tracking-[-0.01em] text-canvas">
-              {value}
-              <span className="ml-0.5 text-xl text-canvas/60">%</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Controls + note */}
-        <div className="flex flex-col gap-4">
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
-              Estimated body fat
-            </div>
-            <div className="mt-0.5 font-display text-5xl font-bold uppercase leading-none tracking-[-0.01em] text-ink-900">
-              {value}
-              <span className="ml-1 text-2xl text-ink-400">%</span>
-            </div>
-          </div>
-
-          <div>
-            <input
-              id={`${idPrefix}-slider`}
-              type="range"
-              min={10}
-              max={35}
-              step={5}
-              value={value}
-              onChange={(e) => onChange(parseInt(e.target.value, 10))}
-              aria-label={`${label} estimate`}
-              aria-valuetext={`${value} percent`}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-200 accent-ember"
-            />
-            <div className="mt-2 flex justify-between">
-              {BF_STOPS.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => onChange(s)}
-                  aria-pressed={value === s}
-                  className={`font-mono text-[11px] tabular-nums transition ${
-                    value === s
-                      ? "font-bold text-ember-deep"
-                      : "text-ink-400 hover:text-ink-700"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <p className="text-sm leading-relaxed text-ink-600">{note}</p>
+      <div>
+        <input
+          id={`${idPrefix}-slider`}
+          type="range"
+          min={10}
+          max={35}
+          step={5}
+          value={value}
+          onChange={(e) => onChange(parseInt(e.target.value, 10))}
+          aria-label={`${label} estimate`}
+          aria-valuetext={`${value} percent`}
+          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-200 accent-ember"
+        />
+        <div className="mt-2 flex justify-between">
+          {BF_STOPS.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => onChange(s)}
+              aria-pressed={value === s}
+              className={`font-mono text-[11px] tabular-nums transition ${
+                value === s
+                  ? "font-bold text-ember-deep"
+                  : "text-ink-400 hover:text-ink-700"
+              }`}
+            >
+              {s}
+            </button>
+          ))}
         </div>
       </div>
+
+      <p className="text-sm leading-relaxed text-ink-600">{note}</p>
 
       {showDisclaimers && (
         <div className="rounded-3xl border hairline bg-ink-50/60 p-4">

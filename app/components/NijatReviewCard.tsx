@@ -34,6 +34,9 @@ export function NijatReviewCard({ data: c }: { data: ResultCase }) {
         <img
           src={c.img}
           alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
+          width={900}
+          height={825}
+          loading="lazy"
           className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
         />
       </div>

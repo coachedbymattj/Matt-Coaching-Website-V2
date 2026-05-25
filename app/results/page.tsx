@@ -9,63 +9,63 @@ const cases = [
     name: "Paul",
     headline: "Dropped 8.6kg",
     detail: "103.4kg to 94.8kg",
-    img: "/results/paul.png",
+    img: "/results/paul.webp",
   },
   {
     slug: "elin",
     name: "Elin",
     headline: "Dropped 9.5kg",
     detail: "Week 1 to Week 13",
-    img: "/results/elin.png",
+    img: "/results/elin.webp",
   },
   {
     slug: "nijat",
     name: "Nijat",
     headline: "Dropped 7.9kg",
     detail: "78.3kg to 70.4kg",
-    img: "/results/nijat.png",
+    img: "/results/nijat.webp",
   },
   {
     slug: "adrian",
     name: "Adrian",
     headline: "Full recomp",
     detail: "Dec 2024 to March 2025",
-    img: "/results/adrian.png",
+    img: "/results/adrian.webp",
   },
   {
     slug: "natalia",
     name: "Natalia",
     headline: "Photoshoot ready",
     detail: "Week 1 to Week 34",
-    img: "/results/natalia.png",
+    img: "/results/natalia.webp",
   },
   {
     slug: "jim",
     name: "Jim",
     headline: "Dropped 10kg",
     detail: "Week 1 to Week 12",
-    img: "/results/jim.png",
+    img: "/results/jim.webp",
   },
   {
     slug: "liam",
     name: "Liam",
     headline: "Full recomp",
     detail: "99.8kg to 97.2kg",
-    img: "/results/liam.png",
+    img: "/results/liam.webp",
   },
   {
     slug: "rebecca",
     name: "Rebecca",
     headline: "Got abs",
     detail: "Month 1 to Month 6",
-    img: "/results/rebecca.png",
+    img: "/results/rebecca.webp",
   },
   {
     slug: "chitvan",
     name: "Chitvan",
     headline: "Dropped 9.7kg",
     detail: "71.7kg to 62kg",
-    img: "/results/chitvan.png",
+    img: "/results/chitvan.webp",
   },
 ];
 
@@ -112,6 +112,9 @@ export default function ResultsPage() {
                     <img
                       src={c.img}
                       alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
+                      width={900}
+                      height={825}
+                      loading="lazy"
                       className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
                     />
                   </div>

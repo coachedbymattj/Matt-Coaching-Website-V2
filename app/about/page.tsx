@@ -13,32 +13,32 @@ const timeline = [
     year: "2016",
     title: "Fitness Advisor, Bannatyne Group · Aberdeen",
     body: "Entry into fitness. Eighteen months on the gym floor, building my first set of client results and learning what actually works when you're the one accountable for delivering them.",
-    img: "/career/2016-bannatyne.jpg",
+    img: "/career/2016-bannatyne.webp",
   },
   {
     year: "2018",
     title: "Personal Trainer, Nuffield Health · Aberdeen",
     body: "Stepped into 1:1 personal training. Built my first proper client list, delivered the results that came with it, and started obsessing about programming as a craft.",
-    img: "/career/2018-nuffield.jpg",
+    img: "/career/2018-nuffield.webp",
   },
   {
     year: "2019",
     title: "Ultimate Performance · Amsterdam",
     body: "Moved to the Netherlands and joined Ultimate Performance, one of the most rigorous coaching brands in the world. Four and a half years progressing through Personal Trainer, Mentor, Engagement Mentor, and Assistant Trainer Manager, delivering client transformations while mentoring the next bench of coaches into doing the same.",
-    img: "/career/2019-up.jpg",
+    img: "/career/2019-up.webp",
   },
   {
     year: "2024",
     title: "Head Trainer, ONE Human Performance Institute · Amsterdam",
     body: "Ten months mentoring the coaching team and helping build their mentoring systems, all while continuing to deliver client results on the floor myself.",
-    img: "/career/2024-one.jpg",
+    img: "/career/2024-one.webp",
     imgClass: "h-full w-full object-cover object-[18%_78%] scale-[1.9] origin-[18%_78%]",
   },
   {
     year: "2025",
     title: "Founded Coached by Matt J",
     body: "Went independent. A capped roster, three coaching paths, and full control over the standard.",
-    img: "https://picsum.photos/seed/career-2025-cbmj/240/240",
+    img: "/career/2025-cbmj.webp",
   },
 ];
 
@@ -84,7 +84,7 @@ export default function AboutPage() {
               style={{ aspectRatio: "5 / 6" }}
             >
               <img
-                src="/career/about-portrait.jpg"
+                src="/career/about-portrait.webp"
                 alt="Matthew Johnstone"
                 className="absolute inset-0 h-full w-full object-cover object-top opacity-95"
               />

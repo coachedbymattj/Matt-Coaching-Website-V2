@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
-import { ExerciseSwapper } from "../../components/ExerciseSwapper";
+import { LazyExerciseSwapper } from "../../components/lazy";
 
 export const metadata: Metadata = {
   title: "Exercise Swapper · Level Zero · Coached by Matt J",
@@ -35,7 +35,7 @@ export default function ExerciseSwapPage() {
         </header>
 
         <div className="mt-10">
-          <ExerciseSwapper />
+          <LazyExerciseSwapper />
         </div>
       </div>
     </section>

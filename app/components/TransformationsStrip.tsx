@@ -11,6 +11,7 @@ const cases = [
     metric: "−9.4 kg",
     sub: "14 weeks · maintained 3-rep deadlift PR",
     seed: "transform-aoife-12",
+    img: "/transformations/aoife.webp",
   },
   {
     name: "Tomás Lindqvist",
@@ -18,6 +19,7 @@ const cases = [
     metric: "+6.1 kg lean",
     sub: "22 weeks · returned to competitive Brazilian Jiu-Jitsu",
     seed: "transform-tomas-08",
+    img: "/transformations/tomas.webp",
   },
   {
     name: "Priya Sundaresan",
@@ -25,6 +27,7 @@ const cases = [
     metric: "21.4% → 14.7% BF",
     sub: "18 weeks · zero meals tracked after week 9",
     seed: "transform-priya-19",
+    img: "/transformations/priya.webp",
   },
 ];
 
@@ -73,8 +76,11 @@ export function TransformationsStrip() {
                 style={{ aspectRatio: i === 0 ? "4 / 5" : "16 / 9" }}
               >
                 <img
-                  src={`https://picsum.photos/seed/${c.seed}/1200/900`}
+                  src={c.img}
                   alt={`${c.name} transformation`}
+                  width={1200}
+                  height={900}
+                  loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-[1.02] group-hover:opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent" />

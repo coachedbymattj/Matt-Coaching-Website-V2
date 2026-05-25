@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
-import { GoalWeightCalculator } from "../../components/GoalWeightCalculator";
+import { LazyGoalWeightCalculator } from "../../components/lazy";
 
 export const metadata: Metadata = {
   title: "Goal Weight Calculator · Level Zero · Coached by Matt J",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function GoalWeightPage() {
   return (
     <section className="bg-canvas">
-      <div className="mx-auto max-w-3xl px-6 pb-24 pt-24 md:pt-32">
+      <div className="mx-auto max-w-4xl px-6 pb-24 pt-24 md:pt-32">
         <Link
           href="/level-zero"
           className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500 transition hover:text-ink-900"
@@ -36,7 +36,7 @@ export default function GoalWeightPage() {
         </header>
 
         <div className="mt-10">
-          <GoalWeightCalculator />
+          <LazyGoalWeightCalculator />
         </div>
       </div>
     </section>

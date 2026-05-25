@@ -8,7 +8,7 @@ import {
   isValidEmail,
   cleanMailchimpMessage,
 } from "../lib/mailchimpClient";
-import { BodyFatSelector, type Sex } from "./BodyFatSelector";
+import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 
 const RATES = [
   { key: "slow", label: "Slow", rate: 0.005, sub: "0.5% / wk" },
@@ -237,31 +237,54 @@ export function GoalWeightCalculator() {
             )}
           </div>
 
-          <BodyFatSelector
-            label="Current body fat %"
-            value={currentBf}
-            onChange={setCurrentBf}
-            sex={sex}
-            onSexChange={setSex}
-            showDisclaimers={false}
-            idPrefix="gw-cur"
-          />
+          {/* Current + Goal tiles: side by side on desktop, stacked on mobile */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <BodyFatFigure sex={sex} value={currentBf} />
+              <BodyFatControls
+                label="Current body fat %"
+                value={currentBf}
+                onChange={setCurrentBf}
+                sex={sex}
+                onSexChange={setSex}
+                showDisclaimers={false}
+                idPrefix="gw-cur"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <BodyFatSelector
-              label="Goal body fat %"
-              value={goalBf}
-              onChange={setGoalBf}
-              sex={sex}
-              onSexChange={setSex}
-              showSexToggle={false}
-              idPrefix="gw-goal"
-            />
-            {errors.goalBf && (
-              <p className="text-xs leading-snug text-ember-deep">
-                {errors.goalBf}
-              </p>
-            )}
+            <div className="flex flex-col gap-4">
+              <BodyFatFigure sex={sex} value={goalBf} />
+              <BodyFatControls
+                label="Goal body fat %"
+                value={goalBf}
+                onChange={setGoalBf}
+                sex={sex}
+                onSexChange={setSex}
+                showSexToggle={false}
+                showDisclaimers={false}
+                idPrefix="gw-goal"
+              />
+              {errors.goalBf && (
+                <p className="text-xs leading-snug text-ember-deep">
+                  {errors.goalBf}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* shared disclaimers (one set under both tiles) */}
+          <div className="rounded-3xl border hairline bg-ink-50/60 p-4">
+            <ul className="flex flex-col gap-2">
+              <li className="flex items-start gap-2.5 text-xs leading-snug text-ink-500">
+                <span className="mt-1.5 h-1 w-3 flex-none rounded-full bg-ink-300" />
+                This is an estimate only.
+              </li>
+              <li className="flex items-start gap-2.5 text-xs leading-snug text-ink-500">
+                <span className="mt-1.5 h-1 w-3 flex-none rounded-full bg-ink-300" />
+                Most people underestimate their body fat, so be honest and round
+                up if unsure.
+              </li>
+            </ul>
           </div>
         </div>
 
