@@ -12,7 +12,10 @@ import {
   X,
   Lightning,
   LockSimple,
+  InstagramLogo,
 } from "@phosphor-icons/react";
+
+const INSTAGRAM_URL = "https://instagram.com/coachedbymattj";
 import {
   buildProgram,
   capsFromKeys,
@@ -315,6 +318,26 @@ export function SessionBuilder() {
                 </OptionButton>
               ))}
             </div>
+
+            {(freq === 5 || freq === 6) && (
+              <div className="mt-5 rounded-2xl border border-ember/30 bg-ember/5 p-4">
+                <p className="text-sm leading-relaxed text-ink-700">
+                  {freq} days a week is a big commitment. Most people get further
+                  with fewer, harder sessions they can actually stick to, week in,
+                  week out.
+                </p>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-start gap-2 text-sm font-semibold text-ember-deep transition hover:text-ember"
+                >
+                  <InstagramLogo size={16} weight="bold" className="mt-0.5 flex-none" />
+                  Not sure? No stress. Message me on Instagram and I&apos;ll help you
+                  figure out the right number of days for you.
+                </a>
+              </div>
+            )}
           </Question>
         )}
 
@@ -881,6 +904,21 @@ function ProgramView({
               </Link>
             </div>
           </div>
+
+          {/* soft Instagram CTA */}
+          <p className="text-center text-sm leading-relaxed text-ink-500">
+            Want a second pair of eyes on this, or something more tailored?{" "}
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-semibold text-ember-deep underline-offset-2 hover:underline"
+            >
+              <InstagramLogo size={15} weight="bold" />
+              Send me a message on Instagram
+            </a>
+            .
+          </p>
         </>
       )}
     </div>

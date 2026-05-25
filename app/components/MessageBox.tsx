@@ -6,7 +6,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 const EMAIL = "coachedbymattj@gmail.com";
-const INSTAGRAM_URL = "https://www.instagram.com/coachedbymattj/";
+const INSTAGRAM_URL = "https://instagram.com/coachedbymattj";
 
 export function MessageBox() {
   return (

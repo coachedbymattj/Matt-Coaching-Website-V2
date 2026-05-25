@@ -61,7 +61,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a className="inline-flex items-center gap-2 text-ink-200 hover:text-canvas" href="https://www.instagram.com/coachedbymattj/" target="_blank" rel="noopener noreferrer">
+                <a className="inline-flex items-center gap-2 text-ink-200 hover:text-canvas" href="https://instagram.com/coachedbymattj" target="_blank" rel="noopener noreferrer">
                   <InstagramLogo size={16} weight="regular" />
                   @coachedbymattj
                 </a>
@@ -76,7 +76,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-ink-800 pt-8 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
+        <a
+          href="https://instagram.com/coachedbymattj"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-16 inline-flex items-center gap-2 text-sm text-ink-300 transition hover:text-canvas"
+        >
+          <InstagramLogo size={16} weight="regular" />
+          Questions? DM me on Instagram
+        </a>
+
+        <div className="mt-8 flex flex-col gap-3 border-t border-ink-800 pt-8 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
           <span className="font-mono">
             © {new Date().getFullYear()} Coached by Matt J. All protocols proprietary.
           </span>
