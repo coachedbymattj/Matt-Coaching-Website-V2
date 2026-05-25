@@ -61,7 +61,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a className="inline-flex items-center gap-2 text-ink-200 hover:text-canvas" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <a className="inline-flex items-center gap-2 text-ink-200 hover:text-canvas" href="https://www.instagram.com/coachedbymattj/" target="_blank" rel="noopener noreferrer">
                   <InstagramLogo size={16} weight="regular" />
                   @coachedbymattj
                 </a>

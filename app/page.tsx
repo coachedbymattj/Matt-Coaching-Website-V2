@@ -4,6 +4,7 @@ import { BentoFeatures } from "./components/BentoFeatures";
 import { TransformationsStrip } from "./components/TransformationsStrip";
 import { ProcessSteps } from "./components/ProcessSteps";
 import { TestimonialMarquee } from "./components/TestimonialMarquee";
+import { MessageBox } from "./components/MessageBox";
 import { CtaBanner } from "./components/CtaBanner";
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       <TransformationsStrip />
       <ProcessSteps />
       <TestimonialMarquee />
+      <MessageBox />
       <CtaBanner />
     </>
   );

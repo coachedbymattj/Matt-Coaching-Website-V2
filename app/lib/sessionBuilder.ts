@@ -416,12 +416,16 @@ const SLOT = {
   },
 } satisfies Record<string, Slot>;
 
-// Each template is a list of superset groups; ~7 exercises grouped 2 + 2 + 3.
+// Each template is a list of superset groups.
 const TEMPLATES: Record<string, Slot[][]> = {
+  // Full Body follows the German Body Composition approach: every group is an
+  // upper/lower pair, so one area recovers while the other works. Short rest and
+  // slow lowering are surfaced to the user as plain-language notes (see UI).
   "Full Body": [
-    [SLOT.verticalPull, SLOT.squat],
-    [SLOT.inclinePush, SLOT.hamstring],
-    [SLOT.row, SLOT.chestIso, SLOT.deltIso],
+    [SLOT.inclinePush, SLOT.squat],
+    [SLOT.verticalPull, SLOT.hamstring],
+    [SLOT.verticalPush, SLOT.lunge],
+    [SLOT.row, SLOT.glute],
   ],
   Upper: [
     [SLOT.horizontalPush, SLOT.verticalPull],
@@ -516,6 +520,9 @@ export type BuiltDay = {
   type: string;
   groups: BuiltExercise[][];
   finisher: Finisher | null;
+  // "gbc" = Full Body upper/lower pairs, short rest, slow lowering; "standard"
+  // = same-day pairings / straight sets with normal rest.
+  method: "gbc" | "standard";
 };
 
 export type BuildInput = {
@@ -600,20 +607,17 @@ function placePriorityFirst(groups: BuiltExercise[][], priority: Priority) {
   const target = flat.find(matches);
   if (!target || target === groups[0][0]) return;
 
-  let ti = -1;
-  let tj = -1;
-  groups.forEach((g, i) =>
-    g.forEach((e, j) => {
-      if (e === target) {
-        ti = i;
-        tj = j;
-      }
-    })
-  );
-  if (ti < 0) return;
-  const tmp = groups[0][0];
-  groups[0][0] = groups[ti][tj];
-  groups[ti][tj] = tmp;
+  // Move the whole group to the front (keeps supersets / upper-lower pairs intact),
+  // then put the priority move first within it.
+  const gi = groups.findIndex((g) => g.includes(target));
+  if (gi < 0) return;
+  const [grp] = groups.splice(gi, 1);
+  groups.unshift(grp);
+  const j = grp.indexOf(target);
+  if (j > 0) {
+    grp.splice(j, 1);
+    grp.unshift(target);
+  }
 }
 
 function buildFinisher(caps: Caps): Finisher {
@@ -668,6 +672,7 @@ function buildDay(label: string, type: string, input: BuildInput, caps: Caps): B
     type,
     groups,
     finisher: input.goal === "fatloss" ? buildFinisher(caps) : null,
+    method: type === "Full Body" ? "gbc" : "standard",
   };
 }
 

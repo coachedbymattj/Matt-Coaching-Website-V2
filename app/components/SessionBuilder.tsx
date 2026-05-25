@@ -32,9 +32,15 @@ import {
   type Program,
   type SplitKey,
 } from "../lib/sessionBuilder";
+import {
+  subscribeEmail,
+  isValidEmail,
+  cleanMailchimpMessage,
+} from "../lib/mailchimpClient";
 
 const STORE_PLAN = "cbmj_sb_plan";
 const STORE_LAST = "cbmj_sb_last";
+const STORE_UNLOCKED = "cbmj_sb_unlocked";
 const WEEK = 7 * 24 * 60 * 60 * 1000;
 
 const GOALS: { key: Goal; label: string; sub: string }[] = [
@@ -79,13 +85,21 @@ export function SessionBuilder() {
   const [unlocksAt, setUnlocksAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
 
-  // Restore a saved plan + cooldown on mount (client-only).
+  // email gate
+  const [unlocked, setUnlocked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
+
+  // Restore a saved, already-unlocked session + cooldown on mount (client-only).
   useEffect(() => {
     try {
       const last = Number(localStorage.getItem(STORE_LAST) || 0);
       const saved = localStorage.getItem(STORE_PLAN);
-      if (last && saved && Date.now() - last < WEEK) {
+      const unl = localStorage.getItem(STORE_UNLOCKED) === "1";
+      if (last && saved && unl && Date.now() - last < WEEK) {
         setProgram(JSON.parse(saved) as Program);
+        setUnlocked(true);
         setUnlocksAt(last + WEEK);
       }
     } catch {
@@ -147,17 +161,49 @@ export function SessionBuilder() {
       capKeys: Array.from(equip),
       excluded,
     };
-    const prog = buildProgram(input);
-    setProgram(prog);
+    // Build it now, but keep it behind the email gate until they unlock.
+    setProgram(buildProgram(input));
     setSwapKey(null);
+    setUnlocked(false);
+    setEmail("");
+    setStatusMsg("");
+  }
+
+  // Capture the email (Mailchimp), then reveal the session and start the cooldown.
+  async function handleUnlock() {
+    if (!isValidEmail(email)) {
+      setStatusMsg("Please enter a valid email address.");
+      return;
+    }
+    setSubmitting(true);
+    setStatusMsg("");
     try {
+      const res = await subscribeEmail(email);
+      if (res.result !== "success") {
+        const clean = cleanMailchimpMessage(res.msg);
+        setStatusMsg(
+          clean
+            ? `${clean} Your session is unlocked below anyway.`
+            : "You're already on the list, session unlocked below."
+        );
+      }
+    } catch {
+      setStatusMsg(
+        "Couldn't reach the mailing list right now, but your session is unlocked below."
+      );
+    } finally {
+      setSubmitting(false);
       const ts = Date.now();
-      localStorage.setItem(STORE_PLAN, JSON.stringify(prog));
-      localStorage.setItem(STORE_LAST, String(ts));
+      setUnlocked(true);
       setUnlocksAt(ts + WEEK);
       setNow(ts);
-    } catch {
-      /* ignore */
+      try {
+        if (program) localStorage.setItem(STORE_PLAN, JSON.stringify(program));
+        localStorage.setItem(STORE_LAST, String(ts));
+        localStorage.setItem(STORE_UNLOCKED, "1");
+      } catch {
+        /* ignore */
+      }
     }
   }
 
@@ -172,6 +218,10 @@ export function SessionBuilder() {
     setCantText("");
     setExperience(null);
     setSplit("fb");
+    setUnlocked(false);
+    setEmail("");
+    setStatusMsg("");
+    setUnlocksAt(null);
   }
 
   function persist(p: Program) {
@@ -208,6 +258,12 @@ export function SessionBuilder() {
         unlocksAt={unlocksAt}
         now={now}
         onStartOver={startOver}
+        unlocked={unlocked}
+        email={email}
+        setEmail={setEmail}
+        submitting={submitting}
+        statusMsg={statusMsg}
+        onUnlock={handleUnlock}
       />
     );
   }
@@ -308,6 +364,33 @@ export function SessionBuilder() {
             title="What can you train with?"
             help="Tick everything you can use. Leave it all unticked if it is just you and your bodyweight."
           >
+            {(() => {
+              const allOn = EQUIPMENT_OPTIONS.every((o) => equip.has(o.key));
+              return (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setEquip(
+                      allOn ? new Set() : new Set(EQUIPMENT_OPTIONS.map((o) => o.key))
+                    )
+                  }
+                  className={`mb-3 flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-bold uppercase tracking-[0.06em] transition ${
+                    allOn
+                      ? "border-ember/60 bg-ember/10 text-ember-deep"
+                      : "hairline text-ink-700 hover:bg-ink-50"
+                  }`}
+                >
+                  <span
+                    className={`grid h-5 w-5 flex-none place-items-center rounded-md border transition ${
+                      allOn ? "border-ember bg-ember text-white" : "border-ink-300"
+                    }`}
+                  >
+                    {allOn && <Check size={13} weight="bold" />}
+                  </span>
+                  Yes to all (full gym)
+                </button>
+              );
+            })()}
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {EQUIPMENT_OPTIONS.map((opt) => {
                 const on = equip.has(opt.key);
@@ -440,13 +523,14 @@ export function SessionBuilder() {
           disabled={!canNext}
           className="btn-ember inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {stepIdx === total - 1 ? "Build my program" : "Next"}
+          {stepIdx === total - 1 ? "Build my session" : "Next"}
           <ArrowRight size={15} weight="bold" />
         </button>
       </div>
 
       <p className="text-center text-xs text-ink-400">
-        One free program every 7 days. This is a starting point, not personal coaching.
+        One free session every 7 days, unlocked with your email. A starting point,
+        not personal coaching.
       </p>
     </div>
   );
@@ -467,6 +551,12 @@ function ProgramView({
   unlocksAt,
   now,
   onStartOver,
+  unlocked,
+  email,
+  setEmail,
+  submitting,
+  statusMsg,
+  onUnlock,
 }: {
   program: Program;
   supersets: boolean;
@@ -478,11 +568,46 @@ function ProgramView({
   unlocksAt: number | null;
   now: number;
   onStartOver: () => void;
+  unlocked: boolean;
+  email: string;
+  setEmail: (v: string) => void;
+  submitting: boolean;
+  statusMsg: string;
+  onUnlock: () => void;
 }) {
+  const reduce = useReducedMotion();
   const caps = useMemo(
     () => capsFromKeys(program.meta.capKeys),
     [program.meta.capKeys]
   );
+
+  // Only ever show one session: day 1 of the plan their answers imply.
+  const session = program.days[0];
+
+  // Plain-language coaching notes. Full Body uses the upper/lower pair method
+  // (short rest, slow lowering); other days use normal rest.
+  const methodNotes = (
+    session.method === "gbc"
+      ? [
+          supersets
+            ? "Work in pairs: one set of the top move (A1), then straight into the move below it (A2). Pairing an upper-body move with a lower-body one lets each area rest while the other works."
+            : null,
+          "Keep rest short: 30 to 60 seconds between the two paired moves and between sets.",
+          "Lower every weight slowly, around 3 to 4 seconds, and stay in control. No bouncing or dropping.",
+        ]
+      : [
+          supersets
+            ? "Moves grouped together are done back to back, then you rest."
+            : "Do all the sets of one move, then move on to the next.",
+          "Do the big compound lifts first while you are fresh, then the smaller isolation moves.",
+          "Push each set to within 1 to 2 reps of failure. Stop when your form would break.",
+          "Try to beat last time: add a rep or a little weight whenever you can.",
+          "Use a full stretch and a full range of motion on every rep.",
+          "Rest longer on the big lifts (about 2 to 3 minutes) and less on the smaller moves (about 60 to 90 seconds).",
+          "Pick moves that load the muscle in a good stretched position with smooth, steady resistance.",
+          "Across the week, aim to train each muscle about twice, with roughly 10 to 20 hard sets per muscle in total.",
+        ]
+  ).filter((n): n is string => Boolean(n));
 
   return (
     <div className="flex flex-col gap-6">
@@ -492,11 +617,17 @@ function ProgramView({
         <div className="relative">
           <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ember-soft">
             <Lightning size={14} weight="fill" />
-            Your program
+            Your session
           </div>
           <h2 className="mt-3 font-display text-4xl font-bold uppercase leading-[0.9] tracking-[-0.01em] md:text-5xl">
-            {program.days.length}-day {SPLIT_LABELS[program.meta.split]}
+            {session.type} session
           </h2>
+          {program.days.length > 1 && (
+            <p className="mt-3 max-w-[48ch] text-sm leading-relaxed text-canvas/70">
+              The first session from a {program.days.length}-day{" "}
+              {SPLIT_LABELS[program.meta.split]} week. Coaching builds out the rest.
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap gap-2">
             <DarkTag>
               {program.meta.goal === "fatloss"
@@ -517,148 +648,241 @@ function ProgramView({
         </div>
       </div>
 
-      {/* focus note */}
-      <div className="rounded-4xl border hairline bg-ember/5 p-5 md:p-6">
-        <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember-deep">
-          For every exercise, in this order
-        </div>
-        <ol className="mt-3 grid grid-cols-1 gap-2 text-sm text-ink-700 sm:grid-cols-2">
-          {[
-            "Move through the full range",
-            "Keep your technique clean",
-            "Feel the right muscle working",
-            "Then add weight",
-          ].map((t, i) => (
-            <li key={t} className="flex items-center gap-2.5">
-              <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-ink-900 font-mono text-[11px] text-canvas">
-                {i + 1}
-              </span>
-              {t}
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* controls */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={() => setSupersets(!supersets)}
-          className="inline-flex items-center gap-2 rounded-full border hairline px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-ink-700 transition hover:bg-ink-100"
+      {/* email gate */}
+      {!unlocked ? (
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.05 }}
+          className="rounded-5xl border border-ember/30 bg-white p-6 shadow-ember-glow md:p-8"
         >
-          <ArrowsClockwise size={14} weight="bold" />
-          {supersets ? "Switch to straight sets" : "Switch to supersets"}
-        </button>
-        <span className={label}>
-          {supersets
-            ? "Supersets: do paired moves back to back"
-            : "Straight sets: finish all sets of one move first"}
-        </span>
-      </div>
+          <div className="flex items-start gap-4">
+            <span className="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-ember/10 text-ember-deep">
+              <LockSimple size={18} weight="bold" />
+            </span>
+            <div className="flex-1">
+              <h3 className="font-display text-2xl font-semibold uppercase leading-none tracking-[0.01em] text-ink-900">
+                Unlock your session
+              </h3>
+              <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ink-600">
+                Pop your email in and your full session opens up below, every move,
+                with sets and reps.
+              </p>
 
-      {/* days */}
-      {program.days.map((day, di) => (
-        <div
-          key={di}
-          className="rounded-5xl border hairline bg-white p-5 shadow-diffusion-sm md:p-7"
-        >
-          <div className="flex items-baseline justify-between gap-3 border-b hairline pb-4">
-            <h3 className="font-display text-2xl font-bold uppercase tracking-[0.01em] text-ink-900">
-              {day.label}
-            </h3>
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember-deep">
-              {day.type}
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder="you@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") onUnlock();
+                  }}
+                  className="w-full flex-1 rounded-full border hairline bg-canvas px-5 py-3 text-base text-ink-900 outline-none transition focus:border-ember/50"
+                  aria-label="Email address"
+                />
+                <button
+                  type="button"
+                  onClick={onUnlock}
+                  disabled={submitting}
+                  className="btn-ember inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] disabled:opacity-60"
+                >
+                  {submitting ? "Sending…" : "Unlock my session"}
+                  {!submitting && <ArrowRight size={16} weight="bold" />}
+                </button>
+              </div>
+
+              {statusMsg && (
+                <p className="mt-3 text-xs leading-snug text-ember-deep" aria-live="polite">
+                  {statusMsg}
+                </p>
+              )}
+
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
+                One email when there's something worth saying · unsubscribe anytime
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      ) : (
+        <>
+          {/* focus note */}
+          <div className="rounded-4xl border hairline bg-ember/5 p-5 md:p-6">
+            <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember-deep">
+              For every exercise, in this order
+            </div>
+            <ol className="mt-3 grid grid-cols-1 gap-2 text-sm text-ink-700 sm:grid-cols-2">
+              {[
+                "Move through the full range",
+                "Keep your technique clean",
+                "Feel the right muscle working",
+                "Then add weight",
+              ].map((t, i) => (
+                <li key={t} className="flex items-center gap-2.5">
+                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-ink-900 font-mono text-[11px] text-canvas">
+                    {i + 1}
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* how to run it */}
+          <div className="rounded-4xl border hairline bg-white p-5 shadow-diffusion-sm md:p-6">
+            <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-500">
+              How to run it
+            </div>
+            <ul className="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-ink-700">
+              {methodNotes.map((t) => (
+                <li key={t} className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-ember" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* controls */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={() => setSupersets(!supersets)}
+              className="inline-flex items-center gap-2 rounded-full border hairline px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-ink-700 transition hover:bg-ink-100"
+            >
+              <ArrowsClockwise size={14} weight="bold" />
+              {supersets ? "Switch to straight sets" : "Switch to supersets"}
+            </button>
+            <span className={label}>
+              {supersets
+                ? "Supersets: do paired moves back to back"
+                : "Straight sets: finish all sets of one move first"}
             </span>
           </div>
 
-          <div className="mt-4 flex flex-col gap-4">
-            {day.groups.map((group, gi) =>
-              supersets ? (
-                <SupersetGroup
-                  key={gi}
-                  group={group}
-                  letter={String.fromCharCode(65 + gi)}
-                  single={group.length === 1}
-                  dayIdx={di}
-                  gIdx={gi}
-                  caps={caps}
-                  excluded={program.meta.excluded}
-                  swapKey={swapKey}
-                  setSwapKey={setSwapKey}
-                  onSwap={onSwap}
-                />
-              ) : (
-                group.map((ex, ei) => (
-                  <ExerciseRow
-                    key={`${gi}-${ei}`}
-                    ex={ex}
-                    tag={straightLabel(day.groups, gi, ei)}
-                    dayIdx={di}
+          {/* the one session */}
+          <div className="rounded-5xl border hairline bg-white p-5 shadow-diffusion-sm md:p-7">
+            <div className="flex items-baseline justify-between gap-3 border-b hairline pb-4">
+              <h3 className="font-display text-2xl font-bold uppercase tracking-[0.01em] text-ink-900">
+                Your session
+              </h3>
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember-deep">
+                {session.type}
+              </span>
+            </div>
+
+            <div className="mt-4 flex flex-col gap-4">
+              {session.groups.map((group, gi) =>
+                supersets ? (
+                  <SupersetGroup
+                    key={gi}
+                    group={group}
+                    letter={String.fromCharCode(65 + gi)}
+                    single={group.length === 1}
+                    dayIdx={0}
                     gIdx={gi}
-                    eIdx={ei}
                     caps={caps}
                     excluded={program.meta.excluded}
                     swapKey={swapKey}
                     setSwapKey={setSwapKey}
                     onSwap={onSwap}
                   />
-                ))
-              )
-            )}
+                ) : (
+                  group.map((ex, ei) => (
+                    <ExerciseRow
+                      key={`${gi}-${ei}`}
+                      ex={ex}
+                      tag={straightLabel(session.groups, gi, ei)}
+                      dayIdx={0}
+                      gIdx={gi}
+                      eIdx={ei}
+                      caps={caps}
+                      excluded={program.meta.excluded}
+                      swapKey={swapKey}
+                      setSwapKey={setSwapKey}
+                      onSwap={onSwap}
+                    />
+                  ))
+                )
+              )}
 
-            {day.finisher && (
-              <div className="rounded-2xl border border-dashed border-ember/40 bg-ember/5 p-4">
-                <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember-deep">
-                  Finisher
+              {session.finisher && (
+                <div className="rounded-2xl border border-dashed border-ember/40 bg-ember/5 p-4">
+                  <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember-deep">
+                    Finisher
+                  </div>
+                  <div className="mt-1.5 font-display text-lg font-bold uppercase text-ink-900">
+                    {session.finisher.name}
+                  </div>
+                  <p className="mt-1 text-sm text-ink-700">{session.finisher.detail}</p>
+                  <p className="mt-1 text-xs text-ink-400">{session.finisher.note}</p>
                 </div>
-                <div className="mt-1.5 font-display text-lg font-bold uppercase text-ink-900">
-                  {day.finisher.name}
+              )}
+            </div>
+          </div>
+
+          {/* ask for cues */}
+          <p className="text-center text-sm leading-relaxed text-ink-500">
+            Want cues on how to do any of these moves?{" "}
+            <Link
+              href="/#message"
+              className="font-semibold text-ember-deep underline-offset-2 hover:underline"
+            >
+              Message me
+            </Link>{" "}
+            and I'll talk you through it.
+          </p>
+
+          {/* cooldown */}
+          <div className="rounded-5xl border hairline bg-ink-50/60 p-6 text-center md:p-8">
+            {locked && unlocksAt ? (
+              <>
+                <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-500">
+                  <LockSimple size={13} weight="bold" />
+                  Next free session in {countdown(unlocksAt - now)}
                 </div>
-                <p className="mt-1 text-sm text-ink-700">{day.finisher.detail}</p>
-                <p className="mt-1 text-xs text-ink-400">{day.finisher.note}</p>
-              </div>
+                <p className="mx-auto mt-3 max-w-md text-sm text-ink-600">
+                  Your session is saved on this device. Keep swapping moves to
+                  fine-tune it, or come back next week to build a fresh one.
+                </p>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={onStartOver}
+                className="inline-flex items-center gap-2 rounded-full border hairline px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-ink-700 transition hover:bg-ink-100"
+              >
+                <ArrowsClockwise size={15} weight="bold" />
+                Build a new session
+              </button>
             )}
           </div>
-        </div>
-      ))}
 
-      {/* footer / cooldown + CTA */}
-      <div className="rounded-5xl border hairline bg-ink-50/60 p-6 text-center md:p-8">
-        {locked && unlocksAt ? (
-          <>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-500">
-              <LockSimple size={13} weight="bold" />
-              Next free program in {countdown(unlocksAt - now)}
+          {/* "doesn't fit you? jump on a call" */}
+          <div className="grain relative overflow-hidden rounded-5xl bg-ink-950 p-6 text-center text-canvas shadow-diffusion md:p-8">
+            <div className="pointer-events-none absolute inset-0 speed-stripes" />
+            <div className="relative">
+              <h3 className="mx-auto max-w-[24ch] font-display text-2xl font-bold uppercase leading-[0.95] tracking-[0.01em] md:text-3xl">
+                If this plan doesn&apos;t fit you, jump on a call.
+              </h3>
+              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-canvas/70">
+                Niggles, no time, or not sure it suits you? My online 1:1 coaching
+                builds the whole thing around your life, your body and your goals,
+                with me checking in every week.
+              </p>
+              <Link
+                href="/apply/online"
+                className="btn-ember mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em]"
+              >
+                Apply for online 1:1 coaching
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
-            <p className="mx-auto mt-3 max-w-md text-sm text-ink-600">
-              Your program is saved on this device. Keep swapping moves to fine-tune
-              it, or come back next week to build a fresh one.
-            </p>
-          </>
-        ) : (
-          <button
-            type="button"
-            onClick={onStartOver}
-            className="inline-flex items-center gap-2 rounded-full border hairline px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-ink-700 transition hover:bg-ink-100"
-          >
-            <ArrowsClockwise size={15} weight="bold" />
-            Build a new program
-          </button>
-        )}
-        <div className="mt-6 border-t hairline pt-6">
-          <p className="text-sm text-ink-600">
-            Want this dialed in around your life, with someone checking your
-            progress every week?
-          </p>
-          <Link
-            href="/apply"
-            className="btn-ember mt-4 inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.12em]"
-          >
-            Apply for coaching
-            <ArrowRight size={15} weight="bold" />
-          </Link>
-        </div>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -763,13 +987,10 @@ function ExerciseRow({
           <div className="font-display text-base font-semibold uppercase leading-tight tracking-[0.01em] text-ink-900">
             {ex.name}
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-ink-400">
+          <div className="mt-1 text-[11px] text-ink-400">
             <span className="font-mono uppercase tracking-[0.12em] text-ink-500">
               {ex.bodyPart}
             </span>
-            <span aria-hidden>·</span>
-            {/* Per-exercise coaching cue: slot reserved, filled in later. */}
-            <span className="italic text-ink-300">cue coming soon</span>
           </div>
         </div>
         <div className="flex flex-none items-center gap-3">
