@@ -10,6 +10,7 @@ import {
   ChartLineUp,
   Waveform,
 } from "@phosphor-icons/react";
+import { Reveal } from "./motion";
 
 const spring = { type: "spring" as const, stiffness: 100, damping: 20 };
 
@@ -297,7 +298,7 @@ export function BentoFeatures() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-12">
+        <Reveal className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-12">
           <Card
             span="md:col-span-5"
             icon={<Brain size={14} weight="bold" />}
@@ -342,7 +343,7 @@ export function BentoFeatures() {
           >
             <FocusCard />
           </Card>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

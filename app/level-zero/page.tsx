@@ -11,6 +11,7 @@ import {
   ArrowRight,
 } from "@phosphor-icons/react/dist/ssr";
 import type { ReactNode } from "react";
+import { Reveal } from "../components/motion";
 
 export const metadata: Metadata = {
   title: "Level Zero · Free tools · Coached by Matt J",
@@ -164,11 +165,12 @@ export default function LevelZeroPage() {
       <section className="bg-canvas py-16 md:py-24">
         <div className="mx-auto max-w-[1400px] px-6">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((tool) => {
+            {tools.map((tool, i) => {
+              const delay = Math.min(i, 5) * 0.05;
               if (tool.kind === "soon") {
                 return (
+                  <Reveal key={tool.n} delay={delay} className="h-full">
                   <div
-                    key={tool.n}
                     aria-disabled="true"
                     className="flex h-full cursor-default flex-col justify-between gap-8 rounded-4xl border border-dashed border-ink-300/60 bg-ink-50/50 p-7 md:p-8"
                   >
@@ -189,12 +191,13 @@ export default function LevelZeroPage() {
                       </div>
                     }
                   </div>
+                  </Reveal>
                 );
               }
 
               const isExternal = tool.kind === "external";
               const cardClass =
-                "group flex h-full flex-col justify-between gap-8 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm transition hover:-translate-y-1 hover:shadow-diffusion md:p-8";
+                "group flex h-full flex-col justify-between gap-8 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm transition duration-300 hover:-translate-y-1 hover:border-ember/40 hover:shadow-ember-glow focus-visible:-translate-y-1 active:translate-y-0 active:scale-[0.99] md:p-8";
               const footer = (
                 <div className="flex items-center justify-between border-t hairline pt-5">
                   <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-500">
@@ -221,9 +224,8 @@ export default function LevelZeroPage() {
                 </ToolCardChrome>
               );
 
-              return isExternal ? (
+              const card = isExternal ? (
                 <a
-                  key={tool.n}
                   href={tool.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -232,9 +234,14 @@ export default function LevelZeroPage() {
                   {inner}
                 </a>
               ) : (
-                <Link key={tool.n} href={tool.href} className={cardClass}>
+                <Link href={tool.href} className={cardClass}>
                   {inner}
                 </Link>
+              );
+              return (
+                <Reveal key={tool.n} delay={delay} className="h-full">
+                  {card}
+                </Reveal>
               );
             })}
           </div>

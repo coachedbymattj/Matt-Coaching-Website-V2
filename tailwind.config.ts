@@ -75,6 +75,14 @@ const config: Config = {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(200,85,61,0.45)" },
           "50%": { boxShadow: "0 0 0 6px rgba(200,85,61,0)" },
         },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "0.25", transform: "scale(1)" },
+          "50%": { opacity: "0.5", transform: "scale(1.08)" },
+        },
+        drift: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(16px)" },
+        },
       },
       animation: {
         marquee: "marquee 38s linear infinite",
@@ -82,6 +90,8 @@ const config: Config = {
         breathe: "breathe 2.4s ease-in-out infinite",
         shimmer: "shimmer 2.6s linear infinite",
         "ember-pulse": "ember-pulse 2.6s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 7s ease-in-out infinite",
+        "drift-slow": "drift 16s ease-in-out infinite alternate",
       },
     },
   },

@@ -2,72 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { ResultsShowcase } from "../components/ResultsShowcase";
 import { NijatReviewCard } from "../components/NijatReviewCard";
-
-const cases = [
-  {
-    slug: "paul",
-    name: "Paul",
-    headline: "Dropped 8.6kg",
-    detail: "103.4kg to 94.8kg",
-    img: "/results/paul.webp",
-  },
-  {
-    slug: "elin",
-    name: "Elin",
-    headline: "Dropped 9.5kg",
-    detail: "Week 1 to Week 13",
-    img: "/results/elin.webp",
-  },
-  {
-    slug: "nijat",
-    name: "Nijat",
-    headline: "Dropped 7.9kg",
-    detail: "78.3kg to 70.4kg",
-    img: "/results/nijat.webp",
-  },
-  {
-    slug: "adrian",
-    name: "Adrian",
-    headline: "Full recomp",
-    detail: "Dec 2024 to March 2025",
-    img: "/results/adrian.webp",
-  },
-  {
-    slug: "natalia",
-    name: "Natalia",
-    headline: "Photoshoot ready",
-    detail: "Week 1 to Week 34",
-    img: "/results/natalia.webp",
-  },
-  {
-    slug: "jim",
-    name: "Jim",
-    headline: "Dropped 10kg",
-    detail: "Week 1 to Week 12",
-    img: "/results/jim.webp",
-  },
-  {
-    slug: "liam",
-    name: "Liam",
-    headline: "Full recomp",
-    detail: "99.8kg to 97.2kg",
-    img: "/results/liam.webp",
-  },
-  {
-    slug: "rebecca",
-    name: "Rebecca",
-    headline: "Got abs",
-    detail: "Month 1 to Month 6",
-    img: "/results/rebecca.webp",
-  },
-  {
-    slug: "chitvan",
-    name: "Chitvan",
-    headline: "Dropped 9.7kg",
-    detail: "71.7kg to 62kg",
-    img: "/results/chitvan.webp",
-  },
-];
+import { results as cases } from "../lib/results";
+import { Reveal } from "../components/motion";
 
 export default function ResultsPage() {
   return (
@@ -99,7 +35,7 @@ export default function ResultsPage() {
           <div className="mb-10 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
             Every transformation
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cases.map((c) =>
               c.slug === "nijat" ? (
                 <NijatReviewCard key={c.slug} data={c} />
@@ -134,7 +70,7 @@ export default function ResultsPage() {
                 </article>
               )
             )}
-          </div>
+          </Reveal>
 
           <div className="mt-20 flex flex-col items-start gap-4 rounded-5xl border hairline bg-white p-10 shadow-diffusion-sm md:flex-row md:items-center md:justify-between md:p-14">
             <div>

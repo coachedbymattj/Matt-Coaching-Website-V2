@@ -3,10 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight, Barbell } from "@phosphor-icons/react";
+import { CountUp } from "./motion";
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
+      {/* slow ember glow (decorative, behind content, does not gate paint) */}
+      <div className="pointer-events-none absolute right-[-8%] top-[12%] -z-10 h-72 w-72 rounded-full bg-ember/20 blur-3xl animate-glow-pulse" />
       <div className="mx-auto grid min-h-[100dvh] max-w-[1400px] grid-cols-1 items-end gap-10 px-6 pb-16 pt-24 md:grid-cols-12 md:gap-8 md:pt-32">
         {/* Left column: copy (rendered statically so it paints instantly — LCP) */}
         <div className="md:col-span-7">
@@ -47,13 +50,13 @@ export function Hero() {
 
             <dl className="mt-6 grid max-w-2xl grid-cols-3 divide-x divide-ink-200/70 border-y hairline py-5">
               {[
-                { k: "47.2%", l: "Avg. body-fat reduction · 16 wk" },
-                { k: "1,284", l: "Sessions programmed in 2025" },
-                { k: "9.4 / 10", l: "Client NPS, rolling Q1" },
+                { value: 47.2, decimals: 1, suffix: "%", l: "Avg. body-fat reduction · 16 wk" },
+                { value: 1284, decimals: 0, suffix: "", l: "Sessions programmed in 2025" },
+                { value: 9.4, decimals: 1, suffix: " / 10", l: "Client NPS, rolling Q1" },
               ].map((s) => (
-                <div key={s.k} className="px-4 first:pl-0 last:pr-0">
+                <div key={s.l} className="px-4 first:pl-0 last:pr-0">
                   <dt className="font-mono text-2xl tracking-tight text-ink-900 md:text-3xl">
-                    {s.k}
+                    <CountUp value={s.value} decimals={s.decimals} suffix={s.suffix} />
                   </dt>
                   <dd className="mt-1 text-[11px] uppercase tracking-[0.16em] text-ink-500">
                     {s.l}
@@ -83,6 +86,8 @@ export function Hero() {
                 fetchPriority="high"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/20 to-transparent" />
+              {/* slow drifting speed-stripes over the portrait */}
+              <div className="pointer-events-none absolute inset-0 speed-stripes animate-drift-slow" />
               <div className="pointer-events-none absolute inset-0 rounded-5xl border border-white/10 shadow-inner-glass" />
 
               <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-ink-950/60 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-canvas/90 backdrop-blur">

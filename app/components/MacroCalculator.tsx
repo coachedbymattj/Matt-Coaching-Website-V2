@@ -15,6 +15,7 @@ import {
   cleanMailchimpMessage,
 } from "../lib/mailchimpClient";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
+import { CountUp } from "./motion";
 
 const PACES = [
   { key: "gentle", label: "Gentle", rate: 0.005, sub: "0.5% / wk" },
@@ -26,8 +27,6 @@ const CALORIE_FLOOR = 1200;
 
 type Snapshot = { bodyweight: number; bodyFat: number };
 
-const whole = (n: number) =>
-  Number.isFinite(n) ? Math.round(n).toLocaleString("en-GB") : "-";
 
 function activityCategory(vRaw: number) {
   const v = Math.round(vRaw * 10) / 10;
@@ -420,7 +419,7 @@ export function MacroCalculator() {
                   Daily calorie target
                 </div>
                 <div className="mt-1 font-display text-6xl font-bold uppercase leading-none tracking-[-0.01em] md:text-7xl">
-                  {whole(result.calorieTarget)}
+                  <CountUp value={result.calorieTarget} />
                   <span className="ml-2 text-2xl text-canvas/50">kcal</span>
                 </div>
               </div>
@@ -429,7 +428,7 @@ export function MacroCalculator() {
                   Est. maintenance
                 </div>
                 <div className="mt-1 font-mono text-2xl text-canvas/80">
-                  {whole(result.maintenance)} kcal
+                  <CountUp value={result.maintenance} /> kcal
                 </div>
               </div>
             </div>
@@ -542,7 +541,7 @@ export function MacroCalculator() {
                   {m.k}
                 </div>
                 <div className="mt-2 font-display text-5xl font-bold uppercase leading-none tracking-[-0.01em] text-ink-900">
-                  {whole(m.v)}
+                  <CountUp value={m.v} />
                   <span className="ml-1 text-2xl text-ink-400">g</span>
                 </div>
                 <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
@@ -559,7 +558,7 @@ export function MacroCalculator() {
                 Fibre
               </span>
               <span className="font-display text-4xl font-bold uppercase leading-none tracking-[-0.01em] text-ink-900">
-                {whole(result.fibreG)}
+                <CountUp value={result.fibreG} />
                 <span className="ml-1 text-xl text-ink-400">g</span>
               </span>
             </div>

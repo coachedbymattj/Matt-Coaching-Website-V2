@@ -9,6 +9,7 @@ import {
   cleanMailchimpMessage,
 } from "../lib/mailchimpClient";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
+import { CountUp } from "./motion";
 
 const RATES = [
   { key: "slow", label: "Slow", rate: 0.005, sub: "0.5% / wk" },
@@ -359,7 +360,7 @@ export function GoalWeightCalculator() {
                   Goal weight
                 </div>
                 <div className="mt-1 font-display text-5xl font-bold uppercase leading-none tracking-[-0.01em] md:text-6xl">
-                  {fmt(result.goalWeight)}
+                  <CountUp value={result.goalWeight} decimals={1} />
                   <span className="ml-1 text-2xl text-canvas/50">kg</span>
                 </div>
               </div>
@@ -368,7 +369,7 @@ export function GoalWeightCalculator() {
                   Required loss
                 </div>
                 <div className="mt-1 font-display text-5xl font-bold uppercase leading-none tracking-[-0.01em] text-ember-soft md:text-6xl">
-                  {fmt(result.requiredLoss)}
+                  <CountUp value={result.requiredLoss} decimals={1} />
                   <span className="ml-1 text-2xl text-canvas/40">kg</span>
                 </div>
               </div>
