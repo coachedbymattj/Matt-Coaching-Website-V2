@@ -7,7 +7,7 @@ import { useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 
 const links = [
-  { href: "/", label: "Index" },
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Coaching" },
   { href: "/level-zero", label: "Level Zero" },
