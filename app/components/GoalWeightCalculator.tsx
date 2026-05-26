@@ -238,9 +238,43 @@ export function GoalWeightCalculator() {
             )}
           </div>
 
+          {/* Shared sex toggle: one control for BOTH tiles, centered above. */}
+          <div className="flex justify-center">
+            <div
+              role="radiogroup"
+              aria-label="Sex"
+              className="flex rounded-full border hairline bg-canvas p-0.5"
+            >
+              {(["male", "female"] as const).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  role="radio"
+                  aria-checked={sex === s}
+                  onClick={() => setSex(s)}
+                  className={`rounded-full px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] transition ${
+                    sex === s
+                      ? "bg-ink-900 text-canvas"
+                      : "text-ink-500 hover:text-ink-900"
+                  }`}
+                >
+                  {s === "male" ? "Male" : "Female"}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Current + Goal tiles: side by side on desktop, stacked on mobile */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="flex flex-col gap-4">
+              <div className="text-center">
+                <div className="font-display text-2xl font-bold uppercase leading-none tracking-[0.02em] text-ink-900 md:text-3xl">
+                  Current
+                </div>
+                <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
+                  Body fat %
+                </div>
+              </div>
               <BodyFatFigure sex={sex} value={currentBf} />
               <BodyFatControls
                 label="Current body fat %"
@@ -248,12 +282,22 @@ export function GoalWeightCalculator() {
                 onChange={setCurrentBf}
                 sex={sex}
                 onSexChange={setSex}
+                showLabel={false}
+                showSexToggle={false}
                 showDisclaimers={false}
                 idPrefix="gw-cur"
               />
             </div>
 
             <div className="flex flex-col gap-4">
+              <div className="text-center">
+                <div className="font-display text-2xl font-bold uppercase leading-none tracking-[0.02em] text-ink-900 md:text-3xl">
+                  Goal
+                </div>
+                <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
+                  Body fat %
+                </div>
+              </div>
               <BodyFatFigure sex={sex} value={goalBf} />
               <BodyFatControls
                 label="Goal body fat %"
@@ -261,6 +305,7 @@ export function GoalWeightCalculator() {
                 onChange={setGoalBf}
                 sex={sex}
                 onSexChange={setSex}
+                showLabel={false}
                 showSexToggle={false}
                 showDisclaimers={false}
                 idPrefix="gw-goal"

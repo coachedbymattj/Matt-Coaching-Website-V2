@@ -79,6 +79,7 @@ type ControlsProps = {
   onSexChange?: (s: Sex) => void;
   defaultSex?: Sex;
   showSexToggle?: boolean;
+  showLabel?: boolean;
   showDisclaimers?: boolean;
   idPrefix?: string;
 };
@@ -92,6 +93,7 @@ export function BodyFatControls({
   onSexChange,
   defaultSex = "male",
   showSexToggle = true,
+  showLabel = true,
   showDisclaimers = true,
   idPrefix = "bf",
 }: ControlsProps) {
@@ -105,8 +107,9 @@ export function BodyFatControls({
 
   return (
     <div className="flex flex-col gap-4">
+      {(showLabel || showSexToggle) && (
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className={labelClass}>{label}</span>
+        {showLabel && <span className={labelClass}>{label}</span>}
         {showSexToggle && (
           <div
             role="radiogroup"
@@ -132,6 +135,7 @@ export function BodyFatControls({
           </div>
         )}
       </div>
+      )}
 
       <div>
         <input
