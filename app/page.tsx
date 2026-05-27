@@ -3,7 +3,7 @@ import { MessageBox } from "./components/MessageBox";
 import { HomeHero } from "./components/home/Hero";
 import { HomeBeliefs } from "./components/home/Beliefs";
 import { HomePrinciples } from "./components/home/Principles";
-import { HomeInstruments } from "./components/home/Instruments";
+import { HomeDeliveryStack } from "./components/home/DeliveryStack";
 import { HomeOutcomes } from "./components/home/Outcomes";
 import { HomeProcess } from "./components/home/Process";
 import { HomeReviews } from "./components/home/Reviews";
@@ -55,8 +55,8 @@ export default function HomePage() {
       {/* 03 · How I coach — editorial */}
       <HomePrinciples />
 
-      {/* 04 · Instruments — LAB (intentional seam) */}
-      <HomeInstruments />
+      {/* 04 · Delivery stack — editorial channels + LAB instrument panel for the app (intentional seam) */}
+      <HomeDeliveryStack />
 
       {/* 05 · Outcomes log — LAB on dark ink */}
       <HomeOutcomes />

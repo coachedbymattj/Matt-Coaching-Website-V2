@@ -4,97 +4,95 @@ import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { Reveal } from "../motion";
 
+// Real asset already in /public — same one the V3C preview uses.
+const PORTRAIT_SRC = "/career/about-portrait.webp";
+
 export function HomeHero() {
   return (
-    <section className="relative border-b hairline bg-canvas">
-      {/* slow ember warm wash behind the type */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-[-12%] top-[6%] -z-10 h-[460px] w-[460px] rounded-full bg-ember/15 blur-3xl animate-glow-pulse"
-      />
+    <section className="relative isolate overflow-hidden bg-ink-950 text-canvas">
+      {/* ── warm-duotone background ── */}
+      <div className="absolute inset-0">
+        {/* base portrait, slightly desaturated and held under the warm wash */}
+        <img
+          src={PORTRAIT_SRC}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-65 [filter:grayscale(40%)_contrast(1.05)]"
+          loading="eager"
+          fetchPriority="high"
+        />
+        {/* warm fire-rim from the right — ember-deep multiply for shadow warmth */}
+        <div
+          aria-hidden
+          className="absolute inset-0 mix-blend-multiply"
+          style={{
+            background:
+              "linear-gradient(270deg, rgba(142,58,41,0.55) 0%, rgba(142,58,41,0.15) 35%, transparent 70%)",
+          }}
+        />
+        {/* deep ink wash from the bottom so the headline always sits legible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/10" />
+        {/* ember firelight glow, centre-right */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-[10%] top-[42%] h-[460px] w-[460px] -translate-y-1/2 rounded-full bg-ember/30 blur-3xl animate-glow-pulse"
+        />
+        {/* speed-stripes whisper for athletic texture (in addition to global .grain) */}
+        <div className="pointer-events-none absolute inset-0 speed-stripes opacity-70" />
+      </div>
 
-      <div className="mx-auto max-w-[1400px] px-6 pt-24 md:pt-32">
-        {/* running header */}
-        <div className="flex items-baseline justify-between border-b hairline pb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-          <span>Coached by Matt J — Vol. 03</span>
-          <span className="hidden md:inline">Amsterdam · NL</span>
-          <span>Hero / 00</span>
+      {/* ── content ── */}
+      <div className="relative mx-auto flex min-h-[100dvh] max-w-[1400px] flex-col justify-between px-6 pb-14 pt-24 md:pb-20 md:pt-28">
+        {/* TOP-LEFT MARK */}
+        <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-canvas/80">
+          Coached by Matt J
         </div>
 
-        <div className="grid grid-cols-12 gap-6 pb-20 pt-16 md:pb-28 md:pt-24">
-          {/* gutter section number */}
-          <div className="col-span-12 md:col-span-1">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-              00 / 10
-            </div>
-          </div>
-
-          <Reveal className="col-span-12 md:col-span-10 md:col-start-2">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-              A field report on transformation
-            </div>
-            <h1 className="mt-8 font-display text-[clamp(3rem,10vw,9rem)] font-bold uppercase leading-[0.84] tracking-[-0.02em] text-ink-900">
-              If getting fitter
-              <br />
-              feels like your{" "}
+        {/* BOTTOM — headline + CTA */}
+        <div className="grid grid-cols-12 items-end gap-8">
+          <Reveal y={20} className="col-span-12 md:col-span-9">
+            <h1 className="font-display text-[clamp(2.8rem,9.4vw,8.5rem)] font-bold uppercase leading-[0.86] tracking-[-0.02em] text-canvas">
+              If getting fitter feels like your{" "}
               <span className="relative inline-block">
-                <span className="text-ember-grad">Everest</span>
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(100deg,#e8623f 0%,#d97a64 55%,#c8553d 100%)",
+                  }}
+                >
+                  Everest
+                </span>
                 <span
                   aria-hidden
-                  className="absolute -bottom-1 left-0 h-[6px] w-full -skew-x-[12deg] bg-ember-grad opacity-90"
+                  className="absolute -inset-x-3 -inset-y-2 -z-10 rounded-full bg-ember/30 blur-2xl"
                 />
               </span>
               ,
               <br />
-              <span className="text-ink-400">you are who I help.</span>
+              <span className="text-canvas/55">you are who I help.</span>
             </h1>
           </Reveal>
 
-          {/* narrow body column drop */}
           <Reveal
-            delay={0.06}
-            className="col-span-12 mt-12 md:col-span-5 md:col-start-2"
+            delay={0.08}
+            className="col-span-12 md:col-span-3 md:justify-self-end"
           >
-            <p className="text-[17px] leading-[1.6] text-ink-700 md:text-lg">
-              The reality shows up in the small moments. Out of breath after
-              one flight of stairs. On the last hole of your belt. Planning a
-              holiday around your shape instead of what you actually want to
-              do. I help you become someone who is not dreading each year
-              older and quietly accepting that this is just the way it is.
-            </p>
-          </Reveal>
-
-          <Reveal
-            delay={0.12}
-            className="col-span-12 md:col-span-5 md:col-start-8 md:self-end"
-          >
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/apply"
-                className="btn-ember group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em]"
-              >
-                Apply for the next intake
-                <ArrowUpRight
-                  size={16}
-                  weight="bold"
-                  className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </Link>
-              <Link
-                href="/results"
-                className="inline-flex items-center gap-2 rounded-full border hairline px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-ink-700 transition hover:bg-ink-100"
-              >
-                Read the case files
-                <ArrowUpRight size={16} weight="bold" />
-              </Link>
+            <Link
+              href="/apply"
+              className="btn-ember group inline-flex items-center gap-2 rounded-full px-7 py-4 text-xs font-bold uppercase tracking-[0.16em]"
+            >
+              Apply for coaching
+              <ArrowUpRight
+                size={16}
+                weight="bold"
+                className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+            <div className="mt-3 text-right font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/60">
+              Next intake · Jun · 2026
             </div>
           </Reveal>
-        </div>
-
-        <div className="flex items-center justify-between border-t hairline py-4 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-          <span>Programming · Nutrition · Accountability</span>
-          <span className="hidden md:inline">N 52°22′ · E 4°53′</span>
-          <span>Scroll ↓</span>
         </div>
       </div>
     </section>
