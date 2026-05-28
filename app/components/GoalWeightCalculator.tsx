@@ -216,8 +216,9 @@ export function GoalWeightCalculator() {
       <div className="rounded-5xl border hairline bg-white p-6 shadow-diffusion-sm md:p-8">
         <div className="flex flex-col gap-8">
           {/* Current weight (left) + Sex toggle (right) on one row,
-              packed close together, baseline-aligned. Stacks on mobile. */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-5">
+              centered as a pair within the card, baseline-aligned. Stacks
+              on mobile. */}
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-center sm:gap-5">
             <div className="flex w-full flex-col gap-2 sm:max-w-[260px]">
               <label htmlFor="gw-weight" className={labelClass}>
                 Current weight (kg)
