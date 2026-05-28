@@ -68,10 +68,6 @@ export function HomeGallery() {
               <br />
               gallery.
             </h2>
-            <p className="mt-6 max-w-[34ch] text-base leading-relaxed text-ink-600">
-              Eight clients, one frame at a time. Photo and figures shared with
-              their permission.
-            </p>
           </div>
 
           {/* gallery */}
@@ -83,7 +79,7 @@ export function HomeGallery() {
                   {SLOTS.map((n) => (
                     <div
                       key={n}
-                      className="aspect-[3/4] w-[260px] flex-none overflow-hidden bg-ink-900"
+                      className="aspect-[4/5] w-[260px] flex-none overflow-hidden bg-ink-900"
                     >
                       <Slide n={n} />
                     </div>
@@ -91,8 +87,10 @@ export function HomeGallery() {
                 </div>
               </div>
             ) : (
-              /* Auto-cycling crossfade carousel */
-              <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink-900">
+              /* Auto-cycling crossfade carousel — aspect-[4/5] matches the
+                 source images (1080×1350) so nothing crops. Centered with a
+                 max-width so the container doesn't dominate the page. */
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[600px] overflow-hidden bg-ink-900">
                 {SLOTS.map((n, i) => (
                   <div
                     key={n}
