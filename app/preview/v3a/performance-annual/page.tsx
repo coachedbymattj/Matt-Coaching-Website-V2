@@ -73,7 +73,7 @@ export default function PerformanceAnnualPreview() {
                 </span>
                 ,
                 <br />
-                <span className="text-ink-400">you are who I help.</span>
+                <span className="text-ink-400">I&rsquo;ll get you to the top.</span>
               </h1>
             </Reveal>
 

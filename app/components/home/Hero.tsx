@@ -52,7 +52,9 @@ export function HomeHero() {
         <div className="grid grid-cols-12 items-end gap-8">
           <Reveal y={20} className="col-span-12 md:col-span-9">
             <h1 className="font-display text-[clamp(2.8rem,9.4vw,8.5rem)] font-bold uppercase leading-[0.86] tracking-[-0.02em] text-canvas">
-              If getting fitter feels like your{" "}
+              If getting fitter
+              <br />
+              feels like your{" "}
               <span className="relative inline-block">
                 <span
                   className="bg-clip-text text-transparent"
@@ -70,7 +72,7 @@ export function HomeHero() {
               </span>
               ,
               <br />
-              <span className="text-canvas/55">you are who I help.</span>
+              <span className="text-canvas/55">I&rsquo;ll get you to the top.</span>
             </h1>
           </Reveal>
 

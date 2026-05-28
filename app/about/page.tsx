@@ -81,9 +81,12 @@ export default function AboutPage() {
               About · Matthew Johnstone
             </div>
             <h1 className="mt-6 font-display text-[clamp(2.3rem,5.4vw,4.4rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-ink-900">
-              If getting fitter feels like your{" "}
-              <span className="text-ember-grad">Everest</span>, you are who I
-              help.
+              If getting fitter
+              <br />
+              feels like your{" "}
+              <span className="text-ember-grad">Everest</span>,
+              <br />
+              I&rsquo;ll get you to the top.
             </h1>
             <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-ink-600">
               The reality shows up in the small moments. Out of breath after one

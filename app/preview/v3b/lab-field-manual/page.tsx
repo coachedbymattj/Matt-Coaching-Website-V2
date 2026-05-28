@@ -92,7 +92,7 @@ export default function LabFieldManualPreview() {
                   <br />
                   feels like your <span className="text-ember-grad">Everest</span>,
                   <br />
-                  you are who I help.
+                  I&rsquo;ll get you to the top.
                 </h1>
               </Reveal>
 

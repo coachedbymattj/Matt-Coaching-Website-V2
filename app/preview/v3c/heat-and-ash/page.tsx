@@ -78,7 +78,7 @@ export default function HeatAndAshPreview() {
                   />
                 </span>
                 ,<br />
-                <span className="text-canvas/60">you are who I help.</span>
+                <span className="text-canvas/60">I&rsquo;ll get you to the top.</span>
               </h1>
 
               <div className="mt-10 grid grid-cols-1 items-end gap-6 md:grid-cols-12">
