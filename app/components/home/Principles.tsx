@@ -36,7 +36,7 @@ export function HomePrinciples() {
               {principles.map((p, i) => (
                 <Reveal key={p.n} delay={i * 0.06}>
                   <li className="flex h-full flex-col gap-7 rounded-4xl border hairline bg-white p-8 shadow-diffusion-sm">
-                    <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
+                    <div className="font-mono text-5xl leading-none tracking-tight text-ink-900 tabular-nums md:text-6xl">
                       {p.n}
                     </div>
                     <p className="text-[19px] leading-[1.45] text-ink-900">
