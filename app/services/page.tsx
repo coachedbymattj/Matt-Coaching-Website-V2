@@ -6,6 +6,7 @@ import {
   Globe,
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr";
+import { GalleryLink } from "../components/GalleryLink";
 
 const oneToOne = [
   {
@@ -349,6 +350,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
     </>
   );
 }

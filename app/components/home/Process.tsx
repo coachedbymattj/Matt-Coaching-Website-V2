@@ -5,27 +5,28 @@ import { motion } from "framer-motion";
 const steps = [
   {
     n: "01",
-    label: "Diagnostic",
-    title: "A 90-minute call before a single rep is written.",
-    body: "Training history, injuries, life schedule, food preferences, sleep, stress, motivation profile. Lab markers reviewed where available. I write a 12-page case file, your case file.",
+    label: "Interest",
+    body: "You reach out via the form or DM. Tell me what you’re after.",
   },
   {
     n: "02",
-    label: "Calibration",
-    title: "Weeks 1–3 are spent learning your physiology.",
-    body: "Volume tolerance, recovery rate, hunger signals, technique. We deliberately under-load so we can see how you respond, not how you should respond on paper.",
+    label: "Match call",
+    body: "We jump on a 45-minute call. Goals, context, and whether we’d actually enjoy working together. No pitch.",
   },
   {
     n: "03",
-    label: "Block training",
-    title: "Twelve weeks of progressive overload + auto-regulation.",
-    body: "Programming adapts every Sunday based on the prior week's data. No two blocks are identical. We push hard where you adapt; we pull back where you don't.",
+    label: "Onboarding",
+    body: "You fill in the questionnaires and assessments. Sometimes we follow up with a call to walk through your answers. Holidays, traditions, life context — all of it factored in.",
   },
   {
     n: "04",
-    label: "Hand-off",
-    title: "You leave with the skills to never need a coach again.",
-    body: "Every protocol is annotated with the why. By month six, most clients run their own deloads and macro shifts. Coaching becomes optional, not infrastructure.",
+    label: "The first weeks",
+    body: "Back to basics, done extremely well. Showing up to check-ins, giving as much feedback as you can. Building the foundation everything else sits on.",
+  },
+  {
+    n: "05",
+    label: "Progression",
+    body: "We map the whole picture and start moving towards the original goal. Real life is built in, not worked around.",
   },
 ];
 
@@ -36,16 +37,16 @@ export function HomeProcess() {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              06 / 10 — How it works
+              06 / 10 — How I work
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] text-ink-900 md:text-6xl">
-              Four phases.
+              How we
               <br />
-              <span className="text-ember-grad">No mystery.</span>
+              <span className="text-ember-grad">start.</span>
             </h2>
             <p className="mt-6 max-w-[34ch] text-base leading-relaxed text-ink-600">
-              The whole programme is documented openly because trust starts
-              with transparency, not testimonials.
+              Five steps from first message to settled-in. Open, predictable,
+              no pitch.
             </p>
           </div>
 
@@ -62,24 +63,19 @@ export function HomeProcess() {
                   damping: 22,
                   delay: i * 0.06,
                 }}
-                className="group grid grid-cols-12 gap-6 border-t hairline py-10 first:border-t-0 first:pt-0"
+                className="flex flex-col gap-4 border-t hairline py-10 first:border-t-0 first:pt-0 md:grid md:grid-cols-12 md:gap-6"
               >
-                <div className="col-span-3 md:col-span-2">
-                  <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-                    {s.label}
-                  </div>
-                  <div className="mt-1 font-display text-5xl font-bold leading-none text-ink-200 transition-colors group-hover:text-ember md:text-6xl">
+                <div className="md:col-span-3">
+                  <div className="font-mono text-7xl leading-none tracking-tight text-ember-deep tabular-nums md:text-8xl">
                     {s.n}
                   </div>
+                  <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
+                    {s.label}
+                  </div>
                 </div>
-                <div className="col-span-9 md:col-span-10">
-                  <h3 className="font-display text-2xl font-semibold uppercase leading-[0.95] tracking-[0.01em] text-ink-900 md:text-3xl">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-700 md:text-base">
-                    {s.body}
-                  </p>
-                </div>
+                <p className="text-[17px] leading-[1.6] text-ink-700 md:col-span-9 md:self-center md:text-lg">
+                  {s.body}
+                </p>
               </motion.li>
             ))}
           </ol>

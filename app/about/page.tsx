@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
+import { GalleryLink } from "../components/GalleryLink";
 
 const values = [
   {
@@ -66,7 +67,9 @@ const timeline = [
     year: "2025",
     title: "Founded Coached by Matt J",
     body: "Went independent. A capped roster, three coaching paths, and full control over the standard.",
-    img: "/career/2025-cbmj.webp",
+    // Reuses the same portrait file as the homepage hero so the timeline lands on
+    // the same image the visitor first met me with.
+    img: "/hero-portrait.webp",
   },
 ];
 
@@ -239,6 +242,9 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
 
       {/* CTA */}
       <section className="bg-canvas py-24 md:py-32">

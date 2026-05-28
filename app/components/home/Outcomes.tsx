@@ -19,7 +19,7 @@ export function HomeOutcomes() {
         <div className="flex items-end justify-between border-b border-canvas/10 pb-3 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/60">
           <span>Module 05 · Outcomes log</span>
           <span className="hidden md:inline">Verified · client weigh-ins</span>
-          <span>Last 6 of 47</span>
+          <span />
         </div>
 
         {/* heading + meta */}

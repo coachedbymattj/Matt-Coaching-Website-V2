@@ -4,6 +4,8 @@ import { ResultsShowcase } from "../components/ResultsShowcase";
 import { NijatReviewCard } from "../components/NijatReviewCard";
 import { results as cases } from "../lib/results";
 import { Reveal } from "../components/motion";
+import { Positioning } from "../components/Positioning";
+import { GalleryLink } from "../components/GalleryLink";
 
 export default function ResultsPage() {
   return (
@@ -27,6 +29,8 @@ export default function ResultsPage() {
           </div>
         </div>
       </section>
+
+      <Positioning />
 
       <ResultsShowcase cases={cases} />
 
@@ -90,6 +94,9 @@ export default function ResultsPage() {
           </div>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
     </>
   );
 }

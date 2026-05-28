@@ -1,5 +1,6 @@
 import { LogoBar } from "./components/LogoBar";
 import { MessageBox } from "./components/MessageBox";
+import { Positioning } from "./components/Positioning";
 import { HomeHero } from "./components/home/Hero";
 import { HomeBeliefs } from "./components/home/Beliefs";
 import { HomePrinciples } from "./components/home/Principles";
@@ -7,6 +8,7 @@ import { HomeDeliveryStack } from "./components/home/DeliveryStack";
 import { HomeOutcomes } from "./components/home/Outcomes";
 import { HomeProcess } from "./components/home/Process";
 import { HomeReviews } from "./components/home/Reviews";
+import { HomeGallery } from "./components/home/Gallery";
 import { HomeCta } from "./components/home/Cta";
 
 /* Small editorial section-number bar — used above the sections that don't get
@@ -49,6 +51,9 @@ export default function HomePage() {
       </div>
       <LogoBar />
 
+      {/* Positioning strap — "total beginner to photoshoot ready" */}
+      <Positioning />
+
       {/* 02 · What I stand for — editorial */}
       <HomeBeliefs />
 
@@ -61,7 +66,7 @@ export default function HomePage() {
       {/* 05 · Outcomes log — LAB on dark ink */}
       <HomeOutcomes />
 
-      {/* 06 · Four phases — editorial */}
+      {/* 06 · How I work — editorial */}
       <HomeProcess />
 
       {/* 07 · In their words — editorial pull-quotes */}
@@ -76,6 +81,9 @@ export default function HomePage() {
         />
       </div>
       <MessageBox />
+
+      {/* Gallery coda — auto-cycling carousel, anchor target #transformations */}
+      <HomeGallery />
 
       {/* 09 · Apply — editorial dark CTA */}
       <HomeCta />
