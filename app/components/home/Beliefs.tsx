@@ -54,12 +54,12 @@ export function HomeBeliefs() {
                 <Reveal
                   key={v.t}
                   delay={i * 0.04}
-                  className="grid grid-cols-12 gap-6 border-t hairline py-10 first:border-t-0 first:pt-0"
+                  className="flex flex-col gap-4 border-t hairline py-10 first:border-t-0 first:pt-0 md:grid md:grid-cols-12 md:gap-6"
                 >
-                  <div className="col-span-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
+                  <div className="font-mono text-7xl leading-none tracking-tight text-ember-deep tabular-nums md:col-span-2 md:text-8xl">
                     {v.n}
                   </div>
-                  <div className="col-span-10">
+                  <div className="md:col-span-10">
                     <h3 className="font-display text-3xl font-semibold uppercase leading-[0.95] tracking-[-0.005em] text-ink-900 md:text-4xl">
                       {v.t}.
                     </h3>
