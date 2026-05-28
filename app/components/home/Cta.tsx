@@ -10,7 +10,6 @@ export function HomeCta() {
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="flex items-end justify-between border-b hairline pb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
           <span>09 / 10 — Apply</span>
-          <span className="hidden md:inline">Spring intake · 4 spots</span>
           <span>Closing soon</span>
         </div>
 
@@ -27,11 +26,7 @@ export function HomeCta() {
 
           <div className="relative grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ember-soft">
-                <span className="h-1.5 w-1.5 rounded-full bg-ember animate-ember-pulse" />
-                Spring intake · 4 spots
-              </div>
-              <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] md:text-7xl">
+              <h2 className="font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] md:text-7xl">
                 You don&apos;t need more motivation.
                 <br />
                 You need{" "}
