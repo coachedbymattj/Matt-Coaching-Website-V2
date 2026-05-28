@@ -91,9 +91,6 @@ export function HomeHero() {
                 className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
             </Link>
-            <div className="mt-3 text-right font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/60">
-              Next intake · Jun · 2026
-            </div>
           </Reveal>
         </div>
       </div>
