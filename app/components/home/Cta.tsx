@@ -34,8 +34,8 @@ export function HomeCta() {
               <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] md:text-7xl">
                 You don&apos;t need more motivation.
                 <br />
-                You need a programme that{" "}
-                <span className="text-ember-grad">survives Tuesday.</span>
+                You need{" "}
+                <span className="text-ember-grad">someone in your corner.</span>
               </h2>
               <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-canvas/75 md:text-lg">
                 Coaching is application-only. If we&apos;re a fit, you&apos;ll
