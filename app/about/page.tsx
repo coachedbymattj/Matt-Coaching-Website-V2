@@ -179,14 +179,30 @@ export default function AboutPage() {
               How I coach.
             </h2>
           </Reveal>
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
             {howICoach.map((p, i) => (
               <Reveal key={p} delay={i * 0.06} className="h-full">
-                <div className="flex h-full flex-col gap-5 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm md:p-8">
-                  <div className="font-display text-4xl font-bold leading-none text-ink-200">
-                    0{i + 1}
+                <div className="group relative h-full">
+                  {/* Ember heat halo — radial glow bleeding around the tile,
+                      brighter at the bottom so it reads like heat rising from
+                      a coal. Intensifies on hover; reduced-motion disables
+                      the transition but keeps the static glow. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -inset-4 rounded-5xl opacity-70 transition-opacity duration-75 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 75% 65% at 50% 95%, rgba(200,85,61,0.35) 0%, rgba(200,85,61,0.15) 45%, transparent 75%)",
+                      filter: "blur(48px)",
+                    }}
+                  />
+                  {/* Tile face — clean white, on top of the halo. */}
+                  <div className="relative flex h-full flex-col gap-5 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm md:p-8">
+                    <div className="font-mono text-4xl leading-none tracking-tight tabular-nums text-ember-deep">
+                      0{i + 1}
+                    </div>
+                    <p className="text-lg leading-relaxed text-ink-800">{p}</p>
                   </div>
-                  <p className="text-lg leading-relaxed text-ink-800">{p}</p>
                 </div>
               </Reveal>
             ))}
