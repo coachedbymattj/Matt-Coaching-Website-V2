@@ -215,35 +215,37 @@ export function GoalWeightCalculator() {
       {/* ---------- INPUTS ---------- */}
       <div className="rounded-5xl border hairline bg-white p-6 shadow-diffusion-sm md:p-8">
         <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2 sm:max-w-xs">
-            <label htmlFor="gw-weight" className={labelClass}>
-              Current weight (kg)
-            </label>
-            <input
-              id="gw-weight"
-              type="number"
-              inputMode="decimal"
-              step="0.1"
-              min="0"
-              placeholder="e.g. 84.0"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-              className={inputClass}
-              aria-invalid={!!errors.weight}
-            />
-            {errors.weight && (
-              <p className="text-xs leading-snug text-ember-deep">
-                {errors.weight}
-              </p>
-            )}
-          </div>
+          {/* Current weight (left) + Sex toggle (right) on one row,
+              packed close together, baseline-aligned. Stacks on mobile. */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-5">
+            <div className="flex w-full flex-col gap-2 sm:max-w-[260px]">
+              <label htmlFor="gw-weight" className={labelClass}>
+                Current weight (kg)
+              </label>
+              <input
+                id="gw-weight"
+                type="number"
+                inputMode="decimal"
+                step="0.1"
+                min="0"
+                placeholder="e.g. 84.0"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+                className={inputClass}
+                aria-invalid={!!errors.weight}
+              />
+              {errors.weight && (
+                <p className="text-xs leading-snug text-ember-deep">
+                  {errors.weight}
+                </p>
+              )}
+            </div>
 
-          {/* Shared sex toggle: one control for BOTH tiles, centered above. */}
-          <div className="flex justify-center">
+            {/* Shared sex toggle: one control for BOTH tiles. */}
             <div
               role="radiogroup"
               aria-label="Sex"
-              className="flex rounded-full border hairline bg-canvas p-0.5"
+              className="flex self-start rounded-full border hairline bg-canvas p-0.5 sm:self-end"
             >
               {(["male", "female"] as const).map((s) => (
                 <button
