@@ -203,8 +203,8 @@ export function MacroCalculator() {
     <div className="flex flex-col gap-6">
       {/* ---------- INPUTS ---------- */}
       <div className="rounded-5xl border hairline bg-white p-6 shadow-diffusion-sm md:p-8">
-        {/* bodyweight */}
-        <div className="flex flex-col gap-2 sm:max-w-xs">
+        {/* bodyweight — centered to the body figure axis below */}
+        <div className="mx-auto flex max-w-xs flex-col gap-2">
           <label htmlFor="mc-bw" className={labelClass}>
             Bodyweight (kg)
           </label>
@@ -227,7 +227,36 @@ export function MacroCalculator() {
           )}
         </div>
 
-        {/* body fat tile: figure + slider (matches the goal calc tiles) */}
+        {/* sex toggle — centered, sits between the bodyweight input and the
+            body figure. Promoted out of <BodyFatControls> so the label below
+            the figure no longer carries it. */}
+        <div className="mt-5 flex justify-center">
+          <div
+            role="radiogroup"
+            aria-label="Sex"
+            className="flex rounded-full border hairline bg-canvas p-0.5"
+          >
+            {(["male", "female"] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                role="radio"
+                aria-checked={sex === s}
+                onClick={() => setSex(s)}
+                className={`rounded-full px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] transition ${
+                  sex === s
+                    ? "bg-ink-900 text-canvas"
+                    : "text-ink-500 hover:text-ink-900"
+                }`}
+              >
+                {s === "male" ? "Male" : "Female"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* body fat tile: figure + slider (matches the goal calc tiles).
+            Toggle is hoisted above so showSexToggle={false} here. */}
         <div className="mt-7 flex flex-col gap-4">
           <BodyFatFigure sex={sex} value={bodyFat} />
           <BodyFatControls
@@ -236,6 +265,7 @@ export function MacroCalculator() {
             onChange={setBodyFat}
             sex={sex}
             onSexChange={setSex}
+            showSexToggle={false}
             idPrefix="mc-bf"
           />
         </div>
