@@ -67,9 +67,9 @@ const timeline = [
     year: "2025",
     title: "Founded Coached by Matt J",
     body: "Went independent. A capped roster, three coaching paths, and full control over the standard.",
-    // Reuses the same portrait file as the homepage hero so the timeline lands on
-    // the same image the visitor first met me with.
-    img: "/hero-portrait.webp",
+    // Same portrait file as the About page hero above — so the timeline lands
+    // on the same image the visitor first met me with on this page.
+    img: "/career/about-portrait.webp",
   },
 ];
 
