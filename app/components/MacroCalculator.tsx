@@ -352,7 +352,7 @@ export function MacroCalculator() {
                   fat, not total weight). More protein protects muscle while
                   losing fat and keeps you fuller. Guide: 2.0-2.2 general
                   maintenance, 2.3-2.6 most people training and dieting, 2.7-3.0
-                  aggressive fat loss or max muscle retention.
+                  for those who love eating high protein.
                 </p>
               </div>
 
