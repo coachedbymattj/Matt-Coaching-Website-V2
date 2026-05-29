@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Matt J · Online Body Transformation Coach",
+  description:
+    "Meet Matthew Johnstone — the coaching philosophy and career behind Coached by Matt J, now delivering engineered online transformation coaching worldwide.",
+  alternates: {
+    canonical: "https://coachedbymattj.com/about",
+  },
+};
+
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";

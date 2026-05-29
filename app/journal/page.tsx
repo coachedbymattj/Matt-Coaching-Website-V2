@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Journal · Coaching Essays & Notes · Coached by Matt J",
+  description:
+    "Essays on coaching, fitness, and the messy reality behind the results — what I think about when I'm not coaching. Read the latest from Matt J.",
+  alternates: {
+    canonical: "https://coachedbymattj.com/journal",
+  },
+};
+
 import Link from "next/link";
 import {
   ArrowUpRight,

@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Apply for Online 1:1 Coaching · Coached by Matt J",
+  description:
+    "Apply for online 1:1 coaching from anywhere in the world, or MELT group coaching. Every application reaches Matt directly — personal reply within 48 hours.",
+  alternates: {
+    canonical: "https://coachedbymattj.com/apply",
+  },
+};
+
 import Link from "next/link";
 import {
   ArrowUpRight,
