@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Client Results · Real Transformations · Coached by Matt J",
+  description:
+    "Real people, real numbers. See the transformations clients have achieved through engineered coaching protocols, then apply for the next intake.",
+  alternates: {
+    canonical: "https://coachedbymattj.com/results",
+  },
+};
+
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { ResultsShowcase } from "../components/ResultsShowcase";
