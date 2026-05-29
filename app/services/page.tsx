@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Online Coaching & More · Coached by Matt J",
+  description:
+    "Online 1:1 coaching for working professionals who want the 1:1 standard from anywhere, plus MELT group coaching. Limited in-person spots in Amsterdam.",
+  alternates: {
+    canonical: "https://coachedbymattj.com/services",
+  },
+};
+
 import Link from "next/link";
 import {
   ArrowUpRight,
