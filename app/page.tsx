@@ -2,8 +2,6 @@ import { LogoBar } from "./components/LogoBar";
 import { MessageBox } from "./components/MessageBox";
 import { Positioning } from "./components/Positioning";
 import { HomeHero } from "./components/home/Hero";
-import { HomeBeliefs } from "./components/home/Beliefs";
-import { HomePrinciples } from "./components/home/Principles";
 import { HomeDeliveryStack } from "./components/home/DeliveryStack";
 import { HomeOutcomes } from "./components/home/Outcomes";
 import { HomeProcess } from "./components/home/Process";
@@ -44,7 +42,7 @@ export default function HomePage() {
       {/* 01 · Trust strip — editorial running header above existing LogoBar */}
       <div className="bg-canvas pt-10">
         <SectionRail
-          number="01 / 10"
+          number="01 / 07"
           title="Trust"
           meta="Clients write for me from"
         />
@@ -53,12 +51,6 @@ export default function HomePage() {
 
       {/* Positioning strap — "total beginner to photoshoot ready" */}
       <Positioning />
-
-      {/* 02 · What I stand for — editorial */}
-      <HomeBeliefs />
-
-      {/* 03 · How I coach — editorial */}
-      <HomePrinciples />
 
       {/* 04 · Delivery stack — editorial channels + LAB instrument panel for the app (intentional seam) */}
       <HomeDeliveryStack />
@@ -75,7 +67,7 @@ export default function HomePage() {
       {/* 08 · Got a question — editorial running header above existing MessageBox */}
       <div className="bg-canvas pt-10">
         <SectionRail
-          number="08 / 10"
+          number="06 / 07"
           title="Message"
           meta="Direct line to the coach"
         />
