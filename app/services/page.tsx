@@ -18,6 +18,8 @@ import {
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr";
 import { GalleryLink } from "../components/GalleryLink";
+import { HomeBeliefs } from "../components/home/Beliefs";
+import { HomePrinciples } from "../components/home/Principles";
 
 const oneToOne = [
   {
@@ -149,6 +151,10 @@ export default function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      {/* What I stand for + How I coach — moved here from the homepage */}
+      <HomeBeliefs />
+      <HomePrinciples />
 
       {/* 1:1 Tiers, asymmetric 5 / 7 split */}
       <section className="bg-canvas py-24 md:py-32">
