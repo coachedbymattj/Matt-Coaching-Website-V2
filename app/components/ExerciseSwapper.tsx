@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { MagnifyingGlass, X, ArrowsLeftRight, ArrowLeft } from "@phosphor-icons/react";
+import { ResultGate } from "./level-zero/ResultGate";
 import exercisesData from "@/data/exercises.json";
 
 type Exercise = {
@@ -362,32 +363,38 @@ export function ExerciseSwapper() {
           </div>
         </div>
 
-        {filteredAlts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredAlts.map((alt) => (
-              <div
-                key={alt.name}
-                className="flex flex-col gap-3 rounded-4xl border hairline bg-white p-5 shadow-diffusion-sm"
-              >
-                <div className="font-display text-lg font-semibold uppercase leading-tight tracking-[0.01em] text-ink-900">
-                  {alt.name}
+        <ResultGate
+          tool="Exercise Swapper"
+          title="Unlock your swaps"
+          submitLabel="Unlock my swaps"
+        >
+          {filteredAlts.length > 0 ? (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredAlts.map((alt) => (
+                <div
+                  key={alt.name}
+                  className="flex flex-col gap-3 rounded-4xl border hairline bg-white p-5 shadow-diffusion-sm"
+                >
+                  <div className="font-display text-lg font-semibold uppercase leading-tight tracking-[0.01em] text-ink-900">
+                    {alt.name}
+                  </div>
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    <Tag>{alt.muscle}</Tag>
+                    <Tag>{alt.pattern}</Tag>
+                    {alt.equipment !== "other" && <Tag accent>{alt.equipment}</Tag>}
+                  </div>
                 </div>
-                <div className="mt-auto flex flex-wrap gap-2">
-                  <Tag>{alt.muscle}</Tag>
-                  <Tag>{alt.pattern}</Tag>
-                  {alt.equipment !== "other" && <Tag accent>{alt.equipment}</Tag>}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-4xl border hairline bg-ink-50/60 p-6 text-center">
-            <p className="text-sm leading-relaxed text-ink-600">
-              No swaps on that equipment. Clear the filter to see all
-              alternatives.
-            </p>
-          </div>
-        )}
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-4xl border hairline bg-ink-50/60 p-6 text-center">
+              <p className="text-sm leading-relaxed text-ink-600">
+                No swaps on that equipment. Clear the filter to see all
+                alternatives.
+              </p>
+            </div>
+          )}
+        </ResultGate>
       </div>
     );
   }

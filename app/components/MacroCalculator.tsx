@@ -2,18 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import {
-  LockSimple,
-  CheckCircle,
-  ArrowRight,
-  CaretDown,
-  Warning,
-} from "@phosphor-icons/react";
-import {
-  subscribeEmail,
-  isValidEmail,
-  cleanMailchimpMessage,
-} from "../lib/mailchimpClient";
+import { ArrowRight, CaretDown, Warning } from "@phosphor-icons/react";
+import { ResultGate } from "./level-zero/ResultGate";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 import { CountUp } from "./motion";
 
@@ -132,12 +122,6 @@ export function MacroCalculator() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // email gate
-  const [email, setEmail] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [statusMsg, setStatusMsg] = useState("");
-
   const result = useMemo(
     () =>
       snapshot
@@ -161,35 +145,6 @@ export function MacroCalculator() {
       return;
     }
     setSnapshot({ bodyweight: bw, bodyFat });
-  }
-
-  async function handleSubscribe() {
-    if (!isValidEmail(email)) {
-      setStatusMsg("Please enter a valid email address.");
-      return;
-    }
-    setSubmitting(true);
-    setStatusMsg("");
-    try {
-      const res = await subscribeEmail(email);
-      if (res.result === "success") {
-        setStatusMsg("You're in! Your full macro breakdown is unlocked below.");
-      } else {
-        const clean = cleanMailchimpMessage(res.msg);
-        setStatusMsg(
-          clean
-            ? `${clean} Your macros are unlocked below anyway.`
-            : "You're already on the list, macros unlocked below."
-        );
-      }
-    } catch {
-      setStatusMsg(
-        "Couldn't reach the mailing list right now, but your macros are unlocked below."
-      );
-    } finally {
-      setSubmitting(false);
-      setUnlocked(true);
-    }
   }
 
   const inputClass =
@@ -476,87 +431,19 @@ export function MacroCalculator() {
         </motion.div>
       )}
 
-      {/* ---------- EMAIL GATE ---------- */}
-      {result && !unlocked && (
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.05 }}
-          className="rounded-5xl border border-ember/30 bg-white p-6 shadow-ember-glow md:p-8"
+      {/* ---------- MACRO BREAKDOWN (gated behind email) ---------- */}
+      {result && (
+        <ResultGate
+          tool="Macro Calculator"
+          title="Unlock your full macro breakdown"
+          submitLabel="Unlock my macros"
         >
-          <div className="flex items-start gap-4">
-            <span className="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-ember/10 text-ember-deep">
-              <LockSimple size={18} weight="bold" />
-            </span>
-            <div className="flex-1">
-              <h3 className="font-display text-2xl font-semibold uppercase leading-none tracking-[0.01em] text-ink-900">
-                Unlock your full macro breakdown
-              </h3>
-              <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ink-600">
-                Enter your email to reveal your daily protein, fat and carb
-                targets to hit that calorie number.
-              </p>
-
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="you@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSubscribe();
-                  }}
-                  className="w-full flex-1 rounded-full border hairline bg-canvas px-5 py-3 text-base text-ink-900 outline-none transition focus:border-ember/50"
-                  aria-label="Email address"
-                />
-                <button
-                  type="button"
-                  onClick={handleSubscribe}
-                  disabled={submitting}
-                  className="btn-ember inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] disabled:opacity-60"
-                >
-                  {submitting ? "Sending…" : "Unlock my macros"}
-                  {!submitting && <ArrowRight size={16} weight="bold" />}
-                </button>
-              </div>
-
-              {statusMsg && (
-                <p
-                  className="mt-3 text-xs leading-snug text-ember-deep"
-                  aria-live="polite"
-                >
-                  {statusMsg}
-                </p>
-              )}
-
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
-                One email when there's something worth saying · unsubscribe anytime
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* ---------- MACRO BREAKDOWN (revealed after email) ---------- */}
-      {result && unlocked && (
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 22 }}
           className="flex flex-col gap-6"
         >
-          {statusMsg && (
-            <div
-              className="flex items-center gap-2 rounded-full bg-ember/10 px-4 py-2.5 text-xs font-medium text-ember-deep"
-              aria-live="polite"
-            >
-              <CheckCircle size={16} weight="fill" />
-              {statusMsg}
-            </div>
-          )}
-
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
               { k: "Protein", v: result.proteinG },
@@ -617,6 +504,7 @@ export function MacroCalculator() {
             Adjust activity, pace or advanced settings above to update live
           </p>
         </motion.div>
+        </ResultGate>
       )}
     </div>
   );

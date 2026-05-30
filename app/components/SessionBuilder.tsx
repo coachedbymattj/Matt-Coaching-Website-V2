@@ -35,11 +35,7 @@ import {
   type Program,
   type SplitKey,
 } from "../lib/sessionBuilder";
-import {
-  subscribeEmail,
-  isValidEmail,
-  cleanMailchimpMessage,
-} from "../lib/mailchimpClient";
+import { ResultGate } from "./level-zero/ResultGate";
 
 const STORE_PLAN = "cbmj_sb_plan";
 const STORE_LAST = "cbmj_sb_last";
@@ -88,12 +84,6 @@ export function SessionBuilder() {
   const [unlocksAt, setUnlocksAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
 
-  // email gate
-  const [unlocked, setUnlocked] = useState(false);
-  const [email, setEmail] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [statusMsg, setStatusMsg] = useState("");
-
   // Restore a saved, already-unlocked session + cooldown on mount (client-only).
   useEffect(() => {
     try {
@@ -102,7 +92,6 @@ export function SessionBuilder() {
       const unl = localStorage.getItem(STORE_UNLOCKED) === "1";
       if (last && saved && unl && Date.now() - last < WEEK) {
         setProgram(JSON.parse(saved) as Program);
-        setUnlocked(true);
         setUnlocksAt(last + WEEK);
       }
     } catch {
@@ -167,47 +156,31 @@ export function SessionBuilder() {
     // Build it now, but keep it behind the email gate until they unlock.
     setProgram(buildProgram(input));
     setSwapKey(null);
-    setUnlocked(false);
-    setEmail("");
-    setStatusMsg("");
   }
 
-  // Capture the email (Mailchimp), then reveal the session and start the cooldown.
-  async function handleUnlock() {
-    if (!isValidEmail(email)) {
-      setStatusMsg("Please enter a valid email address.");
-      return;
-    }
-    setSubmitting(true);
-    setStatusMsg("");
+  // Fires once the ResultGate reveals the session (via email submit, or a
+  // browser that already unlocked elsewhere). Saves the plan and starts the
+  // one-per-7-days cooldown, without resetting a cooldown we just restored.
+  function handleUnlocked() {
+    let last = 0;
     try {
-      const res = await subscribeEmail(email);
-      if (res.result !== "success") {
-        const clean = cleanMailchimpMessage(res.msg);
-        setStatusMsg(
-          clean
-            ? `${clean} Your session is unlocked below anyway.`
-            : "You're already on the list, session unlocked below."
-        );
-      }
+      last = Number(localStorage.getItem(STORE_LAST) || 0);
     } catch {
-      setStatusMsg(
-        "Couldn't reach the mailing list right now, but your session is unlocked below."
-      );
-    } finally {
-      setSubmitting(false);
-      const ts = Date.now();
-      setUnlocked(true);
-      setUnlocksAt(ts + WEEK);
-      setNow(ts);
+      /* ignore */
+    }
+    const fresh = !(last && Date.now() - last < WEEK);
+    if (fresh) {
+      last = Date.now();
       try {
         if (program) localStorage.setItem(STORE_PLAN, JSON.stringify(program));
-        localStorage.setItem(STORE_LAST, String(ts));
+        localStorage.setItem(STORE_LAST, String(last));
         localStorage.setItem(STORE_UNLOCKED, "1");
       } catch {
         /* ignore */
       }
     }
+    setUnlocksAt(last + WEEK);
+    setNow(Date.now());
   }
 
   function startOver() {
@@ -221,9 +194,6 @@ export function SessionBuilder() {
     setCantText("");
     setExperience(null);
     setSplit("fb");
-    setUnlocked(false);
-    setEmail("");
-    setStatusMsg("");
     setUnlocksAt(null);
   }
 
@@ -261,12 +231,7 @@ export function SessionBuilder() {
         unlocksAt={unlocksAt}
         now={now}
         onStartOver={startOver}
-        unlocked={unlocked}
-        email={email}
-        setEmail={setEmail}
-        submitting={submitting}
-        statusMsg={statusMsg}
-        onUnlock={handleUnlock}
+        onUnlock={handleUnlocked}
       />
     );
   }
@@ -574,11 +539,6 @@ function ProgramView({
   unlocksAt,
   now,
   onStartOver,
-  unlocked,
-  email,
-  setEmail,
-  submitting,
-  statusMsg,
   onUnlock,
 }: {
   program: Program;
@@ -591,14 +551,8 @@ function ProgramView({
   unlocksAt: number | null;
   now: number;
   onStartOver: () => void;
-  unlocked: boolean;
-  email: string;
-  setEmail: (v: string) => void;
-  submitting: boolean;
-  statusMsg: string;
   onUnlock: () => void;
 }) {
-  const reduce = useReducedMotion();
   const caps = useMemo(
     () => capsFromKeys(program.meta.capKeys),
     [program.meta.capKeys]
@@ -671,66 +625,14 @@ function ProgramView({
         </div>
       </div>
 
-      {/* email gate */}
-      {!unlocked ? (
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.05 }}
-          className="rounded-5xl border border-ember/30 bg-white p-6 shadow-ember-glow md:p-8"
-        >
-          <div className="flex items-start gap-4">
-            <span className="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-ember/10 text-ember-deep">
-              <LockSimple size={18} weight="bold" />
-            </span>
-            <div className="flex-1">
-              <h3 className="font-display text-2xl font-semibold uppercase leading-none tracking-[0.01em] text-ink-900">
-                Unlock your session
-              </h3>
-              <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ink-600">
-                Pop your email in and your full session opens up below, every move,
-                with sets and reps.
-              </p>
-
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="you@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") onUnlock();
-                  }}
-                  className="w-full flex-1 rounded-full border hairline bg-canvas px-5 py-3 text-base text-ink-900 outline-none transition focus:border-ember/50"
-                  aria-label="Email address"
-                />
-                <button
-                  type="button"
-                  onClick={onUnlock}
-                  disabled={submitting}
-                  className="btn-ember inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] disabled:opacity-60"
-                >
-                  {submitting ? "Sending…" : "Unlock my session"}
-                  {!submitting && <ArrowRight size={16} weight="bold" />}
-                </button>
-              </div>
-
-              {statusMsg && (
-                <p className="mt-3 text-xs leading-snug text-ember-deep" aria-live="polite">
-                  {statusMsg}
-                </p>
-              )}
-
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
-                One email when there's something worth saying · unsubscribe anytime
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      ) : (
-        <>
+      {/* the session itself, gated behind email */}
+      <ResultGate
+        tool="Session Builder"
+        title="Unlock your session"
+        submitLabel="Unlock my session"
+        onUnlock={onUnlock}
+      >
+        <div className="flex flex-col gap-6">
           {/* focus note */}
           <div className="rounded-4xl border hairline bg-ember/5 p-5 md:p-6">
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember-deep">
@@ -919,8 +821,8 @@ function ProgramView({
             </a>
             .
           </p>
-        </>
-      )}
+        </div>
+      </ResultGate>
     </div>
   );
 }
