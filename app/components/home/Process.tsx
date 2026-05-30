@@ -37,7 +37,7 @@ export function HomeProcess() {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              06 / 10 — How I work
+            04 / 07 — How I work
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] text-ink-900 md:text-6xl">
               How we
