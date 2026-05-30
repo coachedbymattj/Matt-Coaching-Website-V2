@@ -9,7 +9,7 @@ export function HomeCta() {
     <section className="bg-canvas pb-24 md:pb-32">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="flex items-end justify-between border-b hairline pb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-          <span>09 / 10 — Apply</span>
+          <span>07 / 07 — Apply</span>
           <span>Closing soon</span>
         </div>
 
