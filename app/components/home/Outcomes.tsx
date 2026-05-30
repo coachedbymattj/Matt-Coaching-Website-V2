@@ -17,7 +17,7 @@ export function HomeOutcomes() {
       <div className="relative mx-auto max-w-[1400px] px-6">
         {/* module strip */}
         <div className="flex items-end justify-between border-b border-canvas/10 pb-3 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/60">
-          <span>Module 05 · Outcomes log</span>
+          <span>Module 03 · Outcomes log</span>
           <span className="hidden md:inline">Verified · client weigh-ins</span>
           <span />
         </div>
@@ -26,7 +26,7 @@ export function HomeOutcomes() {
         <div className="mt-12 grid grid-cols-12 gap-6">
           <Reveal className="col-span-12 md:col-span-7">
             <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-ember-soft">
-              05 / 10 — Recent transformations
+              03 / 07 — Recent transformations
             </div>
             <h2 className="mt-5 max-w-2xl font-display text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] md:text-6xl">
               Outcomes you can measure.
