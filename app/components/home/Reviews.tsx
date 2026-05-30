@@ -43,7 +43,7 @@ export function HomeReviews() {
         <div className="grid grid-cols-12 gap-6">
           <Reveal className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              07 / 10 — In their words
+              05 / 07 — In their words
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] text-ink-900 md:text-6xl">
               Don&apos;t just take my
