@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { ResultsShowcase } from "../components/ResultsShowcase";
-import { NijatReviewCard } from "../components/NijatReviewCard";
+import { ClientReviewCard } from "../components/ClientReviewCard";
 import { results as cases } from "../lib/results";
 import { Reveal } from "../components/motion";
 import { Positioning } from "../components/Positioning";
@@ -52,8 +52,8 @@ export default function ResultsPage() {
           </div>
           <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cases.map((c) =>
-              c.slug === "nijat" ? (
-                <NijatReviewCard key={c.slug} data={c} />
+              c.slug === "nijat" || c.slug === "natalia" ? (
+                <ClientReviewCard key={c.slug} data={c} />
               ) : (
                 <article
                   key={c.slug}

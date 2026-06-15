@@ -39,6 +39,7 @@ for (const [src, [out, w]] of Object.entries(career))
 jobs.push(["_src-hero.jpg", "hero-portrait.webp", 900]);
 jobs.push(["_src-hero-gym.jpg", "hero-gym.webp", 1300]);
 jobs.push(["_src-hero-gym.jpg", "hero-gym-sm.webp", 760]);
+jobs.push(["_src-hero-gym.jpg", "career/2025-founder.webp", 600]);
 jobs.push(["transformations/_src-aoife.jpg", "transformations/aoife.webp", 1200]);
 jobs.push(["transformations/_src-tomas.jpg", "transformations/tomas.webp", 1200]);
 jobs.push(["transformations/_src-priya.jpg", "transformations/priya.webp", 1200]);

@@ -19,10 +19,12 @@ function formatMonth(iso: string) {
   return d.toLocaleDateString("en-GB", { month: "short", year: "numeric" });
 }
 
-export function NijatReviewCard({ data: c }: { data: ResultCase }) {
+export function ClientReviewCard({ data: c }: { data: ResultCase }) {
   const { data } = useFeaturable();
   const [open, setOpen] = useState(false);
-  const review = findReviewByAuthor(data, "nijat");
+  // Match the Google review by the client's own name, so the same card works
+  // for any client whose review is in the feed (Nijat, Natalia, …).
+  const review = findReviewByAuthor(data, c.name);
 
   return (
     <article
