@@ -119,7 +119,7 @@ export default function AboutPage() {
               style={{ aspectRatio: "5 / 6" }}
             >
               <img
-                src="/career/about-portrait.webp"
+                src="/career/about-headshot.webp"
                 alt="Matthew Johnstone"
                 width={1000}
                 height={1200}
