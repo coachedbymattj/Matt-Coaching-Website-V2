@@ -5,6 +5,7 @@ import { ArrowUpRight } from "@phosphor-icons/react";
 import { Reveal } from "../motion";
 import { useFeaturable } from "../../lib/useFeaturable";
 import { GoogleG, Stars } from "../GoogleMark";
+import { ReviewsCarousel } from "../ReviewsCarousel";
 
 function PullQuoteSkeleton() {
   return (
@@ -150,6 +151,17 @@ export function HomeReviews() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Every review — full marquee beneath the two featured pull-quotes,
+          so all reviews can be read on-site (not just the two highlighted). */}
+      <div className="mt-16 md:mt-20">
+        <div className="mx-auto mb-8 max-w-[1400px] px-6">
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
+            Every review · read them all
+          </div>
+        </div>
+        <ReviewsCarousel />
       </div>
     </section>
   );
