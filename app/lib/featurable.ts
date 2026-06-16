@@ -46,16 +46,20 @@ export async function fetchFeaturable(): Promise<FeaturableData | null> {
   return inflight;
 }
 
-/** Find the first review whose author name contains `name` (case-insensitive). */
+/** Lowercase + strip diacritics so "Natália" matches "natalia". */
+const deburr = (s: string) =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/** Find the first review whose author name contains `name` (accent-insensitive). */
 export function findReviewByAuthor(
   data: FeaturableData | null,
   name: string
 ): FeaturableReview | null {
   if (!data) return null;
-  const needle = name.toLowerCase();
+  const needle = deburr(name);
   return (
     data.reviews.find((r) =>
-      r.reviewer?.displayName?.toLowerCase().includes(needle)
+      r.reviewer?.displayName ? deburr(r.reviewer.displayName).includes(needle) : false
     ) ?? null
   );
 }
