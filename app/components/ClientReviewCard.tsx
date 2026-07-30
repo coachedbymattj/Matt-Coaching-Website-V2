@@ -4,14 +4,8 @@ import { useState } from "react";
 import { useFeaturable } from "../lib/useFeaturable";
 import { findReviewByAuthor, type FeaturableReview } from "../lib/featurable";
 import { GoogleG, Stars } from "./GoogleMark";
-
-type ResultCase = {
-  slug: string;
-  name: string;
-  headline: string;
-  detail: string;
-  img: string;
-};
+import { ResultMedia } from "./ResultMedia";
+import type { ResultCase } from "../lib/results";
 
 // Reviews supplied directly by the client, keyed by case slug. Used as the
 // source of truth on the card so it never depends on a live-feed name match
@@ -50,16 +44,7 @@ export function ClientReviewCard({ data: c }: { data: ResultCase }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="overflow-hidden">
-        <img
-          src={c.img}
-          alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
-          width={900}
-          height={825}
-          loading="lazy"
-          className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
-        />
-      </div>
+      <ResultMedia data={c} />
 
       <div className="flex items-end justify-between gap-3 px-5 py-4 text-canvas">
         <div>

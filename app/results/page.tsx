@@ -13,6 +13,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { ResultsShowcase } from "../components/ResultsShowcase";
 import { ClientReviewCard } from "../components/ClientReviewCard";
+import { ResultMedia } from "../components/ResultMedia";
 import { results as cases } from "../lib/results";
 import { Reveal } from "../components/motion";
 import { Positioning } from "../components/Positioning";
@@ -59,16 +60,7 @@ export default function ResultsPage() {
                   key={c.slug}
                   className="group overflow-hidden rounded-4xl border hairline bg-ink-900 shadow-diffusion-sm transition duration-500 hover:-translate-y-1 hover:shadow-diffusion"
                 >
-                  <div className="overflow-hidden">
-                    <img
-                      src={c.img}
-                      alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
-                      width={900}
-                      height={825}
-                      loading="lazy"
-                      className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
-                    />
-                  </div>
+                  <ResultMedia data={c} />
                   <div className="flex items-end justify-between gap-3 px-5 py-4 text-canvas">
                     <div>
                       <div className="font-display text-xl font-semibold uppercase leading-none tracking-[0.02em]">

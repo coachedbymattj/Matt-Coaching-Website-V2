@@ -7,7 +7,14 @@ export type ResultCase = {
   name: string;
   headline: string;
   detail: string;
+  /** Primary image. Also the still used anywhere that shows a single frame. */
   img: string;
+  /**
+   * Optional extra views of the same transformation (e.g. front and back).
+   * When present, the results card lets you swipe between them in the space
+   * a single image would take. `img` should be the first entry.
+   */
+  views?: { src: string; label: string }[];
 };
 
 export const results: ResultCase[] = [
