@@ -43,14 +43,13 @@ const career = {
   "2019-up.jpg": ["2019-up.webp", 600],
   "2024-one.jpg": ["2024-one.webp", 600],
   "_src-2025.jpg": ["2025-cbmj.webp", 480],
-  "about-headshot.jpg": ["about-headshot.webp", 1000],
+  "about-headshot.jpg": ["about-headshot.webp", 1000, 78],
 };
-for (const [src, [out, w]] of Object.entries(career))
-  jobs.push([`career/${src}`, `career/${out}`, w]);
+for (const [src, [out, w, q]] of Object.entries(career))
+  jobs.push([`career/${src}`, `career/${out}`, w, q]);
 
-jobs.push(["_src-hero.jpg", "hero-portrait.webp", 900]);
-jobs.push(["_src-hero-gym.jpg", "hero-gym.webp", 1300]);
-jobs.push(["_src-hero-gym.jpg", "hero-gym-sm.webp", 760]);
+jobs.push(["_src-hero-gym.jpg", "hero-gym.webp", 1300, 76]);
+jobs.push(["_src-hero-gym.jpg", "hero-gym-sm.webp", 760, 74]);
 jobs.push(["_src-hero-gym.jpg", "career/2025-founder.webp", 600]);
 jobs.push(["transformations/_src-aoife.jpg", "transformations/aoife.webp", 1200]);
 jobs.push(["transformations/_src-tomas.jpg", "transformations/tomas.webp", 1200]);
