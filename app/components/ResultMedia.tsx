@@ -27,7 +27,7 @@ export function ResultMedia({ data: c }: { data: ResultCase }) {
           src={c.img}
           alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
           width={900}
-          height={825}
+          height={1000}
           loading="lazy"
           className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
         />
@@ -62,7 +62,7 @@ export function ResultMedia({ data: c }: { data: ResultCase }) {
             src={v.src}
             alt={`${c.name} ${v.label.toLowerCase()} view, before and after. ${c.headline}, ${c.detail}.`}
             width={900}
-            height={825}
+            height={1000}
             loading={idx === 0 ? "lazy" : "eager"}
             className="block h-auto w-full flex-none"
           />

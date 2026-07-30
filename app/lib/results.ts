@@ -19,6 +19,17 @@ export type ResultCase = {
 
 export const results: ResultCase[] = [
   {
+    slug: "noah",
+    name: "Noah",
+    headline: "Dropped 11.9kg",
+    detail: "67.5kg to 55.6kg",
+    img: "/results/noah-front.webp",
+    views: [
+      { src: "/results/noah-front.webp", label: "Front" },
+      { src: "/results/noah-back.webp", label: "Back" },
+    ],
+  },
+  {
     slug: "paul",
     name: "Paul",
     headline: "Dropped 8.6kg",
