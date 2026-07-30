@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { LazyExerciseSwapper } from "../../components/lazy";
+import { ResultGate } from "../../components/level-zero/ResultGate";
 
 export const metadata: Metadata = {
   title: "Exercise Swapper · Level Zero · Coached by Matt J",
@@ -35,7 +36,14 @@ export default function ExerciseSwapPage() {
         </header>
 
         <div className="mt-10">
-          <LazyExerciseSwapper />
+          <ResultGate
+            tool="Exercise Swapper"
+            title="Enter your email to start"
+            blurb="Enter your email to open the swapper, then get coach-approved alternatives for any exercise."
+            submitLabel="Open the swapper"
+          >
+            <LazyExerciseSwapper />
+          </ResultGate>
         </div>
       </div>
     </section>

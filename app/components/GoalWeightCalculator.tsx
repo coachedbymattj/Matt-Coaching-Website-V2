@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "@phosphor-icons/react";
-import { ResultGate } from "./level-zero/ResultGate";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 import { CountUp } from "./motion";
 
@@ -399,13 +398,8 @@ export function GoalWeightCalculator() {
         </motion.div>
       )}
 
-      {/* ---------- DETAILED PLAN (gated behind email) ---------- */}
+      {/* ---------- DETAILED PLAN ---------- */}
       {result && (
-        <ResultGate
-          tool="Goal Weight Calculator"
-          title="Unlock your week-by-week plan"
-          submitLabel="Unlock my plan"
-        >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -492,7 +486,6 @@ export function GoalWeightCalculator() {
             Switch pace above to update your plan live
           </p>
         </motion.div>
-        </ResultGate>
       )}
     </div>
   );

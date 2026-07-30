@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { MagnifyingGlass, X, ArrowsLeftRight, ArrowLeft } from "@phosphor-icons/react";
-import { ResultGate } from "./level-zero/ResultGate";
 import exercisesData from "@/data/exercises.json";
 
 type Exercise = {
@@ -363,12 +362,7 @@ export function ExerciseSwapper() {
           </div>
         </div>
 
-        <ResultGate
-          tool="Exercise Swapper"
-          title="Unlock your swaps"
-          submitLabel="Unlock my swaps"
-        >
-          {filteredAlts.length > 0 ? (
+        {filteredAlts.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredAlts.map((alt) => (
                 <div
@@ -394,7 +388,6 @@ export function ExerciseSwapper() {
               </p>
             </div>
           )}
-        </ResultGate>
       </div>
     );
   }

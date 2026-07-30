@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { LazyMacroCalculator } from "../../components/lazy";
+import { ResultGate } from "../../components/level-zero/ResultGate";
 
 export const metadata: Metadata = {
   title: "Macro Calculator · Level Zero · Coached by Matt J",
@@ -35,7 +36,14 @@ export default function MacroPage() {
         </header>
 
         <div className="mt-10">
-          <LazyMacroCalculator />
+          <ResultGate
+            tool="Macro Calculator"
+            title="Enter your email to start"
+            blurb="Enter your email to open the calculator, then get your daily calorie target and full macro split."
+            submitLabel="Start the calculator"
+          >
+            <LazyMacroCalculator />
+          </ResultGate>
         </div>
       </div>
     </section>

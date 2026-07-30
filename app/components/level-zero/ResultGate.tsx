@@ -33,6 +33,8 @@ type Props = {
   children: ReactNode;
   /** Optional heading shown on the gate card. */
   title?: string;
+  /** Optional body copy explaining what the email unlocks. */
+  blurb?: string;
   /** Optional label for the submit button. */
   submitLabel?: string;
   /** Fires once when the result becomes visible (via submit OR a remembered unlock). */
@@ -43,6 +45,7 @@ export function ResultGate({
   tool,
   children,
   title = "Unlock your result",
+  blurb = "Enter your email to unlock your result.",
   submitLabel = "Unlock my result",
   onUnlock,
 }: Props) {
@@ -127,8 +130,8 @@ export function ResultGate({
             {title}
           </h3>
           <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ink-600">
-            Enter your email to unlock your result. You&apos;ll also get
-            coaching emails from Coached by Matt J — unsubscribe anytime.
+            {blurb} You&apos;ll also get coaching emails from Coached by Matt J
+            — unsubscribe anytime.
           </p>
 
           {/* Honeypot: visually hidden, off the tab order, ignored by humans. */}

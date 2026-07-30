@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CaretDown, Warning } from "@phosphor-icons/react";
-import { ResultGate } from "./level-zero/ResultGate";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 import { CountUp } from "./motion";
 
@@ -431,13 +430,8 @@ export function MacroCalculator() {
         </motion.div>
       )}
 
-      {/* ---------- MACRO BREAKDOWN (gated behind email) ---------- */}
+      {/* ---------- MACRO BREAKDOWN ---------- */}
       {result && (
-        <ResultGate
-          tool="Macro Calculator"
-          title="Unlock your full macro breakdown"
-          submitLabel="Unlock my macros"
-        >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -504,7 +498,6 @@ export function MacroCalculator() {
             Adjust activity, pace or advanced settings above to update live
           </p>
         </motion.div>
-        </ResultGate>
       )}
     </div>
   );

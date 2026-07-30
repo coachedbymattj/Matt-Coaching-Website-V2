@@ -35,7 +35,6 @@ import {
   type Program,
   type SplitKey,
 } from "../lib/sessionBuilder";
-import { ResultGate } from "./level-zero/ResultGate";
 
 const STORE_PLAN = "cbmj_sb_plan";
 const STORE_LAST = "cbmj_sb_last";
@@ -153,15 +152,13 @@ export function SessionBuilder() {
       capKeys: Array.from(equip),
       excluded,
     };
-    // Build it now, but keep it behind the email gate until they unlock.
-    setProgram(buildProgram(input));
+    // The email is captured before the wizard, so the session is theirs as
+    // soon as it is built. Building it saves the plan and starts the
+    // one-per-7-days cooldown, without resetting a cooldown we just restored.
+    const built = buildProgram(input);
+    setProgram(built);
     setSwapKey(null);
-  }
 
-  // Fires once the ResultGate reveals the session (via email submit, or a
-  // browser that already unlocked elsewhere). Saves the plan and starts the
-  // one-per-7-days cooldown, without resetting a cooldown we just restored.
-  function handleUnlocked() {
     let last = 0;
     try {
       last = Number(localStorage.getItem(STORE_LAST) || 0);
@@ -172,7 +169,7 @@ export function SessionBuilder() {
     if (fresh) {
       last = Date.now();
       try {
-        if (program) localStorage.setItem(STORE_PLAN, JSON.stringify(program));
+        localStorage.setItem(STORE_PLAN, JSON.stringify(built));
         localStorage.setItem(STORE_LAST, String(last));
         localStorage.setItem(STORE_UNLOCKED, "1");
       } catch {
@@ -231,7 +228,6 @@ export function SessionBuilder() {
         unlocksAt={unlocksAt}
         now={now}
         onStartOver={startOver}
-        onUnlock={handleUnlocked}
       />
     );
   }
@@ -539,7 +535,6 @@ function ProgramView({
   unlocksAt,
   now,
   onStartOver,
-  onUnlock,
 }: {
   program: Program;
   supersets: boolean;
@@ -551,7 +546,6 @@ function ProgramView({
   unlocksAt: number | null;
   now: number;
   onStartOver: () => void;
-  onUnlock: () => void;
 }) {
   const caps = useMemo(
     () => capsFromKeys(program.meta.capKeys),
@@ -625,14 +619,8 @@ function ProgramView({
         </div>
       </div>
 
-      {/* the session itself, gated behind email */}
-      <ResultGate
-        tool="Session Builder"
-        title="Unlock your session"
-        submitLabel="Unlock my session"
-        onUnlock={onUnlock}
-      >
-        <div className="flex flex-col gap-6">
+      {/* the session itself */}
+      <div className="flex flex-col gap-6">
           {/* focus note */}
           <div className="rounded-4xl border hairline bg-ember/5 p-5 md:p-6">
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember-deep">
@@ -821,8 +809,7 @@ function ProgramView({
             </a>
             .
           </p>
-        </div>
-      </ResultGate>
+      </div>
     </div>
   );
 }
