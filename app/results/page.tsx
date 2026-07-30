@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
-import { ResultsShowcase } from "../components/ResultsShowcase";
 import { ClientReviewCard } from "../components/ClientReviewCard";
 import { ResultMedia } from "../components/ResultMedia";
 import { results as cases } from "../lib/results";
@@ -23,7 +22,7 @@ export default function ResultsPage() {
   return (
     <>
       <section className="border-b hairline">
-        <div className="mx-auto max-w-[1400px] px-6 pb-16 pt-24 md:pt-32">
+        <div className="mx-auto max-w-[1400px] px-6 pb-12 pt-20 md:pt-24">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="md:col-span-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
@@ -42,16 +41,16 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      <Positioning />
+      <Positioning compact />
 
-      <ResultsShowcase cases={cases} />
-
-      <section className="bg-canvas py-20 md:py-28">
+      <section className="bg-canvas py-12 md:py-16">
         <div className="mx-auto max-w-[1400px] px-6">
-          <div className="mb-10 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
+          <div className="mb-6 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
             Every transformation
           </div>
-          <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* items-start so a card with a review does not stretch every other
+              card in its row, leaving dead space under their captions. */}
+          <Reveal className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {cases.map((c) =>
               c.slug === "nijat" || c.slug === "natalia" ? (
                 <ClientReviewCard key={c.slug} data={c} />
@@ -79,7 +78,7 @@ export default function ResultsPage() {
             )}
           </Reveal>
 
-          <div className="mt-20 flex flex-col items-start gap-4 rounded-5xl border hairline bg-white p-10 shadow-diffusion-sm md:flex-row md:items-center md:justify-between md:p-14">
+          <div className="mt-12 flex flex-col items-start gap-4 rounded-5xl border hairline bg-white p-8 shadow-diffusion-sm md:flex-row md:items-center md:justify-between md:p-12">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
                 Could be you next

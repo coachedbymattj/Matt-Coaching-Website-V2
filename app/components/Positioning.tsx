@@ -4,10 +4,14 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 /* Editorial positioning strap. Used near the top of the homepage and the
    results page so the visitor knows who I coach in one line. Includes a
    small link down to the transformations gallery on the homepage. */
-export function Positioning() {
+export function Positioning({ compact = false }: { compact?: boolean } = {}) {
   return (
     <section className="border-b hairline bg-canvas">
-      <div className="mx-auto max-w-[1400px] px-6 py-16 md:py-24">
+      <div
+        className={`mx-auto max-w-[1400px] px-6 ${
+          compact ? "py-10 md:py-14" : "py-16 md:py-24"
+        }`}
+      >
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
