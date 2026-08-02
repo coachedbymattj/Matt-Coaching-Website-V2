@@ -3,7 +3,26 @@
 import { useEffect, useState } from "react";
 
 export const BF_STOPS = [10, 15, 20, 25, 30, 35] as const;
+export const BF_MIN = 10;
+export const BF_MAX = 35;
 export type Sex = "male" | "female";
+
+/**
+ * Any body-fat value is allowed, but reference photos only exist at the 5%
+ * stops — so the figure (and its health note) snap to the closest one and act
+ * as a guide either side of the number the visitor actually entered.
+ */
+export function nearestStop(v: number): number {
+  return BF_STOPS.reduce((best, s) =>
+    Math.abs(s - v) < Math.abs(best - v) ? s : best
+  );
+}
+
+/** Trim the trailing ".0" so 17 reads as "17" and 17.5 stays "17.5". */
+export const fmtBf = (v: number) =>
+  Number.isInteger(v) ? String(v) : v.toFixed(1);
+
+const clampBf = (v: number) => Math.min(BF_MAX, Math.max(BF_MIN, v));
 
 const NOTES: Record<Sex, Record<number, string>> = {
   male: {
@@ -45,11 +64,14 @@ export function BodyFatFigure({
     });
   }, [sex]);
 
+  const stop = nearestStop(value);
+  const isBetween = value !== stop;
+
   return (
     <div className="relative mx-auto aspect-[3/4] w-full max-w-[320px] overflow-hidden rounded-3xl border hairline bg-ink-950">
       <img
-        src={`/bodyfat/${sex}-${value}.webp`}
-        alt={`${sex === "male" ? "Male" : "Female"} figure at approximately ${value}% body fat`}
+        src={`/bodyfat/${sex}-${stop}.webp`}
+        alt={`${sex === "male" ? "Male" : "Female"} reference figure at approximately ${stop}% body fat`}
         width={600}
         height={804}
         className="absolute inset-0 h-full w-full object-cover"
@@ -62,9 +84,16 @@ export function BodyFatFigure({
       )}
       <div className="absolute bottom-3 left-4">
         <div className="font-display text-4xl font-bold leading-none tracking-[-0.01em] text-canvas">
-          {value}
+          {fmtBf(value)}
           <span className="ml-0.5 text-xl text-canvas/60">%</span>
         </div>
+        {/* Make it explicit that the photo is the nearest guide, not the exact
+            number, so a visitor on 17% is not confused by a 15% figure. */}
+        {isBetween && (
+          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-canvas/55">
+            Photo guide · {stop}%
+          </div>
+        )}
       </div>
     </div>
   );
@@ -101,9 +130,27 @@ export function BodyFatControls({
   const sex = controlledSex ?? internalSex;
   const setSex = (s: Sex) => (onSexChange ? onSexChange(s) : setInternalSex(s));
 
-  const note = NOTES[sex][value] ?? "";
+  // Health notes are written per 5% band, so read the one for the closest stop.
+  const note = NOTES[sex][nearestStop(value)] ?? "";
   const labelClass =
     "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-500";
+
+  // Local draft so half-typed values ("1", "") aren't clamped mid-keystroke.
+  // Anything already valid applies live, so the figure tracks as you type and
+  // a value still in the box can't be missed if you never leave the field.
+  const [draft, setDraft] = useState<string | null>(null);
+  const type = (raw: string) => {
+    setDraft(raw);
+    const n = parseFloat(raw);
+    if (Number.isFinite(n) && n >= BF_MIN && n <= BF_MAX) {
+      onChange(Math.round(n * 2) / 2);
+    }
+  };
+  const commit = (raw: string) => {
+    const n = parseFloat(raw);
+    onChange(Number.isFinite(n) ? clampBf(Math.round(n * 2) / 2) : value);
+    setDraft(null);
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -138,18 +185,46 @@ export function BodyFatControls({
       )}
 
       <div>
-        <input
-          id={`${idPrefix}-slider`}
-          type="range"
-          min={10}
-          max={35}
-          step={5}
-          value={value}
-          onChange={(e) => onChange(parseInt(e.target.value, 10))}
-          aria-label={`${label} estimate`}
-          aria-valuetext={`${value} percent`}
-          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-200 accent-ember"
-        />
+        <div className="flex items-center gap-3">
+          <input
+            id={`${idPrefix}-slider`}
+            type="range"
+            min={BF_MIN}
+            max={BF_MAX}
+            step={0.5}
+            value={value}
+            onChange={(e) => onChange(parseFloat(e.target.value))}
+            aria-label={`${label} estimate`}
+            aria-valuetext={`${fmtBf(value)} percent`}
+            className="h-2 flex-1 cursor-pointer appearance-none rounded-full bg-ink-200 accent-ember"
+          />
+          {/* Type an exact figure — the slider covers whole percents, this also
+              takes half percents for anyone working from a DEXA or caliper read. */}
+          <label htmlFor={`${idPrefix}-exact`} className="sr-only">
+            {label} exact value
+          </label>
+          <div className="relative flex-none">
+            <input
+              id={`${idPrefix}-exact`}
+              type="number"
+              inputMode="decimal"
+              min={BF_MIN}
+              max={BF_MAX}
+              step={0.5}
+              value={draft ?? fmtBf(value)}
+              onChange={(e) => type(e.target.value)}
+              onBlur={(e) => commit(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") commit((e.target as HTMLInputElement).value);
+              }}
+              className="w-[4.75rem] rounded-full border hairline bg-canvas py-1.5 pl-3 pr-6 text-right font-mono text-sm tabular-nums text-ink-900 outline-none transition focus:border-ember/50"
+            />
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-xs text-ink-400">
+              %
+            </span>
+          </div>
+        </div>
+
         <div className="mt-2 flex justify-between">
           {BF_STOPS.map((s) => (
             <button
@@ -160,7 +235,9 @@ export function BodyFatControls({
               className={`font-mono text-[11px] tabular-nums transition ${
                 value === s
                   ? "font-bold text-ember-deep"
-                  : "text-ink-400 hover:text-ink-700"
+                  : nearestStop(value) === s
+                    ? "text-ink-600"
+                    : "text-ink-400 hover:text-ink-700"
               }`}
             >
               {s}
