@@ -8,6 +8,25 @@ export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Mailchimp's API lives at `<dc>.api.mailchimp.com`, where <dc> is the
+ * datacentre ("us17"). Interpolating the env var straight into that host means
+ * a pasted admin URL ("https://us17.admin.mailchimp.com/") silently builds an
+ * unreachable host — every request then fails and the lead is lost. So accept
+ * any reasonable form and reduce it to the datacentre, falling back to the
+ * suffix of the API key, which always carries it.
+ */
+function datacentre(
+  rawPrefix: string | undefined,
+  apiKey: string
+): string | null {
+  const fromPrefix = rawPrefix?.match(/[a-z]{2,}\d+/i)?.[0];
+  const keySuffix = apiKey.split("-").pop();
+  const fromKey = keySuffix && /^[a-z]{2,}\d+$/i.test(keySuffix) ? keySuffix : undefined;
+  const dc = fromPrefix ?? fromKey;
+  return dc ? dc.toLowerCase() : null;
+}
+
 type Body = {
   email?: string;
   tool?: string;
@@ -47,8 +66,19 @@ export async function POST(req: Request) {
   const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
   const prefix = process.env.MAILCHIMP_SERVER_PREFIX;
 
-  if (!apiKey || !audienceId || !prefix) {
+  if (!apiKey || !audienceId) {
     console.error("[subscribe] Missing Mailchimp environment variables.");
+    return NextResponse.json(
+      { error: "The mailing list isn't configured right now." },
+      { status: 500 }
+    );
+  }
+
+  const dc = datacentre(prefix, apiKey);
+  if (!dc) {
+    console.error(
+      "[subscribe] Could not resolve the Mailchimp datacentre from MAILCHIMP_SERVER_PREFIX or the API key."
+    );
     return NextResponse.json(
       { error: "The mailing list isn't configured right now." },
       { status: 500 }
@@ -59,7 +89,7 @@ export async function POST(req: Request) {
   const auth = `Basic ${Buffer.from(`anystring:${apiKey}`).toString("base64")}`;
   // Mailchimp keys members by the MD5 of the lowercased email address.
   const hash = createHash("md5").update(email).digest("hex");
-  const memberUrl = `https://${prefix}.api.mailchimp.com/3.0/lists/${audienceId}/members/${hash}`;
+  const memberUrl = `https://${dc}.api.mailchimp.com/3.0/lists/${audienceId}/members/${hash}`;
 
   try {
     // 1) Upsert the member. PUT is idempotent, so existing emails don't error.
