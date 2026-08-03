@@ -100,12 +100,13 @@ export function ResultGate({
         setError("Please enter a valid email address.");
         return;
       }
-      // Any other backend issue: remember + reveal anyway, never trap the user.
-      rememberUnlocked();
+      // Any other backend issue: let them through, but deliberately do NOT
+      // remember the unlock. The address never reached the list, so asking
+      // again next visit is the only chance to recover the lead.
       reveal();
     } catch {
-      // API unreachable — reveal the result rather than blocking on a hiccup.
-      rememberUnlocked();
+      // API unreachable — same deal: never block on a hiccup, but don't
+      // record an unlock for a signup that didn't happen.
       reveal();
     } finally {
       setSubmitting(false);
