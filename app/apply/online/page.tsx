@@ -18,7 +18,7 @@ export default function ApplyOnlinePage() {
         "I'll review and reply inside 48 working hours, working days.",
         "If we're a fit, I send a calendar link for a 60-minute video diagnostic. We start block one the following Monday.",
       ]}
-      formUrl="https://public.1fit.com/leadforms/0198555c-3110-7270-837d-e0af7242a7ee"
+      formUrl="https://public.1fit.com/leadforms/01a07266-96ac-7128-877d-34143c8d223d"
     />
   );
 }
