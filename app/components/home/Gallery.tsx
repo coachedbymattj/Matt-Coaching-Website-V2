@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-// TODO: drop the eight gallery images at public/images/gallery/1.png … 8.png.
-// Any slot that 404s falls back to a styled placeholder rectangle so the
-// layout stays intact. Once a file lands the marquee picks it up automatically
-// with no code change required.
-const SLOTS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
+// Gallery images live at public/images/gallery/{n}.png. Any slot that 404s
+// falls back to a styled placeholder rectangle so the layout stays intact.
+const SLOTS = [4, 5] as const;
+
+// With only a couple of photos, repeat the set so one half of the marquee
+// track is still wider than the viewport and the loop never shows a gap.
+const LOOP = Array.from({ length: 4 }, () => SLOTS).flat();
 
 function Slide({ n }: { n: number }) {
   const [errored, setErrored] = useState(false);
@@ -40,8 +42,8 @@ function Slide({ n }: { n: number }) {
 }
 
 /* Each tile is aspect-[4/5] portrait to match the 1080×1350 source. The
-   marquee track renders the eight slots twice so the loop translates -50%
-   without a visible snap. */
+   marquee track renders the loop set twice so it translates -50% without a
+   visible snap. */
 function Tile({ n }: { n: number }) {
   return (
     <div className="aspect-[4/5] w-[280px] flex-none overflow-hidden bg-ink-900 sm:w-[340px] md:w-[380px]">
@@ -76,23 +78,23 @@ export function HomeGallery() {
       {/* Marquee band — full bleed of the page. Hairline rule top + bottom. */}
       <div className="relative overflow-hidden border-y hairline bg-canvas">
         {reduce ? (
-          /* Reduced motion: static row of the first 5 images. */
+          /* Reduced motion: static row of the gallery images. */
           <div className="mx-auto max-w-[1400px] px-6 py-6">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-5">
-              {SLOTS.slice(0, 5).map((n) => (
+              {SLOTS.map((n) => (
                 <Tile key={n} n={n} />
               ))}
             </div>
           </div>
         ) : (
-          /* Continuous right-to-left marquee. The slot set renders twice so
+          /* Continuous right-to-left marquee. The loop set renders twice so
              translating the track -50% lands the second copy exactly where
              the first one started — seamless loop, no snap. */
           <div
             className="flex w-max gap-4 py-6 animate-marquee hover:[animation-play-state:paused]"
             style={{ animationDuration: "50s" }}
           >
-            {[...SLOTS, ...SLOTS].map((n, i) => (
+            {[...LOOP, ...LOOP].map((n, i) => (
               <Tile key={`${n}-${i}`} n={n} />
             ))}
           </div>
