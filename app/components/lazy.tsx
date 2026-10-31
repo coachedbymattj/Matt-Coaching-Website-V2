@@ -38,3 +38,8 @@ export const LazySessionBuilder = dynamic(
   () => import("./SessionBuilder").then((m) => m.SessionBuilder),
   { ssr: false, loading: () => <Skeleton /> }
 );
+
+export const LazyPanicButton = dynamic(
+  () => import("./PanicButton").then((m) => m.PanicButton),
+  { ssr: false, loading: () => <Skeleton /> }
+);

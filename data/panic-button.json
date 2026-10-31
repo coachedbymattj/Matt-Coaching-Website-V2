@@ -1,0 +1,2623 @@
+{
+  "_readme": "Panic Button scenario library. Edit text freely. Block types: p, label (label+text), goal (goal: lose|maintain|gain, only shown to that goal), list (items, optional label/ordered). triage[].femaleOnly / scenario.femaleOnly show only to Female profiles. keywords power the smart search.",
+  "categories": [
+    {
+      "id": "scale-progress",
+      "name": "Scale & Progress",
+      "scenarios": [
+        {
+          "id": "scale-up",
+          "title": "My scale weight is up",
+          "keywords": [
+            "weight up",
+            "weight went up",
+            "scale up",
+            "scale went up",
+            "scale jumped",
+            "heavier",
+            "weigh more",
+            "gained weight",
+            "put on weight",
+            "weight gain",
+            "up a kilo",
+            "up 2kg",
+            "weight spike",
+            "water retention",
+            "weighed in heavier",
+            "weight jumped",
+            "scale is up"
+          ],
+          "triage": [
+            {
+              "q": "Did you weigh yourself at the same time and under the same conditions as usual?"
+            },
+            {
+              "q": "Did you eat later than usual last night?"
+            },
+            {
+              "q": "Did you have a high-sodium meal recently?"
+            },
+            {
+              "q": "Did you eat more carbs than usual yesterday, even if you stayed in a deficit? (1g of carbohydrate pulls in roughly 3-4g of water)"
+            },
+            {
+              "q": "Have you had alcohol in the last 24-48 hours?"
+            },
+            {
+              "q": "Have you been to the toilet yet today? (Constipation alone can add 0.5-2kg on the scale)"
+            },
+            {
+              "q": "Are you currently in the week before your period?",
+              "femaleOnly": true
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Almost certainly water retention. Food volume, sodium, carbohydrates, alcohol, digestion, and your cycle can all move the scale up 1-3kg overnight with zero fat gained. One number on one morning means nothing on its own."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Get back to your normal routine today. Hit your steps, eat on plan, drink your water. Weigh yourself over the next 2-3 mornings under the same conditions and look at the trend across the week. The trend is the truth. One data point is just noise."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't slash your calories. Don't punish yourself with extra cardio. Don't weigh yourself three more times today hoping it changes. And don't make any decisions based on a single weigh-in."
+            }
+          ]
+        },
+        {
+          "id": "scale-flat",
+          "title": "The scale didn't drop this week",
+          "keywords": [
+            "scale not moving",
+            "scale didnt drop",
+            "weight not dropping",
+            "not losing weight",
+            "stopped losing",
+            "plateau",
+            "stuck weight",
+            "same weight",
+            "weight stalled",
+            "no weight loss",
+            "scale stuck"
+          ],
+          "triage": [
+            {
+              "q": "Are you using an average weight across the week rather than a single daily weigh-in?"
+            },
+            {
+              "q": "Was your average weight the same as last week's average?"
+            },
+            {
+              "q": "Have your calories and steps stayed consistent this week?"
+            },
+            {
+              "q": "Has anything changed this week — stress, sleep, training volume?"
+            },
+            {
+              "q": "Have you been to the toilet regularly this week?"
+            },
+            {
+              "q": "Are you currently in the week before your period?",
+              "femaleOnly": true
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One week of no movement on the scale is completely normal and means nothing on its own. Weight loss is not linear. The body holds, it fluctuates, then it drops. If your calories and output haven't changed, the scale will catch up."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Compare your weekly averages — this week vs last week. That number is far more useful than any single daily reading. If the average has been flat for 2 weeks or more with no change in input or output, then it's worth increasing steps slightly before touching calories. Change one thing at a time so you know what actually moved the needle."
+            },
+            {
+              "type": "p",
+              "text": "Also check the non-scale wins. Are you stronger? Do your clothes fit better? Is your energy up? The scale is one tool, not the whole story."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't drop calories immediately after one flat week. Don't add a load of extra cardio in a panic. Don't react to individual daily numbers — the weekly average is what matters."
+            }
+          ]
+        },
+        {
+          "id": "look-the-same",
+          "title": "I look the same even though I'm trying hard",
+          "keywords": [
+            "look the same",
+            "no change",
+            "cant see progress",
+            "not seeing results",
+            "mirror",
+            "dont look different",
+            "no visible change",
+            "look no different",
+            "feel fat",
+            "hate my body",
+            "still fat"
+          ],
+          "triage": [
+            {
+              "q": "Have you been training and tracking consistently for at least 4 weeks?"
+            },
+            {
+              "q": "Are you taking progress photos?"
+            },
+            {
+              "q": "Are you measuring progress in any other way besides how you look?"
+            },
+            {
+              "q": "Do your clothes feel any different?"
+            },
+            {
+              "q": "Are you stronger in your sessions than when you started?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Two things. First, you are almost certainly making more progress than you can see. The mirror is the worst tool for measuring short term change because you look at yourself every day. You can't see gradual. Second, if you're only using one method to measure progress you're only looking through a keyhole — you're missing most of the picture."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Go back to your starting point right now. Check your progress photos side by side. Check how your clothes fit. Check what you were lifting in week one versus now. Progress is almost always happening in places you're not looking. If you're not taking photos, start today — future you will thank you. The mirror alone will lie to you every time."
+            },
+            {
+              "type": "p",
+              "text": "Then be brutally honest with yourself. Not harsh — honest. Are you actually doing everything you said you would? Are the sessions really as consistent as you think? Is the tracking as tight as it needs to be? Most of the time when progress looks invisible, the answer is somewhere in that honest conversation with yourself."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't change everything because you can't see a visual difference yet. Don't compare your week 4 to someone else's year 2. Don't rely solely on the mirror or the scale to tell you whether something is working."
+            }
+          ]
+        },
+        {
+          "id": "progress-slow",
+          "title": "Progress feels too slow",
+          "keywords": [
+            "progress slow",
+            "too slow",
+            "slow progress",
+            "taking forever",
+            "not fast enough",
+            "how long",
+            "rate of loss",
+            "how fast"
+          ],
+          "triage": [
+            {
+              "q": "Have you been consistent for at least 4 weeks?"
+            },
+            {
+              "q": "Do you have a clear goal with a timeframe attached to it?"
+            },
+            {
+              "q": "Are you comparing your progress to someone else's?"
+            },
+            {
+              "q": "Are you only measuring progress in one way?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Your expectations are likely based on what you've seen online — transformations that took years presented as 8 week results. Real, sustainable progress looks different depending on your goal."
+            }
+          ],
+          "next": [
+            {
+              "type": "goal",
+              "goal": "lose",
+              "text": "0.5-1% of bodyweight per week is the target. That feels slow. It isn't. That's the rate that keeps muscle on, keeps energy up, and actually sticks long term."
+            },
+            {
+              "type": "goal",
+              "goal": "gain",
+              "text": "Look at your rate of weight gain on the scale rather than trying to measure actual muscle. A sensible rate is roughly 1-2kg per month on the scale as a beginner, slowing down significantly as you gain experience. An experienced lifter gaining 4-5kg in a year is doing extremely well."
+            },
+            {
+              "type": "goal",
+              "goal": "maintain",
+              "text": "Progress here isn't about the scale at all. It's performance, energy, consistency, and how you feel."
+            },
+            {
+              "type": "p",
+              "text": "Zoom out and look at your monthly trend rather than your weekly one. Then measure progress against the right markers for your specific goal. A month of honest work tells you far more than any single week ever will."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't speed up the process by cutting calories aggressively. Don't switch programs because this one feels like it isn't working fast enough. Don't measure your fat loss goal with a muscle gain timeline or vice versa — they are completely different journeys."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food-diet",
+      "name": "Food & Diet",
+      "scenarios": [
+        {
+          "id": "overate",
+          "title": "I overate last night",
+          "keywords": [
+            "overate",
+            "over ate",
+            "ate too much",
+            "overeat",
+            "went over calories",
+            "over my calories",
+            "big dinner",
+            "pigged out",
+            "too many calories",
+            "takeaway"
+          ],
+          "triage": [
+            {
+              "q": "Do you know roughly how many calories over you went?"
+            },
+            {
+              "q": "Was this a one off or has it been happening regularly?"
+            },
+            {
+              "q": "Are you back on track today?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One night over calories does not undo progress. To gain even 0.5kg of actual fat you would need to eat roughly 3,500 calories over your maintenance. One meal or one evening rarely does that. What it does do is cause water retention and bloating which can make you feel worse than you actually are."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Get straight back on plan today — normal meals, normal steps, normal training. Don't skip meals to compensate and don't try to out-train it. If you know roughly how far over you went you can slightly reduce portions across the next couple of days to bring the weekly average back in line. Small, calm adjustments. Not punishment."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't skip breakfast to make up for it. Don't use it as a reason to write off the rest of the week. Don't let one bad evening become a bad week — the bounce back is always faster than you think."
+            }
+          ]
+        },
+        {
+          "id": "binge",
+          "title": "I had a full binge and feel guilty",
+          "keywords": [
+            "binge",
+            "binged",
+            "binge eating",
+            "guilty",
+            "guilt",
+            "ate everything",
+            "lost control",
+            "couldnt stop eating",
+            "feel bad about eating"
+          ],
+          "triage": [
+            {
+              "q": "Has this happened more than once in the last 2 weeks?"
+            },
+            {
+              "q": "Does it tend to happen on the same day or in the same situation? (e.g. weekends, late nights, after training, when stressed)"
+            },
+            {
+              "q": "Does it usually happen alongside something else? (e.g. watching sport, a lie-in, alcohol, a social event)"
+            },
+            {
+              "q": "Were your calories particularly low in the days leading up to it?"
+            },
+            {
+              "q": "Do you feel like your diet is too strict day to day?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "A binge that keeps happening is a pattern, not a willpower problem. There is almost always a habit attached to it — a specific day, a specific trigger, a specific situation that keeps showing up. Friday night football becomes a takeaway. A weekend lie-in becomes waking up starving with no plan. The binge feels random but it rarely is."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Start by identifying the pattern. Look back at the last 2-3 times it happened — what was the common thread? Same day? Same emotion? Same situation? Once you can see the habit clearly you can start to plan around it rather than just trying to resist it."
+            },
+            {
+              "type": "p",
+              "text": "Also look at whether your deficit is too aggressive. A binge every couple of weeks is often the body's way of telling you the plan is too strict to sustain. Slightly less restriction day to day is almost always better than perfect adherence that keeps breaking down."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't restrict harder after a binge — that just sets up the next one. Don't treat it as a character flaw. Don't try to white-knuckle your way through the same trigger next time without changing anything around it. Willpower alone won't fix a habit — a better plan will."
+            }
+          ]
+        },
+        {
+          "id": "off-plan-weekend",
+          "title": "I went off plan all weekend",
+          "keywords": [
+            "off plan weekend",
+            "weekend",
+            "ruined weekend",
+            "fell off weekend",
+            "bad weekend",
+            "weekends",
+            "saturday",
+            "sunday"
+          ],
+          "triage": [
+            {
+              "q": "Do you find weekends are consistently your weakest point?"
+            },
+            {
+              "q": "Did you drink alcohol over the weekend?"
+            },
+            {
+              "q": "Are you back on track today?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "If this was a one off — a birthday, a holiday, a festival — the damage is almost always far less than it feels. One weekend rarely undoes weeks of good work. If weekends are consistently where the wheels come off, that's a pattern worth addressing. The week is not the problem, the weekend structure is."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "If it was a one off — draw a line under it, get back on plan today and don't try to compensate by restricting through the week. Just return to normal and let the weekly average do its job."
+            },
+            {
+              "type": "p",
+              "text": "If weekends are a recurring problem — look at why. Is there no structure on Saturday and Sunday? Are you skipping meals and then overeating later? The fix is almost always adding a small amount of structure — a rough meal plan, food in the house, a walk built in. Enough to stay in the game without feeling restricted."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't skip meals Monday to Thursday to compensate for the weekend. Don't write the whole week off because the weekend wasn't perfect. Don't wait until next Monday to start again — that pattern is exactly how months go by without progress."
+            }
+          ]
+        },
+        {
+          "id": "hungry",
+          "title": "I am starving / I am hungry",
+          "keywords": [
+            "hungry",
+            "starving",
+            "hunger",
+            "craving",
+            "cravings",
+            "always hungry",
+            "want chocolate",
+            "want sweets",
+            "snacking",
+            "peckish",
+            "famished"
+          ],
+          "triage": [
+            {
+              "q": "Are you hungry for anything and everything right now?"
+            },
+            {
+              "q": "Or is it a specific food you're after? (if yes — this is likely a craving, not hunger)"
+            },
+            {
+              "q": "Have you had enough water today?"
+            },
+            {
+              "q": "Have you eaten your meals today or skipped any?"
+            },
+            {
+              "q": "Are you hitting your protein target every day?"
+            },
+            {
+              "q": "Has your activity level increased recently?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "First thing to establish — are you actually hungry or are you craving something specific? True hunger means anything sounds good right now. A craving means one specific thing sounds good. They feel identical but they need completely different responses."
+            }
+          ],
+          "next": [
+            {
+              "type": "label",
+              "label": "If it's a craving",
+              "text": "Don't try to eat around it. Having an apple, then a meal, then a snack, all to still end up eating the thing you wanted is just extra calories on top. If it's something small like a chocolate bar and it fits your calories, just have it and follow it up with a proper planned meal."
+            },
+            {
+              "type": "label",
+              "label": "If it's genuine hunger",
+              "text": "Make a big high volume bowl — iceberg lettuce, shredded carrots, beetroot, spinach, fresh greens, light dressing, topped with white fish or lean meat. Done right you can put together a 400kcal meal that will genuinely fill you up."
+            },
+            {
+              "type": "p",
+              "text": "Also drink a full glass of water first and wait 10 minutes. Thirst and hunger feel almost identical."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't eat around a craving hoping it goes away. Don't ignore genuine hunger — if it's happening consistently the deficit may be too aggressive."
+            }
+          ],
+          "followUp": {
+            "question": "Would you like some helpful tools to manage hunger long term?",
+            "tips": true
+          }
+        },
+        {
+          "id": "didnt-track",
+          "title": "I didn't track properly today",
+          "keywords": [
+            "didnt track",
+            "forgot to track",
+            "not tracking",
+            "no log",
+            "didnt log",
+            "forgot to log",
+            "tracking",
+            "myfitnesspal",
+            "log food"
+          ],
+          "triage": [
+            {
+              "q": "Do you have a rough idea of what you ate today?"
+            },
+            {
+              "q": "Was it a full day of not tracking or just one meal?"
+            },
+            {
+              "q": "Was it a higher calorie day than usual?"
+            },
+            {
+              "q": "Has this been happening regularly or is it a one off?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One untracked day is not a problem. It becomes a problem when it's a regular habit because without data you're essentially flying blind. Even an imperfect log is better than no log because it keeps you honest about the bigger picture."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "If you can remember roughly what you ate — log it now as best you can. An estimate is better than nothing. If you genuinely can't remember, log what you can, mark it as an estimate and move on."
+            },
+            {
+              "type": "p",
+              "text": "If this is happening regularly it's worth asking why. Is tracking too time consuming? Are you eating out a lot? The barrier is usually practical not motivational. Meal prepping the same meals a few times a week means most of your tracking is already done before the day starts."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't skip logging entirely just because it won't be perfect. Don't use one untracked day as a reason to write off the rest of the week. Don't try to compensate tomorrow by being overly strict — just get back to normal and keep going."
+            }
+          ]
+        },
+        {
+          "id": "bar-drinks",
+          "title": "I'm in a bar — what should I drink?",
+          "keywords": [
+            "bar",
+            "pub",
+            "drinks",
+            "what to drink",
+            "alcohol",
+            "night out",
+            "drinking",
+            "beer",
+            "wine",
+            "pint",
+            "cocktail",
+            "vodka",
+            "gin",
+            "club"
+          ],
+          "triage": [
+            {
+              "q": "Are you likely to eat after drinking tonight?"
+            },
+            {
+              "q": "Are you planning on 1-2 drinks or is this a big night?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One night out does not ruin progress. The drink choice matters less than the total number of drinks and what happens after."
+            }
+          ],
+          "next": [
+            {
+              "type": "list",
+              "label": "Best options",
+              "ordered": true,
+              "items": [
+                "Vodka soda with lime / Tequila soda with lime (skinny bitches)",
+                "Gin and tonic",
+                "Guinness",
+                "Prosecco"
+              ]
+            },
+            {
+              "type": "list",
+              "label": "Quick reminders",
+              "ordered": true,
+              "items": [
+                "Drink responsibly",
+                "Avoid cocktails",
+                "Do not face plant food on the way home!"
+              ]
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't let one sensible night out become a full weekend write off — the drinks are rarely the problem, the day after behaviour usually is."
+            }
+          ],
+          "followUp": {
+            "question": "Would you like more info on how to handle a night out without derailing progress?",
+            "scenario": "social-event"
+          }
+        }
+      ]
+    },
+    {
+      "id": "training",
+      "name": "Training",
+      "scenarios": [
+        {
+          "id": "missed-workout",
+          "title": "I missed a workout",
+          "keywords": [
+            "missed workout",
+            "missed session",
+            "skipped gym",
+            "skipped workout",
+            "missed the gym",
+            "didnt train",
+            "didnt go to gym",
+            "skipped training"
+          ],
+          "triage": [
+            {
+              "q": "Was it completely unavoidable or did life just get in the way?"
+            },
+            {
+              "q": "Do you have time to do something today even if it's shorter than usual?"
+            },
+            {
+              "q": "Is this becoming a regular pattern?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One missed session means nothing. Consistency over weeks and months is what drives progress — not whether you hit every single session on the calendar."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Be honest with yourself first. Was this genuinely unavoidable or was it a priority issue? The fix is different depending on the answer."
+            },
+            {
+              "type": "p",
+              "text": "If the plan feels too ambitious — too many sessions, too long — it needs adjusting. A realistic plan you actually follow beats a perfect plan you keep skipping."
+            },
+            {
+              "type": "p",
+              "text": "If it was a priority issue — plan the next session in your diary right now and treat it like a non-negotiable appointment."
+            },
+            {
+              "type": "p",
+              "text": "If today is completely gone — get out for a walk instead. It keeps momentum and means you haven't done nothing. Then plan your next workout for the earliest possible slot."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't add extra sessions to compensate. Don't let one missed session become two because you feel like the week is already ruined. Don't waste energy feeling guilty — use that energy to plan the next one instead."
+            }
+          ]
+        },
+        {
+          "id": "missed-week",
+          "title": "I missed a whole week of training",
+          "keywords": [
+            "missed week",
+            "week off",
+            "whole week",
+            "no training this week",
+            "havent trained in a week",
+            "week without training"
+          ],
+          "triage": [
+            {
+              "q": "Was this due to illness or injury?"
+            },
+            {
+              "q": "Was it due to work, travel or a life event?"
+            },
+            {
+              "q": "Has this happened more than once in the last month?"
+            },
+            {
+              "q": "Did your nutrition stay on track during the week off?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "A week off is not as damaging as it feels. You do not lose significant muscle or fitness in 7 days. What you do lose is momentum and routine — and that's what needs addressing more than the physical side."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Come back at slightly reduced intensity for the first session back. Not because you've lost fitness but because your body needs to ease back in. Drop the weights slightly, get through the session, feel good about being back. Then build back to normal over the following week."
+            },
+            {
+              "type": "p",
+              "text": "If this is becoming a pattern — a week off here, a week off there — the plan or the schedule needs a serious look. Can you reduce sessions temporarily during busy periods rather than stopping entirely?"
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't come back trying to make up for lost time by training harder or more frequently. Don't catastrophise — one week off will not undo months of work. Don't wait until Monday to start again if today is available."
+            }
+          ]
+        },
+        {
+          "id": "sore",
+          "title": "I'm sore as hell and can barely move",
+          "keywords": [
+            "sore",
+            "doms",
+            "aching muscles",
+            "cant move",
+            "stiff",
+            "muscle soreness",
+            "legs sore",
+            "cant walk",
+            "killing me",
+            "legs killing me",
+            "everything hurts",
+            "aching all over",
+            "walking like a cowboy"
+          ],
+          "triage": [
+            {
+              "q": "Is this from a new exercise or a big increase in training volume?"
+            },
+            {
+              "q": "Has this been going on for more than 2 weeks?"
+            },
+            {
+              "q": "Is it general muscle soreness or is it a specific sharp pain?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "General muscle soreness — known as DOMS (delayed onset muscle soreness) — is completely normal, especially when starting a new program or introducing new exercises. It peaks around 24-48 hours after training and should settle within 2 weeks of consistent training."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Keep moving. Light movement, walking and low intensity activity actually speeds up recovery more than complete rest. Don't skip the next session because you're sore — train through it at a slightly reduced intensity."
+            },
+            {
+              "type": "p",
+              "text": "If a specific exercise caused it — scale back the volume on that movement for the next session and build back up gradually."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't stop training entirely because you're sore — that just delays recovery. Don't confuse general muscle soreness with injury. Sharp, localised pain that doesn't improve is different — get that checked."
+            }
+          ]
+        },
+        {
+          "id": "strength-down",
+          "title": "My strength has gone down / My strength progress has slowed",
+          "keywords": [
+            "strength down",
+            "weaker",
+            "lost strength",
+            "strength slowed",
+            "not getting stronger",
+            "stalled lifts",
+            "strength plateau",
+            "lifts going down"
+          ],
+          "triage": [
+            {
+              "q": "Are you currently in a calorie deficit?"
+            },
+            {
+              "q": "Has your sleep been poor recently?"
+            },
+            {
+              "q": "Have you increased training volume or changed your program recently?"
+            },
+            {
+              "q": "Has your stress been higher than usual?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Strength slowing down is a very normal occurrence and almost never means something is wrong. When you first start training, the biggest jumps in strength come from neurological adaptation — your body learns to recruit more muscle fibres. After that initial phase, progress is slower but still real. In a deficit, some strength reduction is also completely normal — you are training with less fuel."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Don't change the program. Be consistent and apply the basics for a long time. Track your indicator lifts — bench press, split squats, pull ups, deadlifts, squats, overhead press — and look at the trend over months not weeks."
+            },
+            {
+              "type": "p",
+              "text": "If it's deficit related — accept that some performance reduction is part of fat loss. Focus on maintaining as much strength as possible rather than hitting new PBs."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't change the whole program because of a few slower weeks. Don't drop intensity further. Don't confuse slower progress with no progress — they are completely different things."
+            }
+          ]
+        },
+        {
+          "id": "training-hard-enough",
+          "title": "I'm not sure if I'm training hard enough",
+          "keywords": [
+            "training hard enough",
+            "hard enough",
+            "intensity",
+            "failure",
+            "reps in reserve",
+            "not pushing",
+            "too easy",
+            "effort in gym"
+          ],
+          "triage": [
+            {
+              "q": "Are you reaching close to failure on your working sets?"
+            },
+            {
+              "q": "Could you do significantly more reps than prescribed at the end of a set?"
+            },
+            {
+              "q": "Are your indicator lifts progressing over time?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Most people significantly underestimate how close to failure they are actually training. The target is 1-2 reps away from failure on most working sets. If you could comfortably do 5 more reps at the end of a set, the weight is too light."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Test yourself. Go to actual muscular failure on one exercise this session so you understand what failure actually feels like. Then use that as your reference point going forward."
+            },
+            {
+              "type": "p",
+              "text": "Check your indicator lifts. If bench press, split squats, and deadlifts are progressing over the months — even slowly — you are training hard enough. If they have stalled completely for 3+ weeks, intensity needs to increase."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't add more sets or more sessions thinking that's the solution — intensity within the session matters more than volume. Don't mistake being tired after a session for having trained hard enough."
+            }
+          ]
+        },
+        {
+          "id": "cant-do-exercise",
+          "title": "I can't do the exercise in my plan",
+          "keywords": [
+            "cant do exercise",
+            "exercise hurts",
+            "dont know how",
+            "no equipment",
+            "exercise too hard",
+            "alternative exercise",
+            "swap exercise",
+            "replace exercise"
+          ],
+          "triage": [
+            {
+              "q": "Is it because of pain or discomfort?"
+            },
+            {
+              "q": "Is it because the equipment isn't available?"
+            },
+            {
+              "q": "Is it because you don't know how to do the movement?"
+            },
+            {
+              "q": "Is it because the exercise feels too advanced right now?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "The movement pattern matters more than the specific exercise. Almost every exercise has an alternative that trains the same muscle in the same way. Not being able to do one specific exercise is never a reason to skip the session or the muscle group entirely."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Pain or discomfort — don't push through it. Find an alternative that trains the same muscle without aggravating it."
+            },
+            {
+              "type": "p",
+              "text": "Equipment not available — swap for the closest alternative that replicates the movement pattern. Cables, dumbbells, machines — the muscle doesn't care what the kit looks like."
+            },
+            {
+              "type": "p",
+              "text": "Don't know how to do it — ask someone or look it up before skipping it."
+            },
+            {
+              "type": "p",
+              "text": "Feels too advanced — scale it back. A regression of the same movement is always better than avoiding it entirely."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't skip the session because one exercise isn't possible. Don't substitute a completely unrelated exercise — keep it in the same movement pattern. Don't push through pain to prove a point."
+            }
+          ]
+        },
+        {
+          "id": "gym-busy",
+          "title": "The gym is too busy for my usual workout",
+          "keywords": [
+            "gym busy",
+            "gym packed",
+            "busy gym",
+            "equipment taken",
+            "machine taken",
+            "rack taken",
+            "waiting for equipment",
+            "rammed",
+            "heaving",
+            "packed",
+            "gym full",
+            "no space"
+          ],
+          "triage": [
+            {
+              "q": "Do you know what exercises you were planning to do today?"
+            },
+            {
+              "q": "Is it a full session or just certain equipment that's taken?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "The gym is busy, not broken. You can still train — it just needs a small adjustment."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "First option — swap the unavailable exercise for something that trains the same muscle in the same movement pattern. Cables instead of a machine, dumbbells instead of a barbell. The muscle doesn't care what the kit looks like."
+            },
+            {
+              "type": "p",
+              "text": "Second option — reorder today's session slightly. If your usual equipment is taken, start with what's available but make sure your most complex, demanding exercises still come first when you're freshest. Don't save a squat variation for the end because you waited around for a simpler machine."
+            },
+            {
+              "type": "p",
+              "text": "One adjusted session changes nothing. Leaving does."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't leave. Don't stand around waiting and waste the session. Don't skip it entirely and tell yourself you'll come back later."
+            }
+          ]
+        },
+        {
+          "id": "change-program",
+          "title": "I feel like I need to change my whole program",
+          "keywords": [
+            "change program",
+            "new program",
+            "switch program",
+            "bored of program",
+            "program not working",
+            "change routine",
+            "new plan",
+            "change my plan"
+          ],
+          "triage": [
+            {
+              "q": "Have you been on your current program for at least 8 weeks?"
+            },
+            {
+              "q": "Have you stopped seeing progress in your sessions?"
+            },
+            {
+              "q": "Are you bored of the program or is it genuinely not working?"
+            },
+            {
+              "q": "Have your indicator lifts gone backwards?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "The urge to change everything is almost always premature. Most people change programs too early and never give anything long enough to actually work. Consistency with one solid plan for 12-16 weeks will almost always outperform constantly switching. That said there is a difference between a program that isn't working and a program you've genuinely outgrown — the indicator lifts tell you which one it is."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Look at your indicator lifts first. Are they progressing? If yes — don't touch the program. If they have genuinely plateaued for 3 weeks or more, small tweaks are worth considering before a full overhaul."
+            },
+            {
+              "type": "p",
+              "text": "If it's boredom — swap out 1-2 accessory exercises for alternatives that train the same muscle. Keep the core structure and indicator lifts completely intact. That's usually enough to make it feel fresh without losing the progress you've built."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't change the whole program because of one or two bad sessions. Don't mistake boredom for the program not working. Don't start from scratch and lose the baseline you've spent weeks building."
+            }
+          ]
+        },
+        {
+          "id": "bad-session",
+          "title": "I had a bad session and everything felt weak",
+          "keywords": [
+            "bad session",
+            "felt weak",
+            "weak today",
+            "bad workout",
+            "terrible session",
+            "no energy in gym",
+            "awful workout"
+          ],
+          "triage": [
+            {
+              "q": "Did you sleep poorly the night before?"
+            },
+            {
+              "q": "Have you eaten enough today before training?"
+            },
+            {
+              "q": "Has your stress been higher than usual this week?"
+            },
+            {
+              "q": "Have you trained several days in a row without a rest day?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Bad sessions happen to everyone including the most experienced lifters in the gym. Sleep, nutrition, stress, and accumulated fatigue all directly impact performance on any given day. A bad session is almost never a sign that something is wrong with your program or your progress. If you're in a deficit this is even more expected — training with less fuel means some sessions will feel harder."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Look at the most likely culprit first. Poor sleep and under eating before a session are the two biggest performance killers and both are fixable."
+            },
+            {
+              "type": "p",
+              "text": "If you've trained several days in a row — a bad session might be your body telling you it needs a rest day. Take it without guilt. Coming back fresh will always produce better sessions than grinding through on empty."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't judge your program or your progress off one bad session. Don't go heavier to prove a point — that's how injuries happen. Don't let a bad session become a reason to skip the next one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "routine-life",
+      "name": "Routine & Life",
+      "scenarios": [
+        {
+          "id": "work-busy",
+          "title": "Work is mental this week — I can't stick to routine",
+          "keywords": [
+            "work busy",
+            "busy at work",
+            "work is mental",
+            "stressed with work",
+            "no time",
+            "long hours",
+            "work stress",
+            "busy week"
+          ],
+          "triage": [
+            {
+              "q": "Is this a temporary busy period or a long term change?"
+            },
+            {
+              "q": "Can you still get to the gym at all this week?"
+            },
+            {
+              "q": "Has your nutrition been affected too?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "A busy week at work doesn't mean the whole plan falls apart. It means you adapt temporarily and do what you can. Putting yourself into a healthier position actually allows you to handle more stress — not less."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Focus on the average frequency you train across the month, not whether this week is perfect. Even one session this week beats zero."
+            },
+            {
+              "type": "p",
+              "text": "If nutrition is going off the rails — prioritise protein and don't worry about everything else being perfect. Keep the most important thing in place."
+            },
+            {
+              "type": "p",
+              "text": "Keep your steps up where possible. Even short walks during the day make a difference when the gym isn't happening."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't write the whole week off because you can't do everything. Don't use a busy week as permission to abandon nutrition too. Don't wait for a quiet week to start again — quiet weeks don't come."
+            }
+          ]
+        },
+        {
+          "id": "schedule-changed",
+          "title": "My schedule changed and I can't do the old plan",
+          "keywords": [
+            "schedule changed",
+            "new schedule",
+            "new job",
+            "shift work",
+            "shifts",
+            "cant do old plan",
+            "time changed",
+            "less time to train"
+          ],
+          "triage": [
+            {
+              "q": "Is this a temporary change or a permanent shift in your schedule?"
+            },
+            {
+              "q": "Are you still able to train the same number of days just at different times?"
+            },
+            {
+              "q": "Has your nutrition been affected by the schedule change too?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "The plan needs to adapt to your life — not the other way around. A schedule change doesn't mean starting from scratch, it means reorganising what you already have to fit the new reality."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "If it's temporary — make small adjustments and return to the original plan when things normalise. Keep something in rather than dropping everything."
+            },
+            {
+              "type": "p",
+              "text": "If it's permanent — redesign the schedule around the new routine now. Three consistent sessions in a new schedule beats four sessions on a plan that no longer fits your life."
+            },
+            {
+              "type": "p",
+              "text": "If you can only get to the gym once or twice — switch to full body sessions using GBC style training (German Body Composition). This pairs upper and lower body exercises back to back with short rest periods. Time efficient and effective especially during a fat loss phase."
+            },
+            {
+              "type": "p",
+              "text": "If your step count has dropped — account for the missed steps with added cardio. A rough guide is 6 minutes of cardio per 1,000 steps missed from your usual daily target."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't wait for life to go back to normal before getting back on track. Don't abandon the plan entirely because the old structure doesn't fit anymore."
+            }
+          ]
+        },
+        {
+          "id": "holiday",
+          "title": "I'm going on holiday — I don't want to ruin progress",
+          "keywords": [
+            "holiday",
+            "vacation",
+            "going away",
+            "trip",
+            "abroad",
+            "all inclusive",
+            "travelling",
+            "travel",
+            "beach",
+            "flights"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Enjoy your holiday first. If you really need this break, trying to think about dieting can be very short sighted. The goal on holiday is to maintain, not to lose."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Follow these simple rules and the majority of people either lose weight or maintain on holiday:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Eat all the protein sources you want",
+                "Eat all the fruit and veg you want",
+                "Keep to one carbohydrate-based meal in the evening",
+                "Avoid alcohol throughout the day",
+                "Weight train if you feel like it"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "These rules are easy, simple, and don't make it a restrictive holiday."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't try to diet aggressively on holiday — you'll enjoy it less and likely binge when you get back. Don't skip every social meal in the name of progress. Don't weigh yourself every day on holiday."
+            }
+          ]
+        },
+        {
+          "id": "celebrations",
+          "title": "It's Christmas / birthday / festival season",
+          "keywords": [
+            "christmas",
+            "birthday",
+            "festival",
+            "xmas",
+            "celebration",
+            "party season",
+            "new year",
+            "easter"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Christmas is 3 days. A birthday is 1 day. A festival is a weekend. If you've done the work leading up to it, a few days won't make an impact. If you go all out for over a week then that's a different conversation."
+            }
+          ],
+          "next": [
+            {
+              "type": "label",
+              "label": "Christmas",
+              "text": "Bank calories a few days before. Enjoy the day. Get back on plan the day after."
+            },
+            {
+              "type": "label",
+              "label": "Birthday",
+              "text": "It's your birthday. Relax. If you've banked calories and extra steps beforehand, have fun. This is how fitness and life integrate together."
+            },
+            {
+              "type": "label",
+              "label": "Festival",
+              "text": "Treat it like a marathon not a sprint. Stay hydrated. Eat well before you go. Have a solid plan for the day after — good food, a walk, get back on track as soon as possible."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't let 3 days become 3 weeks. Don't use a celebration as permission to abandon the plan entirely. Don't expect zero impact — just minimise it and move forward."
+            }
+          ]
+        },
+        {
+          "id": "sleep",
+          "title": "My sleep is awful this week",
+          "keywords": [
+            "sleep",
+            "cant sleep",
+            "insomnia",
+            "tired",
+            "awful sleep",
+            "bad sleep",
+            "poor sleep",
+            "waking up",
+            "exhausted",
+            "no sleep"
+          ],
+          "triage": [
+            {
+              "q": "Has this been going on for more than a week?"
+            },
+            {
+              "q": "Do you have a consistent sleep and wake time?"
+            },
+            {
+              "q": "Are you consuming caffeine after 2pm?"
+            },
+            {
+              "q": "Are you on your phone right before bed?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Poor sleep directly impacts performance, recovery, hunger hormones and fat loss. It is one of the most underestimated factors in any transformation. One bad night is fine — a pattern of poor sleep needs addressing."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Start waking up and going to bed at the same time every day — even weekends. Use alarms to build the habit."
+            },
+            {
+              "type": "p",
+              "text": "No caffeine after 2pm. Caffeine has a half-life of 3-7 hours — it stays in your system longer than most people think."
+            },
+            {
+              "type": "p",
+              "text": "Get off your phone 30-60 minutes before bed. If you're tossing and turning — get out of bed, go to the sofa, read a book or have a herbal tea. Come back when you feel sleepy."
+            },
+            {
+              "type": "p",
+              "text": "Take Magnesium Bisglycinate in the evening — it genuinely helps with sleep quality."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't take sleeping pills — they knock you out but rob you of deep sleep. Don't train harder to compensate for bad sleep — your recovery is already compromised. Don't rely on caffeine to get through the day if sleep is poor — it makes the next night worse."
+            }
+          ]
+        },
+        {
+          "id": "out-of-routine",
+          "title": "I've been out of routine for 3-7 days",
+          "keywords": [
+            "out of routine",
+            "fell off",
+            "fallen off",
+            "off track",
+            "few days off",
+            "been off",
+            "lost routine",
+            "get back on track"
+          ],
+          "triage": [
+            {
+              "q": "Was this due to illness, injury or a life event?"
+            },
+            {
+              "q": "Has your nutrition been off during this period too?"
+            },
+            {
+              "q": "Do you feel physically ready to get back to training?"
+            },
+            {
+              "q": "Has this happened before in the last month?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "3-7 days out is a blip not a breakdown. You have not lost meaningful fitness or muscle in that time. What you have lost is momentum — and that's what needs to be rebuilt right now."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Get back in today or tomorrow at the latest. Don't wait for Monday. The first session back doesn't need to be your best — it just needs to happen."
+            },
+            {
+              "type": "p",
+              "text": "Before you go — take 2 minutes to remind yourself why you started. Go back to your goal. Read it. Feel it. The days off are done, they don't define the journey. What you do next does."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't wait for the perfect moment to restart. Don't try to make up for lost time by training harder or restricting calories. Don't let 3-7 days turn into 3-7 weeks by overthinking the comeback."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mindset",
+      "name": "Mindset",
+      "scenarios": [
+        {
+          "id": "motivation",
+          "title": "I've lost motivation",
+          "keywords": [
+            "motivation",
+            "unmotivated",
+            "no motivation",
+            "cant be bothered",
+            "demotivated",
+            "lost drive",
+            "dont want to",
+            "giving up",
+            "lazy"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Motivation will come and go. That's very normal. What lowers motivation is when you stop seeing results because you start to justify your bad actions. If you found it hard to start in the first place — starting again will feel like you are at the bottom of the mountain again."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Just keep going. Don't stop. Motivation will find you again once you're moving."
+            },
+            {
+              "type": "p",
+              "text": "Go back to your why. The most successful clients all have a deep rooted why — a real emotional reason underneath the goal. Spend 5-10 minutes writing out why you are willing to go through all of this. That's what gets you through the hard weeks, not motivation."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't wait until you feel motivated to start — the feeling comes because you started, not before. Don't take a full break thinking it will reset motivation — it almost always makes it harder to come back."
+            }
+          ]
+        },
+        {
+          "id": "overwhelmed",
+          "title": "I feel overwhelmed",
+          "keywords": [
+            "overwhelmed",
+            "too much",
+            "overwhelm",
+            "dont know where to start",
+            "stressed",
+            "anxious",
+            "everything at once"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Overwhelm almost always comes from trying to do too many things at once or focusing on the size of the whole journey rather than just the next step."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Shrink the task down to one thing. Just one. One session. One day of tracking. One walk. That's it. Momentum starts with the smallest possible action."
+            },
+            {
+              "type": "p",
+              "text": "Go back to your goal and your why. Read them. Sit with them. The gap between where you are and where you want to be is crossed one day at a time — not all at once."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't try to fix everything today. Don't add more information, more research, or more planning. Don't confuse being busy with making progress."
+            }
+          ]
+        },
+        {
+          "id": "start-stop",
+          "title": "I keep starting and stopping",
+          "keywords": [
+            "starting and stopping",
+            "start stop",
+            "keep quitting",
+            "always give up",
+            "yo yo",
+            "on and off",
+            "keep restarting",
+            "cant stay consistent",
+            "consistency"
+          ],
+          "triage": [
+            {
+              "q": "Do you tend to stop when life gets busy?"
+            },
+            {
+              "q": "Do you stop when progress feels too slow?"
+            },
+            {
+              "q": "Do you have a clear goal with a deadline attached to it?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Starting and stopping is almost always one of two things. Either the plan is too aggressive to sustain when real life kicks in, or there is no deep enough reason to keep going when motivation dips."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Write down your why right now. Not your goal — your why. The real emotional reason underneath it. That's what pulls you through the hard weeks."
+            },
+            {
+              "type": "p",
+              "text": "Then look at the plan honestly. Is it realistic for your actual life or does it only work when everything is perfect? Showing up at 70% consistently for 6 months destroys showing up at 100% for 3 weeks then stopping every single time."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't start again with an even more aggressive plan. Don't wait until you feel motivated. Don't keep repeating the same approach and expecting a different result."
+            }
+          ]
+        },
+        {
+          "id": "not-doing-it",
+          "title": "I know what to do but I'm not doing it",
+          "keywords": [
+            "know what to do",
+            "not doing it",
+            "procrastinating",
+            "not following plan",
+            "cant make myself",
+            "self sabotage",
+            "accountability"
+          ],
+          "triage": [
+            {
+              "q": "Is it a specific part of the plan you're avoiding — training, nutrition or both?"
+            },
+            {
+              "q": "Are you overwhelmed by how much there is to do?"
+            },
+            {
+              "q": "Do you have accountability from anyone right now?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Knowing and doing are two completely different skills. Most people in this position aren't lazy — they're either overwhelmed by the gap between where they are and where they want to be, or they've lost the emotional connection to why it matters."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Shrink the task. Pick one thing — just one — and do it today. Momentum starts with the smallest possible action."
+            },
+            {
+              "type": "p",
+              "text": "Reconnect with your why. Go back to your goal right now. Read it. Sit with it for 2 minutes."
+            },
+            {
+              "type": "p",
+              "text": "Consider accountability. Clients who consistently do what they should almost always have someone checking in on them. A coach, a training partner, even just telling someone your goal out loud changes the dynamic."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't wait until you feel ready. Don't add more information or more planning to the pile. You already know enough. Don't confuse being busy with making progress."
+            }
+          ]
+        },
+        {
+          "id": "comparing",
+          "title": "I'm comparing myself to everyone online",
+          "keywords": [
+            "comparing",
+            "compare",
+            "instagram",
+            "social media",
+            "online",
+            "influencers",
+            "tiktok",
+            "everyone else looks better"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Comparison is the thief of joy. On social media you are seeing everyone's highlight reel and best photo or video. The majority of the time you are watching it while feeling your lowest."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Mute or unfollow accounts that make you feel worse about yourself. You can even ban certain words and hashtags from your feed so it's filled with things outside of fitness."
+            },
+            {
+              "type": "p",
+              "text": "Focus on your own data — your photos, your strength numbers, your trend weight. That's the only comparison that matters."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't measure your progress against someone else's highlight reel. Don't use social media as a benchmark for where you should be. Don't let someone else's journey distract you from your own."
+            }
+          ]
+        },
+        {
+          "id": "effort-results",
+          "title": "My effort doesn't match my results",
+          "keywords": [
+            "effort doesnt match",
+            "working hard no results",
+            "doing everything right",
+            "not working",
+            "nothing is working",
+            "results dont match"
+          ],
+          "triage": [
+            {
+              "q": "Has your training stayed consistent or has anything changed?"
+            },
+            {
+              "q": "Are you tracking food or going by feel?"
+            },
+            {
+              "q": "Is this just a feeling, or do you have data that backs it up?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "One of three things. Either you're not in as much of a deficit as you think, your output has quietly dropped without you noticing, or you're measuring progress by only one method and missing the wins elsewhere."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "First — check if this is actually a feeling or if the data supports it. How do your clothes fit compared to 4 weeks ago? Are you stronger in your sessions than when you started? Those two things alone tell you a lot."
+            },
+            {
+              "type": "p",
+              "text": "Then audit your weekly averages honestly. Steps, calories, training frequency — look at the trend over 2-3 weeks. And be 100% honest with yourself. The gap between effort you think you're putting in and effort you're actually putting in is usually where the answer is."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't slash calories dramatically. Don't add punishment cardio on top of everything. Don't change the whole program based on a feeling alone."
+            }
+          ]
+        },
+        {
+          "id": "friends-faster",
+          "title": "My friends are losing faster than me on the same plan",
+          "keywords": [
+            "friend losing faster",
+            "friends faster",
+            "same plan",
+            "partner losing faster",
+            "someone else losing more",
+            "losing slower than"
+          ],
+          "triage": [
+            {
+              "q": "Are you both the same sex, starting weight, and activity level?"
+            },
+            {
+              "q": "Are you both tracking with the same level of accuracy?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Here's the honest question first — why are you and your friend on the exact same plan when you're two completely different people? Same starting point, same body, same sleep, same stress, same hormones? Didn't think so. Same plan on paper rarely means identical conditions in practice."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Stay in your lane. Their rate of loss tells you nothing meaningful about yours. Focus on your own trend over 2-3 weeks."
+            },
+            {
+              "type": "p",
+              "text": "If your progress has genuinely stalled for more than 2 weeks with no change in input or output, then we look at what to adjust — not before."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't drop your calories further just to match their pace. Don't assume something is wrong with you. Don't use their results as a reason to blow up what's actually working."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "social-pressure",
+      "name": "Social Pressure",
+      "scenarios": [
+        {
+          "id": "peer-pressure",
+          "title": "My friends are pressuring me to eat / drink",
+          "keywords": [
+            "pressure",
+            "friends pressuring",
+            "peer pressure",
+            "pushing me to drink",
+            "pushing food",
+            "forcing me to eat",
+            "feeders"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "This is one of the most common social challenges and it's rarely about the food or drink — it's about people's own relationship with food and their own insecurities being projected onto you."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Don't announce you're dieting if you don't have to. The minute some friends find out you're trying to lose weight, they try to tempt you. Manage your portion control and when needed just tell people you don't feel like drinking or having extra food."
+            },
+            {
+              "type": "p",
+              "text": "Remember it's about the average calorie intake over the week — one social event handled sensibly is not going to derail progress."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't try to justify what you're doing to others — it ends in circles. Don't let social pressure be the reason you abandon the plan. Don't isolate yourself either — find the middle ground."
+            }
+          ]
+        },
+        {
+          "id": "too-skinny",
+          "title": "My family says I look too skinny",
+          "keywords": [
+            "too skinny",
+            "too thin",
+            "family says",
+            "look ill",
+            "getting too small",
+            "lost too much weight"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "This is almost always coming from their own insecurities rather than a genuine health concern. When you're leaner than the people around you, it can make them uncomfortable — that's their issue, not yours."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Check your own data first. Progress photos, strength numbers, energy levels. If those are all good — you're fine."
+            },
+            {
+              "type": "p",
+              "text": "Focus on yourself and the progress you're making. You don't need to justify your goal to anyone."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't let other people's comments derail progress that's actually working. Don't use it as an excuse to ease up if you're genuinely on track. If you have a genuine concern about being too lean, speak to a professional."
+            }
+          ]
+        },
+        {
+          "id": "partner-support",
+          "title": "My partner isn't supporting me",
+          "keywords": [
+            "partner not supporting",
+            "partner",
+            "boyfriend",
+            "girlfriend",
+            "husband",
+            "wife",
+            "not supportive",
+            "unsupportive"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "This is tough and it's more common than people think. A partner who doesn't support the goal often feels excluded or threatened by the change — even if they don't say it directly."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Share your why with them. Not the goal — the emotional reason underneath it. Explaining why this matters to you on a deeper level helps them understand it's not just about how you look."
+            },
+            {
+              "type": "p",
+              "text": "Find the middle ground. There almost always is one. Clear communication about what you need and what you're asking of them goes a long way."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't let a lack of support become a reason to quit. Don't force them to be involved if they're not interested — just ask that they don't actively undermine it."
+            }
+          ]
+        },
+        {
+          "id": "partner-cooked",
+          "title": "My partner cooked and I don't know the calories",
+          "keywords": [
+            "partner cooked",
+            "dont know calories",
+            "home cooked",
+            "someone cooked",
+            "mum cooked",
+            "dinner made for me",
+            "estimate calories",
+            "cooked for me"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "This is simpler than it feels. If your partner is on board they'll ask if the meal fits your calories and macros. If they're not — it'll be obvious."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Talk to them. Ask what went into the meal and log your best estimate. An estimate is better than nothing."
+            },
+            {
+              "type": "p",
+              "text": "For future — if this is a regular occurrence, share your rough calorie targets with them so they can cook with that in mind. Most partners are happy to help once they know what's needed."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't obsess over not knowing the exact calories for one meal. Don't skip eating to compensate. Don't let one unmeasured meal become a reason to abandon tracking for the day."
+            }
+          ]
+        },
+        {
+          "id": "social-event",
+          "title": "I've got a social event and don't know how to handle it",
+          "keywords": [
+            "social event",
+            "party",
+            "dinner out",
+            "restaurant",
+            "eating out",
+            "meal out",
+            "wedding guest",
+            "work do",
+            "night out food"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Social events are manageable with a bit of planning. You don't have to choose between your social life and your progress."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Bank some calories in the days before — drop fats slightly, keep protein high. If you can save 200-300 calories across 2 days before the event, you arrive with wiggle room."
+            },
+            {
+              "type": "p",
+              "text": "At the event — pick the highest protein option on the menu. Starter OR dessert, not both. Limit alcohol — if you're drinking, go for lower calorie options."
+            },
+            {
+              "type": "p",
+              "text": "If you can choose the venue, pick somewhere with food aligned to your goals. If not — you can still control your drink choice, your portion size, and what you order."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't avoid social events in the name of progress — that's not sustainable. Don't arrive hungry. Don't let one event become a reason to write off the whole week."
+            }
+          ]
+        },
+        {
+          "id": "comments",
+          "title": "People's comments are getting in my head",
+          "keywords": [
+            "comments",
+            "people saying",
+            "judging me",
+            "what people think",
+            "remarks",
+            "people talking",
+            "opinions"
+          ],
+          "triage": [],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Other people's opinions about your body are almost always a reflection of their own insecurities. People who are genuinely comfortable with themselves don't feel the need to comment on how someone else looks or eats."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Play the long game and do this for yourself. Trying to justify what you're doing to others ends in circles every time."
+            },
+            {
+              "type": "p",
+              "text": "Focus on your own data — your photos, your strength, your energy. That's the only feedback that matters."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't let comments derail progress that's working. Don't get drawn into defending your choices to people who aren't supporting you. Don't mistake discomfort from others as a sign you're doing something wrong."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "physical-body",
+      "name": "Physical & Body",
+      "scenarios": [
+        {
+          "id": "dizzy",
+          "title": "I feel dizzy or lightheaded during training",
+          "keywords": [
+            "dizzy",
+            "lightheaded",
+            "light headed",
+            "faint",
+            "feel sick training",
+            "head spinning",
+            "woozy"
+          ],
+          "triage": [
+            {
+              "q": "Was your last meal more than 3 hours ago?"
+            },
+            {
+              "q": "Was your last meal low in carbohydrates?"
+            },
+            {
+              "q": "Did you stand up or change position quickly before feeling dizzy?"
+            },
+            {
+              "q": "Did this happen after a particularly hard set or heavy lift?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Very common and rarely anything to worry about. If it happened after a hard set or heavy lift — especially if you're newer to training — this is normal. Intense effort temporarily redirects blood flow and can cause a brief dizzy spell. If it's happening more generally during the session it's almost always low blood sugar from training on empty or after a long gap since your last meal."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Immediate fix — electrolytes and a small piece of fruit. Fast, simple and gets your blood sugar and mineral levels back up quickly. Sit down, give it 5 minutes and you'll likely be fine to continue."
+            },
+            {
+              "type": "p",
+              "text": "For your next session make sure you've eaten something with carbohydrates 60-90 minutes beforehand."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't push through dizziness — that's how people get hurt. Don't ignore it if it keeps happening session after session without an obvious cause. Recurring dizziness is worth getting checked by a doctor."
+            }
+          ]
+        },
+        {
+          "id": "headaches",
+          "title": "I'm getting headaches since starting my diet",
+          "keywords": [
+            "headache",
+            "headaches",
+            "migraine",
+            "head hurts",
+            "head pain",
+            "sore head"
+          ],
+          "triage": [
+            {
+              "q": "Did the headaches start when you reduced calories?"
+            },
+            {
+              "q": "Have you reduced carbohydrates significantly?"
+            },
+            {
+              "q": "Are you drinking enough water throughout the day?"
+            },
+            {
+              "q": "Are you consuming less caffeine than usual?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Almost always one of three things. Low carbohydrates causing a drop in blood sugar, dehydration from reduced food volume, or caffeine withdrawal if you've cut back on coffee or pre workout alongside the diet. All three are extremely common in the first 1-2 weeks of a new diet and almost always settle down on their own."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Immediate fix — electrolytes and water. A lot of diet related headaches are simply the body adjusting to lower sodium and reduced food volume."
+            },
+            {
+              "type": "p",
+              "text": "If you've dropped carbs significantly — consider keeping them slightly higher, particularly around training."
+            },
+            {
+              "type": "p",
+              "text": "If it's caffeine withdrawal — reduce gradually rather than cutting it out completely. Drop by one coffee every few days rather than going cold turkey."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't assume something is seriously wrong if it started within the first 2 weeks of dieting. Don't reach for painkillers as a daily fix without addressing the root cause. If headaches persist beyond 2 weeks or are severe — get them checked by a doctor."
+            }
+          ]
+        },
+        {
+          "id": "bloated",
+          "title": "I'm really bloated and uncomfortable",
+          "keywords": [
+            "bloated",
+            "bloating",
+            "bloat",
+            "stomach swollen",
+            "gassy",
+            "wind",
+            "uncomfortable stomach",
+            "belly sore"
+          ],
+          "triage": [
+            {
+              "q": "Has your diet changed significantly recently?"
+            },
+            {
+              "q": "Have you increased your protein intake recently?"
+            },
+            {
+              "q": "Are you eating a lot of protein bars or protein snacks?"
+            },
+            {
+              "q": "Have you introduced a lot of gluten, dairy or high fibre foods recently?"
+            },
+            {
+              "q": "Have you eaten anything your body isn't used to?"
+            },
+            {
+              "q": "Are you eating faster than usual?"
+            },
+            {
+              "q": "Has this been happening for more than a week consistently?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Bloating when starting or changing a diet is extremely common. The most frequent culprits are a sudden increase in protein — especially from protein bars and shakes — increased fibre from more vegetables and whole foods, or inflammatory foods like gluten or dairy that your body may not tolerate well."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "First check your protein sources. If you're relying heavily on protein bars, shakes or artificial sweeteners these are very likely the cause. Swap to whole food protein sources — chicken, fish, eggs, Greek yoghurt."
+            },
+            {
+              "type": "p",
+              "text": "Look at whether you've introduced gluten, dairy or high fibre foods your body isn't used to. Remove one at a time to identify the culprit rather than cutting everything at once."
+            },
+            {
+              "type": "p",
+              "text": "Slow your eating down — food in mouth fork on plate, two minute break at halfway point."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't cut out vegetables to fix bloating. Don't assume it's a food intolerance immediately without first ruling out the simple causes. If bloating is severe, painful or consistent for more than 2 weeks — speak to a doctor."
+            }
+          ]
+        },
+        {
+          "id": "cold",
+          "title": "I feel cold all the time",
+          "keywords": [
+            "cold",
+            "freezing",
+            "always cold",
+            "cold hands",
+            "cant get warm",
+            "chilly"
+          ],
+          "triage": [
+            {
+              "q": "Has this started since reducing your calories?"
+            },
+            {
+              "q": "Are you in a significant calorie deficit?"
+            },
+            {
+              "q": "Has your energy been low alongside this?"
+            },
+            {
+              "q": "Has this been going on for more than 2 weeks?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Feeling cold is one of the most common and overlooked signs that a calorie deficit is too aggressive. When the body is significantly under fuelled it reduces heat production to conserve energy. This is particularly common in females and in anyone who has been in a deep deficit for an extended period."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Assess how aggressive the deficit is. If you are losing weight faster than 1% of your bodyweight per week the deficit is likely too steep. Bringing calories up slightly — even 100-200 per day — can make a noticeable difference without significantly impacting fat loss."
+            },
+            {
+              "type": "p",
+              "text": "Make sure protein is high enough. Protein has the highest thermic effect of any macronutrient meaning your body generates more heat digesting it."
+            },
+            {
+              "type": "p",
+              "text": "Check iron and vitamin D levels if possible — both deficiencies cause persistent coldness and are extremely common especially in females."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't ignore it and push through indefinitely. Don't increase the deficit further if you're already feeling this way. If coldness is severe, persistent and accompanied by extreme fatigue or hair loss — get blood work done with your doctor."
+            }
+          ]
+        },
+        {
+          "id": "no-appetite",
+          "title": "I've lost my appetite completely",
+          "keywords": [
+            "no appetite",
+            "not hungry",
+            "lost appetite",
+            "cant eat",
+            "forcing food",
+            "dont want to eat",
+            "cant finish meals"
+          ],
+          "triage": [
+            {
+              "q": "Has this started since beginning or changing your diet?"
+            },
+            {
+              "q": "Are you under a lot of stress at the moment?"
+            },
+            {
+              "q": "Are you sleeping poorly?"
+            },
+            {
+              "q": "Has your training intensity increased recently?"
+            },
+            {
+              "q": "Have you increased your caffeine intake recently? (high caffeine is a known appetite suppressant)"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Appetite suppression is very common when starting a new diet or training program. High caffeine in particular is one of the most overlooked causes — pre workouts, multiple coffees and energy drinks throughout the day can significantly blunt appetite without people realising it's the cause."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Even if you're not hungry you still need to eat. Set meal times and stick to them regardless of hunger signals."
+            },
+            {
+              "type": "p",
+              "text": "If caffeine is high — reduce it gradually and see if appetite returns over a few days."
+            },
+            {
+              "type": "p",
+              "text": "Focus on calorie dense but easy to eat foods — Greek yoghurt, nut butters, eggs, smoothies with protein and oats."
+            },
+            {
+              "type": "p",
+              "text": "If stress and sleep are the root cause — address those first. Appetite almost always returns when stress comes down and sleep improves."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't use low appetite as a reason to eat significantly under your calorie target day after day. If appetite loss is severe and accompanied by nausea or significant unexpected weight loss — speak to a doctor."
+            }
+          ]
+        },
+        {
+          "id": "joints",
+          "title": "My joints are aching more than usual",
+          "keywords": [
+            "joints",
+            "joint pain",
+            "knees",
+            "elbows",
+            "shoulder pain",
+            "achy joints",
+            "knee pain",
+            "tendon",
+            "wrist",
+            "knee hurts",
+            "knees hurt",
+            "sore knees",
+            "sore joints",
+            "elbow hurts",
+            "joint"
+          ],
+          "triage": [
+            {
+              "q": "Has this started since increasing your training volume or intensity?"
+            },
+            {
+              "q": "Is it a specific joint or multiple joints?"
+            },
+            {
+              "q": "Are you warming up properly before sessions?"
+            },
+            {
+              "q": "Are you getting enough sleep and recovery between sessions?"
+            },
+            {
+              "q": "Have you significantly reduced calories recently?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Joint aching when increasing training is extremely common especially in the first few weeks of a new program. The connective tissue — tendons and ligaments — adapts much slower than muscle. Your muscles get stronger faster than your joints can keep up which creates temporary discomfort."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "First check your warm up. A proper warm up that includes mobility work specific to the joints causing discomfort makes a significant difference. Don't skip it."
+            },
+            {
+              "type": "p",
+              "text": "Reduce training volume slightly on the exercises aggravating the joints and build back up gradually."
+            },
+            {
+              "type": "p",
+              "text": "Make sure omega 3 intake is adequate. Fish oil with high EPA and DHA has good evidence for reducing joint inflammation."
+            },
+            {
+              "type": "p",
+              "text": "Prioritise sleep. The majority of tissue repair happens overnight."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't train through sharp or acute pain — that's injury territory. Don't ignore persistent joint pain that doesn't improve with reduced volume and better recovery. If a specific joint has been painful for more than 2-3 weeks without improvement — get it assessed by a physio."
+            }
+          ]
+        },
+        {
+          "id": "period",
+          "title": "My period has become irregular or stopped",
+          "femaleOnly": true,
+          "keywords": [
+            "period",
+            "periods",
+            "irregular period",
+            "missed period",
+            "no period",
+            "cycle stopped",
+            "menstrual",
+            "amenorrhea",
+            "late period"
+          ],
+          "triage": [
+            {
+              "q": "Has this happened since starting or increasing your calorie deficit?"
+            },
+            {
+              "q": "Has your training volume increased significantly recently?"
+            },
+            {
+              "q": "Has your bodyweight dropped quickly in a short period of time?"
+            },
+            {
+              "q": "Has your stress level been particularly high recently?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "This is your body sending a very clear signal that it is under too much stress — from under eating, overtraining, rapid weight loss or a combination of all three. When the body doesn't have enough fuel to support all its functions, reproduction is the first thing it switches off. This is not something to push through or ignore."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "This needs to be taken seriously. Increase calories immediately. If training volume is high — reduce it. Your body needs to feel safe and adequately fuelled before the cycle returns."
+            },
+            {
+              "type": "p",
+              "text": "Fat loss can wait. Your long term health cannot. A short period of eating at maintenance or even a small surplus to restore hormonal function is far more important than continued progress on the scale right now."
+            },
+            {
+              "type": "p",
+              "text": "Book an appointment with your doctor. This scenario goes beyond coaching advice and needs medical attention if the cycle doesn't return within 4-6 weeks of reducing the deficit and training load."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't continue in an aggressive deficit if your period has stopped. Don't dismiss it as normal or something that will sort itself out without any changes. Don't prioritise fat loss progress over your hormonal health."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nutrition-timing",
+      "name": "Nutrition Timing",
+      "scenarios": [
+        {
+          "id": "pre-workout-food",
+          "title": "I don't know what to eat before training",
+          "keywords": [
+            "before training",
+            "pre workout",
+            "before gym",
+            "what to eat before",
+            "eat before session",
+            "fasted training",
+            "pre training meal"
+          ],
+          "triage": [
+            {
+              "q": "Do you train first thing in the morning?"
+            },
+            {
+              "q": "Do you train in the afternoon or evening?"
+            },
+            {
+              "q": "Do you currently train fasted?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Pre training nutrition is simpler than most people make it. The goal is to arrive at your session with enough fuel to perform well without feeling heavy or sluggish."
+            }
+          ],
+          "next": [
+            {
+              "type": "label",
+              "label": "Morning trainer",
+              "text": "A small easily digestible meal 30-60 minutes before works well. A banana and a protein shake or some rice cakes with peanut butter. A good tip — eat your carbohydrates the evening before. They will be stored and ready to fuel your session without needing to eat a full meal before you've barely woken up."
+            },
+            {
+              "type": "label",
+              "label": "Afternoon / evening trainer",
+              "text": "A proper meal 90-120 minutes before is ideal. Lean protein, a carbohydrate source like rice or potatoes and some vegetables."
+            },
+            {
+              "type": "label",
+              "label": "Fasted trainer",
+              "text": "If it's working for you — keep going. If you're feeling dizzy, weak or performance is suffering consistently, add something small pre session even if it's just a banana."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't eat a large heavy meal within an hour of training. Don't overthink it — carbohydrates and protein before training covers the basics every time."
+            }
+          ]
+        },
+        {
+          "id": "post-workout-food",
+          "title": "I don't know what to eat after training",
+          "keywords": [
+            "after training",
+            "post workout",
+            "after gym",
+            "what to eat after",
+            "eat after session",
+            "recovery meal",
+            "post training meal"
+          ],
+          "triage": [
+            {
+              "q": "Do you train first thing in the morning?"
+            },
+            {
+              "q": "Do you train in the afternoon or evening?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Post training nutrition is simpler than most people think. Total daily protein and calories matter more than the exact timing — but getting something in within a reasonable window is still important."
+            }
+          ],
+          "next": [
+            {
+              "type": "label",
+              "label": "Morning trainer",
+              "text": "Have a proper meal within 60-90 minutes of finishing. Lean protein and a carbohydrate source. Eggs and rice, chicken and potatoes, Greek yoghurt with fruit and granola. This is the most important meal of the day for recovery — don't skip it."
+            },
+            {
+              "type": "label",
+              "label": "Afternoon / evening trainer",
+              "text": "Your next scheduled meal covers your post training nutrition in most cases. If your next meal is more than 2 hours away — have a protein shake to bridge the gap."
+            },
+            {
+              "type": "goal",
+              "goal": "lose",
+              "text": "Total daily calories matter most. Don't add extra meals just because you trained."
+            },
+            {
+              "type": "goal",
+              "goal": "gain",
+              "text": "Prioritise getting protein and carbohydrates in within 60-90 minutes post session."
+            },
+            {
+              "type": "goal",
+              "goal": "maintain",
+              "text": "Your next regular meal is fine in most cases."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't skip eating after training in an attempt to burn more fat. Don't rely solely on a protein shake as a full post workout meal. Don't overthink the timing — total daily protein is what matters most."
+            }
+          ]
+        },
+        {
+          "id": "evening-eating",
+          "title": "I'm struggling with eating well in the evenings",
+          "keywords": [
+            "evening eating",
+            "night time eating",
+            "eating at night",
+            "late night snacking",
+            "snacking at night",
+            "night eating",
+            "after dinner snacking",
+            "evenings"
+          ],
+          "triage": [
+            {
+              "q": "Is this happening most nights or just occasionally?"
+            },
+            {
+              "q": "Do you find yourself restricting during the day then overeating at night?"
+            },
+            {
+              "q": "Is it triggered by a specific situation — stress, boredom, watching TV?"
+            },
+            {
+              "q": "Are you staying up late with nothing specific to do?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Evening eating is rarely about genuine hunger. It's almost always habit, boredom or the evening being the first moment in the day where the person slows down and the brain looks for a reward."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "First establish if it's genuine hunger or habit. Drink a full glass of water and wait 10 minutes. If it passes — it was habit. If it doesn't — have something high in protein and low in calories. Greek yoghurt, cottage cheese, a small protein shake."
+            },
+            {
+              "type": "p",
+              "text": "If you're restricting during the day — stop. Work with the pattern instead. Save a larger portion of your calories deliberately for the evening, eat lighter during the day and give yourself a planned evening snack within your targets."
+            },
+            {
+              "type": "p",
+              "text": "If it's boredom or habit — make a herbal tea, brush your teeth, move away from the kitchen. The physical barrier of already having brushed your teeth is surprisingly effective."
+            },
+            {
+              "type": "p",
+              "text": "If you're staying up late with nothing to do — go to bed earlier. The extra hours awake serve nothing except creating more opportunity to eat."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't keep trigger foods within easy reach in the evening. Don't try to white knuckle it every night with willpower alone — change the environment instead. Don't eat standing in front of the fridge — make it a conscious planned decision."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event-based",
+      "name": "Event Based",
+      "scenarios": [
+        {
+          "id": "wedding-event",
+          "title": "I have a wedding / event coming up — how do I look my best?",
+          "keywords": [
+            "wedding",
+            "event coming up",
+            "look my best",
+            "photoshoot",
+            "big day",
+            "look good for",
+            "event in a few days"
+          ],
+          "triage": [
+            {
+              "q": "Is it your wedding?"
+            },
+            {
+              "q": "Is the event in 3 days or less?"
+            },
+            {
+              "q": "Is the event in 4-7 days?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "There is no magic fix in a few days but there are smart things you can do to look and feel your best. The goal is to reduce water retention and bloating, not to lose fat — there isn't enough time for that. If it's your own wedding — you should have come to me sooner! Let's make the best of it."
+            }
+          ],
+          "next": [
+            {
+              "type": "label",
+              "text": "Cut out alcohol completely. Remove foods that cause you to bloat — gluten, dairy, fizzy drinks, protein bars, cruciferous vegetables. Keep sodium moderate. Drink plenty of water — being well hydrated actually reduces water retention. Prioritise lean protein and vegetables. Get a walk in each day.",
+              "label": "3 days or less"
+            },
+            {
+              "type": "label",
+              "text": "All of the above plus a slight calorie reduction for a few days to sharpen things up. Train as normal. Prioritise sleep — nothing makes you look worse than poor sleep the night before.",
+              "label": "4-7 days"
+            },
+            {
+              "type": "p",
+              "text": "On the day — eat a high protein breakfast, stay hydrated and avoid anything that personally bloats you."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't crash diet in the days leading up to it. Don't cut water. Don't try anything with food or training you haven't done before."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gym-confidence",
+      "name": "Gym Confidence",
+      "scenarios": [
+        {
+          "id": "gym-embarrassed",
+          "title": "I feel embarrassed at the gym",
+          "keywords": [
+            "embarrassed",
+            "self conscious",
+            "gym anxiety",
+            "scared of gym",
+            "intimidated",
+            "people watching me",
+            "nervous at gym",
+            "awkward at gym"
+          ],
+          "triage": [
+            {
+              "q": "Is this your first few weeks or have you been going a while?"
+            },
+            {
+              "q": "Is it a specific situation or just a general feeling?"
+            }
+          ],
+          "happening": [
+            {
+              "type": "p",
+              "text": "Everyone in that gym is focused on themselves. Nobody is watching you as closely as you think. That feeling is your brain trying to protect you from discomfort — it's not reality."
+            }
+          ],
+          "next": [
+            {
+              "type": "p",
+              "text": "Do the session anyway. The embarrassment shrinks every single time you show up despite it."
+            },
+            {
+              "type": "p",
+              "text": "The people you think are judging you are the same people who started exactly where you are now. Everyone respects someone who turns up and puts in the work — nobody is thinking what you think they're thinking."
+            }
+          ],
+          "avoid": [
+            {
+              "type": "p",
+              "text": "Don't avoid the exercises you need to do. Don't hide in the corner on the same two machines forever. Don't let that feeling make the decision for you."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tips": [
+    {
+      "id": "fork-on-plate",
+      "title": "Food in mouth — fork on plate",
+      "text": "Every time you put food in your mouth, put your fork down. Don't pick it back up until you've swallowed. Most people are loading the next bite before they've finished the first. This one habit alone slows eating down dramatically and gives your body time to register fullness before you've overeaten."
+    },
+    {
+      "id": "halfway-break",
+      "title": "Two minute break at the halfway point",
+      "text": "Stop eating halfway through your meal for at least a minute — work up to two. No phone, no scrolling. Just be present. Drink some water, have a conversation if you're eating socially, check in with how full you actually feel. Most people need far less food than they thought once they pause and pay attention."
+    },
+    {
+      "id": "volume-eating",
+      "title": "Volume eating",
+      "text": "Fill your plate with high volume, low calorie foods first — leafy greens, shredded carrots, beetroot, spinach. Then add your protein source on top. The same calorie target can feel completely different depending on what's filling it."
+    },
+    {
+      "id": "plan-the-craving",
+      "title": "Plan the craving, don't fight it",
+      "text": "If you want something specific, plan it in and enjoy it guilt free rather than eating around it and caving anyway with extra calories on top."
+    },
+    {
+      "id": "weekly-average",
+      "title": "Weekly average weight",
+      "text": "Don't judge progress on a single weigh-in. Add up your daily weigh-ins and look at the weekly average. That number tells the real story."
+    }
+  ]
+}
