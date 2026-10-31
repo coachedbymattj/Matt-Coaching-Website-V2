@@ -22,7 +22,7 @@ import {
 const paths = [
   {
     slug: "in-person",
-    eyebrow: "01 · Amsterdam studio · €100 / session",
+    eyebrow: "01 · Amsterdam studio",
     name: "In-Person 1:1 Coaching",
     pitch:
       "Face-to-face coaching in the studio. Every set coached, every cue corrected on the floor, best fit if you want hands-on technique work or if you train better with someone in the room.",
@@ -36,7 +36,7 @@ const paths = [
   },
   {
     slug: "online",
-    eyebrow: "02 · Anywhere in the world · €150 / 4 weeks",
+    eyebrow: "02 · Anywhere in the world",
     name: "Online 1:1 Coaching",
     pitch:
       "Bespoke programming, weekly check-ins, voice-note form reviews and a coach in your pocket. Built for working professionals who already know their way around a gym.",
@@ -218,11 +218,7 @@ export default function ApplyPage() {
                       >
                         Start application
                       </span>
-                      <span
-                        className={`inline-flex items-center gap-2 text-sm font-medium transition group-hover:gap-3 ${
-                          p.accent ? "text-canvas" : "text-ink-900"
-                        }`}
-                      >
+                      <span className="btn-ember inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition group-hover:gap-3">
                         Open form
                         <ArrowUpRight size={16} weight="bold" />
                       </span>

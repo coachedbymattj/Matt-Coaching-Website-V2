@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
+import { GalleryLink } from "../components/GalleryLink";
 
 const values = [
   {
@@ -77,7 +78,7 @@ const timeline = [
     year: "2025",
     title: "Founded Coached by Matt J",
     body: "Went independent. A capped roster, three coaching paths, and full control over the standard.",
-    img: "/career/2025-cbmj.webp",
+    img: "/career/2025-founder.webp",
   },
 ];
 
@@ -92,9 +93,12 @@ export default function AboutPage() {
               About · Matthew Johnstone
             </div>
             <h1 className="mt-6 font-display text-[clamp(2.3rem,5.4vw,4.4rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-ink-900">
-              If getting fitter feels like your{" "}
-              <span className="text-ember-grad">Everest</span>, you are who I
-              help.
+              If getting fitter
+              <br />
+              feels like your{" "}
+              <span className="text-ember-grad">Everest</span>,
+              <br />
+              I&rsquo;ll get you to the top.
             </h1>
             <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-ink-600">
               The reality shows up in the small moments. Out of breath after one
@@ -113,7 +117,7 @@ export default function AboutPage() {
               style={{ aspectRatio: "5 / 6" }}
             >
               <img
-                src="/career/about-portrait.webp"
+                src="/career/about-headshot.webp"
                 alt="Matthew Johnstone"
                 width={1000}
                 height={1200}
@@ -184,14 +188,30 @@ export default function AboutPage() {
               How I coach.
             </h2>
           </Reveal>
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
             {howICoach.map((p, i) => (
               <Reveal key={p} delay={i * 0.06} className="h-full">
-                <div className="flex h-full flex-col gap-5 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm md:p-8">
-                  <div className="font-display text-4xl font-bold leading-none text-ink-200">
-                    0{i + 1}
+                <div className="group relative h-full">
+                  {/* Ember heat halo — radial glow bleeding around the tile,
+                      brighter at the bottom so it reads like heat rising from
+                      a coal. Intensifies on hover; reduced-motion disables
+                      the transition but keeps the static glow. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -inset-4 rounded-5xl opacity-70 transition-opacity duration-75 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 75% 65% at 50% 95%, rgba(200,85,61,0.35) 0%, rgba(200,85,61,0.15) 45%, transparent 75%)",
+                      filter: "blur(48px)",
+                    }}
+                  />
+                  {/* Tile face — clean white, on top of the halo. */}
+                  <div className="relative flex h-full flex-col gap-5 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm md:p-8">
+                    <div className="font-mono text-4xl leading-none tracking-tight tabular-nums text-ember-deep">
+                      0{i + 1}
+                    </div>
+                    <p className="text-lg leading-relaxed text-ink-800">{p}</p>
                   </div>
-                  <p className="text-lg leading-relaxed text-ink-800">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -247,6 +267,9 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
 
       {/* CTA */}
       <section className="bg-canvas py-24 md:py-32">

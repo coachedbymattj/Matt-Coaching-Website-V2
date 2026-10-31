@@ -2,18 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import {
-  LockSimple,
-  CheckCircle,
-  ArrowRight,
-  CaretDown,
-  Warning,
-} from "@phosphor-icons/react";
-import {
-  subscribeEmail,
-  isValidEmail,
-  cleanMailchimpMessage,
-} from "../lib/mailchimpClient";
+import { ArrowRight, CaretDown, Warning } from "@phosphor-icons/react";
 import { BodyFatFigure, BodyFatControls, type Sex } from "./BodyFatSelector";
 import { CountUp } from "./motion";
 
@@ -132,12 +121,6 @@ export function MacroCalculator() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // email gate
-  const [email, setEmail] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [statusMsg, setStatusMsg] = useState("");
-
   const result = useMemo(
     () =>
       snapshot
@@ -163,35 +146,6 @@ export function MacroCalculator() {
     setSnapshot({ bodyweight: bw, bodyFat });
   }
 
-  async function handleSubscribe() {
-    if (!isValidEmail(email)) {
-      setStatusMsg("Please enter a valid email address.");
-      return;
-    }
-    setSubmitting(true);
-    setStatusMsg("");
-    try {
-      const res = await subscribeEmail(email);
-      if (res.result === "success") {
-        setStatusMsg("You're in! Your full macro breakdown is unlocked below.");
-      } else {
-        const clean = cleanMailchimpMessage(res.msg);
-        setStatusMsg(
-          clean
-            ? `${clean} Your macros are unlocked below anyway.`
-            : "You're already on the list, macros unlocked below."
-        );
-      }
-    } catch {
-      setStatusMsg(
-        "Couldn't reach the mailing list right now, but your macros are unlocked below."
-      );
-    } finally {
-      setSubmitting(false);
-      setUnlocked(true);
-    }
-  }
-
   const inputClass =
     "w-full rounded-2xl border hairline bg-canvas px-4 py-3 font-mono text-lg text-ink-900 outline-none transition focus:border-ember/50";
   const labelClass =
@@ -203,8 +157,8 @@ export function MacroCalculator() {
     <div className="flex flex-col gap-6">
       {/* ---------- INPUTS ---------- */}
       <div className="rounded-5xl border hairline bg-white p-6 shadow-diffusion-sm md:p-8">
-        {/* bodyweight */}
-        <div className="flex flex-col gap-2 sm:max-w-xs">
+        {/* bodyweight — centered to the body figure axis below */}
+        <div className="mx-auto flex max-w-xs flex-col gap-2">
           <label htmlFor="mc-bw" className={labelClass}>
             Bodyweight (kg)
           </label>
@@ -227,7 +181,36 @@ export function MacroCalculator() {
           )}
         </div>
 
-        {/* body fat tile: figure + slider (matches the goal calc tiles) */}
+        {/* sex toggle — centered, sits between the bodyweight input and the
+            body figure. Promoted out of <BodyFatControls> so the label below
+            the figure no longer carries it. */}
+        <div className="mt-5 flex justify-center">
+          <div
+            role="radiogroup"
+            aria-label="Sex"
+            className="flex rounded-full border hairline bg-canvas p-0.5"
+          >
+            {(["male", "female"] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                role="radio"
+                aria-checked={sex === s}
+                onClick={() => setSex(s)}
+                className={`rounded-full px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] transition ${
+                  sex === s
+                    ? "bg-ink-900 text-canvas"
+                    : "text-ink-500 hover:text-ink-900"
+                }`}
+              >
+                {s === "male" ? "Male" : "Female"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* body fat tile: figure + slider (matches the goal calc tiles).
+            Toggle is hoisted above so showSexToggle={false} here. */}
         <div className="mt-7 flex flex-col gap-4">
           <BodyFatFigure sex={sex} value={bodyFat} />
           <BodyFatControls
@@ -236,6 +219,7 @@ export function MacroCalculator() {
             onChange={setBodyFat}
             sex={sex}
             onSexChange={setSex}
+            showSexToggle={false}
             idPrefix="mc-bf"
           />
         </div>
@@ -352,7 +336,7 @@ export function MacroCalculator() {
                   fat, not total weight). More protein protects muscle while
                   losing fat and keeps you fuller. Guide: 2.0-2.2 general
                   maintenance, 2.3-2.6 most people training and dieting, 2.7-3.0
-                  aggressive fat loss or max muscle retention.
+                  for those who love eating high protein.
                 </p>
               </div>
 
@@ -446,87 +430,14 @@ export function MacroCalculator() {
         </motion.div>
       )}
 
-      {/* ---------- EMAIL GATE ---------- */}
-      {result && !unlocked && (
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.05 }}
-          className="rounded-5xl border border-ember/30 bg-white p-6 shadow-ember-glow md:p-8"
-        >
-          <div className="flex items-start gap-4">
-            <span className="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-ember/10 text-ember-deep">
-              <LockSimple size={18} weight="bold" />
-            </span>
-            <div className="flex-1">
-              <h3 className="font-display text-2xl font-semibold uppercase leading-none tracking-[0.01em] text-ink-900">
-                Unlock your full macro breakdown
-              </h3>
-              <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ink-600">
-                Enter your email to reveal your daily protein, fat and carb
-                targets to hit that calorie number.
-              </p>
-
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="you@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSubscribe();
-                  }}
-                  className="w-full flex-1 rounded-full border hairline bg-canvas px-5 py-3 text-base text-ink-900 outline-none transition focus:border-ember/50"
-                  aria-label="Email address"
-                />
-                <button
-                  type="button"
-                  onClick={handleSubscribe}
-                  disabled={submitting}
-                  className="btn-ember inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] disabled:opacity-60"
-                >
-                  {submitting ? "Sending…" : "Unlock my macros"}
-                  {!submitting && <ArrowRight size={16} weight="bold" />}
-                </button>
-              </div>
-
-              {statusMsg && (
-                <p
-                  className="mt-3 text-xs leading-snug text-ember-deep"
-                  aria-live="polite"
-                >
-                  {statusMsg}
-                </p>
-              )}
-
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
-                One email when there's something worth saying · unsubscribe anytime
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* ---------- MACRO BREAKDOWN (revealed after email) ---------- */}
-      {result && unlocked && (
+      {/* ---------- MACRO BREAKDOWN ---------- */}
+      {result && (
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 22 }}
           className="flex flex-col gap-6"
         >
-          {statusMsg && (
-            <div
-              className="flex items-center gap-2 rounded-full bg-ember/10 px-4 py-2.5 text-xs font-medium text-ember-deep"
-              aria-live="polite"
-            >
-              <CheckCircle size={16} weight="fill" />
-              {statusMsg}
-            </div>
-          )}
-
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
               { k: "Protein", v: result.proteinG },

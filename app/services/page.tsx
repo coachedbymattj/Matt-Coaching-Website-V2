@@ -17,6 +17,9 @@ import {
   Globe,
   UsersThree,
 } from "@phosphor-icons/react/dist/ssr";
+import { GalleryLink } from "../components/GalleryLink";
+import { HomeBeliefs } from "../components/home/Beliefs";
+import { HomePrinciples } from "../components/home/Principles";
 
 const oneToOne = [
   {
@@ -24,8 +27,8 @@ const oneToOne = [
     icon: <MapPin size={16} weight="regular" />,
     eyebrow: "In-Person · 1:1 · Amsterdam",
     name: "Face-to-face coaching",
-    price: "€100",
-    cadence: "per 1-hour session · billed how it suits you",
+    price: "By application",
+    cadence: "1-hour sessions · billed how it suits you",
     availability: "Always open · Amsterdam studio",
     pitch:
       "Sessions delivered under my eye, in the studio. The full diagnostic, every set coached, every cue corrected on the floor. Best fit for clients who want hands-on technique work or who train better with someone in the room.",
@@ -45,8 +48,8 @@ const oneToOne = [
     icon: <Globe size={16} weight="regular" />,
     eyebrow: "Online · 1:1",
     name: "Bespoke remote coaching",
-    price: "€150",
-    cadence: "every 4 weeks · cancel any month",
+    price: "By application",
+    cadence: "billed every 4 weeks · cancel any month",
     availability: "Always open",
     pitch:
       "Weekly Loom-based coaching, bespoke programming in the app, and a coach you can message between sessions. Engineered around your gym, your schedule, and your life, the 1:1 standard, from anywhere in the world.",
@@ -148,6 +151,10 @@ export default function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      {/* What I stand for + How I coach — moved here from the homepage */}
+      <HomeBeliefs />
+      <HomePrinciples />
 
       {/* 1:1 Tiers, asymmetric 5 / 7 split */}
       <section className="bg-canvas py-24 md:py-32">
@@ -360,6 +367,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
     </>
   );
 }
