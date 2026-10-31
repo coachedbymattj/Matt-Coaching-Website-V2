@@ -42,11 +42,11 @@ type Tool =
 
 const tools: Tool[] = [
   {
-    kind: "external",
+    kind: "internal",
     n: "01",
     title: "Panic Button",
     desc: "In-the-moment coaching when you're struggling.",
-    href: "https://panicbtn-mhvwst4c.manus.space/",
+    href: "/level-zero/panic-button",
     icon: "/icons/panic-button.webp",
   },
   {
