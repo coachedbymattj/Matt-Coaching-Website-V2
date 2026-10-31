@@ -58,13 +58,6 @@ export const results: ResultCase[] = [
     img: "/results/adrian.webp",
   },
   {
-    slug: "natalia",
-    name: "Natalia",
-    headline: "Photoshoot ready",
-    detail: "Week 1 to Week 34",
-    img: "/results/natalia.webp",
-  },
-  {
     slug: "jim",
     name: "Jim",
     headline: "Dropped 10kg",
