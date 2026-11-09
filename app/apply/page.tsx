@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apply for Online 1:1 Coaching · Coached by Matt J",
   description:
-    "Apply for online 1:1 coaching from anywhere in the world, or MELT group coaching. Every application reaches Matt directly — personal reply within 48 hours.",
+    "Apply for online 1:1 coaching from anywhere in the world, or in-person coaching in Amsterdam. Every application reaches Matt directly — personal reply within 48 hours.",
   alternates: {
     canonical: "https://coachedbymattj.com/apply",
   },
@@ -14,7 +14,6 @@ import {
   ArrowUpRight,
   MapPin,
   Globe,
-  UsersThree,
   Clock,
   Lock,
 } from "@phosphor-icons/react/dist/ssr";
@@ -49,20 +48,6 @@ const paths = [
     badge: "Most popular",
     accent: true,
   },
-  {
-    slug: "melt",
-    eyebrow: "03 · Group programme · €89 / 10 weeks",
-    name: "MELT · Online Group Coaching",
-    pitch:
-      "A 10-week structured fat-loss programme delivered to a small online group. Eight weeks of focused fat loss, then two weeks teaching you how to keep it, the part most programmes skip.",
-    fit: [
-      "You prefer training alongside a community",
-      "You want structure without the bespoke price tag",
-      "You can commit to a fixed 10-week block",
-    ],
-    icon: <UsersThree size={18} weight="regular" />,
-    badge: "Runs three times a year",
-  },
 ];
 
 export default function ApplyPage() {
@@ -73,11 +58,11 @@ export default function ApplyPage() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="md:col-span-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-                Apply · Three coaching paths
+                Apply · Two coaching paths
               </div>
               <h1 className="mt-6 font-display text-[clamp(3rem,7.4vw,5.8rem)] font-bold uppercase leading-[0.86] tracking-[-0.02em] text-ink-900">
                 One coach.<br />
-                <span className="text-ember-grad">Three ways in.</span>
+                <span className="text-ember-grad">Two ways in.</span>
               </h1>
               <p className="mt-7 max-w-[58ch] text-lg leading-relaxed text-ink-600">
                 Pick the path that fits how you actually live, not the one that
@@ -123,12 +108,7 @@ export default function ApplyPage() {
         <div className="mx-auto max-w-[1400px] px-6">
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-12">
             {paths.map((p, i) => {
-              const span =
-                i === 0
-                  ? "md:col-span-5"
-                  : i === 1
-                  ? "md:col-span-7"
-                  : "md:col-span-12";
+              const span = i === 0 ? "md:col-span-5" : "md:col-span-7";
               return (
                 <li key={p.slug} className={span}>
                   <Link
