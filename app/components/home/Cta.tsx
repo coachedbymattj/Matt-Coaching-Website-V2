@@ -10,7 +10,6 @@ export function HomeCta() {
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="flex items-end justify-between border-b hairline pb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
           <span>07 / 07 — Apply</span>
-          <span>Closing soon</span>
         </div>
 
         <motion.div
