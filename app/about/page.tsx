@@ -77,7 +77,7 @@ const timeline = [
   {
     year: "2025",
     title: "Founded Coached by Matt J",
-    body: "Went independent. A capped roster, three coaching paths, and full control over the standard.",
+    body: "Went independent. A capped roster, 1:1 coaching online and in Amsterdam, and full control over the standard.",
     img: "/career/2025-founder.webp",
   },
 ];
