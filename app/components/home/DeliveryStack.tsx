@@ -4,7 +4,7 @@ import { Reveal } from "../motion";
 function CustomAppPanel() {
   const readouts = [
     { k: "Sleep", v: "7h 18m", live: false },
-    { k: "HRV", v: "62 ms", live: true },
+    { k: "HRV", v: "62 ms", live: false },
     { k: "Heart rate", v: "54 bpm", live: false },
     { k: "Weight", v: "84.2 kg", live: false },
   ];
@@ -32,11 +32,7 @@ function CustomAppPanel() {
       <div className="relative">
         {/* code chip + REC */}
         <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em]">
-          <span className="text-ember-soft">01 / 04 · The instrument</span>
-          <span className="inline-flex items-center gap-1.5 text-ember-soft">
-            <span className="inline-block h-2 w-2 rounded-full bg-ember animate-ember-pulse" />
-            REC
-          </span>
+          <span className="text-ember-soft">01 · Your app</span>
         </div>
 
         {/* headline */}
@@ -60,8 +56,7 @@ function CustomAppPanel() {
         {/* live readouts */}
         <div className="mt-10 border-t border-canvas/10 pt-6">
           <div className="mb-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/55">
-            <span>Live readout · last sync 06 m ago</span>
-            <span>Source · your Health app</span>
+            <span>Example · what I see from your Health app</span>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
             {readouts.map((r) => (
@@ -125,10 +120,10 @@ export function HomeDeliveryStack() {
         <div className="grid grid-cols-12 gap-6">
           <Reveal className="col-span-12 md:col-span-5">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-              02 / 07— How we work together
+              How we work together
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.01em] text-ink-900 md:text-6xl">
-              The delivery stack.
+              How coaching works.
             </h2>
           </Reveal>
           <Reveal
@@ -136,9 +131,9 @@ export function HomeDeliveryStack() {
             className="col-span-12 md:col-span-6 md:col-start-7 max-w-[58ch] self-end"
           >
             <p className="text-base leading-relaxed text-ink-700">
-              Four channels. One coach. The app is the instrument that watches
-              your week; the rest is me, on a direct line, doing the thinking
-              and writing the call.
+              Four parts, one coach. The app keeps track of your week; the
+              rest is me, on a direct line, doing the thinking and making the
+              calls.
             </p>
           </Reveal>
         </div>
@@ -152,7 +147,7 @@ export function HomeDeliveryStack() {
         <div className="mt-16 grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              The human channels
+              The coaching
             </div>
             <p className="mt-4 max-w-[34ch] text-base leading-relaxed text-ink-600">
               Where the actual coaching happens. No portal logins, no
@@ -168,7 +163,7 @@ export function HomeDeliveryStack() {
                 className="grid grid-cols-12 gap-6 border-t hairline py-10 first:border-t-0 first:pt-0"
               >
                 <div className="col-span-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-                  {c.n} / 04
+                  {c.n}
                 </div>
                 <div className="col-span-10">
                   <h3 className="font-display text-3xl font-semibold uppercase leading-[0.95] tracking-[-0.005em] text-ink-900 md:text-4xl">

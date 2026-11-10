@@ -16,18 +16,11 @@ export function HomeOutcomes() {
       />
 
       <div className="relative mx-auto max-w-[1400px] px-6">
-        {/* module strip */}
-        <div className="flex items-end justify-between border-b border-canvas/10 pb-3 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/60">
-          <span>Module 03 · Outcomes log</span>
-          <span className="hidden md:inline">Verified · client weigh-ins</span>
-          <span />
-        </div>
-
         {/* heading + meta */}
-        <div className="mt-12 grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-12 gap-6">
           <Reveal className="col-span-12 md:col-span-7">
             <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-ember-soft">
-              03 / 07 — Recent transformations
+              Recent transformations
             </div>
             <h2 className="mt-5 max-w-2xl font-display text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] md:text-6xl">
               Outcomes you can measure.
@@ -40,8 +33,8 @@ export function HomeOutcomes() {
             className="col-span-12 md:col-span-4 md:col-start-9 md:self-end"
           >
             <p className="text-canvas/75">
-              Every entry is a real client weigh-in window. Names and numbers
-              are theirs. Photos and case notes on the full results page.
+              Every result here is a real client. Names and numbers are
+              theirs. See them all on the results page.
             </p>
           </Reveal>
         </div>
@@ -75,9 +68,9 @@ export function HomeOutcomes() {
         <div className="mt-14">
           <div className="grid grid-cols-12 gap-4 border-b border-canvas/10 pb-3 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/50">
             <span className="col-span-1">No.</span>
-            <span className="col-span-4 md:col-span-3">Subject</span>
+            <span className="col-span-4 md:col-span-3">Client</span>
             <span className="col-span-7 md:col-span-4">Result</span>
-            <span className="hidden text-right md:col-span-4 md:block">Window</span>
+            <span className="hidden text-right md:col-span-4 md:block">Details</span>
           </div>
 
           {rows.map((r, i) => (
@@ -106,12 +99,12 @@ export function HomeOutcomes() {
         </div>
 
         <div className="mt-10 flex items-center justify-between border-t border-canvas/10 pt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/55">
-          <span>Source · client weigh-ins · verified</span>
+          <span>Real clients · shared with permission</span>
           <Link
             href="/results"
             className="inline-flex items-center gap-2 rounded-full border border-canvas/15 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-canvas transition hover:bg-canvas hover:text-ink-900"
           >
-            Open the full log
+            See all results
             <ArrowUpRight size={14} weight="bold" />
           </Link>
         </div>

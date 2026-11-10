@@ -72,7 +72,7 @@ const faqs = [
   },
   {
     q: "What if I'm a complete beginner?",
-    a: "Welcome. Beginners adapt faster than anyone, your first 12 weeks will likely produce results others spend years chasing. In-person 1:1 is the strongest fit; we can move to online once your technique is locked in.",
+    a: "Welcome. Beginners adapt faster than anyone, your first few months will likely produce results others spend years chasing. In-person 1:1 is the strongest fit; we can move to online once your technique is locked in.",
   },
   {
     q: "Can I pause online coaching if life implodes?",

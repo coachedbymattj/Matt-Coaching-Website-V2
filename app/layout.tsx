@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://coachedbymattj.com"),
   title: "Coached by Matt J · Body transformation, engineered",
   description:
-    "Online coaching for working professionals who want a leaner, stronger, more capable body. Twelve-week transformation protocols built around your life, not the other way around.",
+    "Online coaching for working professionals who want a leaner, stronger, more capable body. Coaching built around your life, not the other way around.",
   openGraph: {
     title: "Coached by Matt J",
     description:

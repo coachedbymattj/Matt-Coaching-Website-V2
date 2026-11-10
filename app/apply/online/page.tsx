@@ -16,7 +16,7 @@ export default function ApplyOnlinePage() {
       whatHappensNext={[
         "Fill in the short form below, about 7 minutes.",
         "I'll review and reply inside 48 working hours, working days.",
-        "If we're a fit, I send a calendar link for a 60-minute video diagnostic. We start block one the following Monday.",
+        "If we're a fit, I send a calendar link for a 45-minute video call. We start block one the following Monday.",
       ]}
       formUrl="https://public.1fit.com/leadforms/01a07266-96ac-7128-877d-34143c8d223d"
     />

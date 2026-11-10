@@ -9,7 +9,7 @@ export function HomeCta() {
     <section className="bg-canvas pb-24 md:pb-32">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="flex items-end justify-between border-b hairline pb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-          <span>07 / 07 — Apply</span>
+          <span>Apply</span>
         </div>
 
         <motion.div
@@ -33,7 +33,7 @@ export function HomeCta() {
               </h2>
               <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-canvas/75 md:text-lg">
                 Coaching is application-only. If we&apos;re a fit, you&apos;ll
-                hear back in 48 hours with a calendar link for the diagnostic
+                hear back in 48 hours with a calendar link for a 45-minute
                 call.
               </p>
             </div>
