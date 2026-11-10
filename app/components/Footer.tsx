@@ -36,6 +36,7 @@ export function Footer() {
                 { href: "/results", label: "Client transformations" },
                 { href: "/journal", label: "Journal" },
                 { href: "/apply", label: "Apply for coaching" },
+                { href: "/privacy", label: "Privacy" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link
