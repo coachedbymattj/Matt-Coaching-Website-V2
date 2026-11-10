@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Client Results · Real Transformations · Coached by Matt J",
   description:
-    "Real people, real numbers. See the transformations clients have achieved through engineered coaching protocols, then apply for the next intake.",
+    "Real people, real numbers. See the transformations clients have achieved through engineered coaching protocols, then apply for coaching.",
   alternates: {
     canonical: "https://coachedbymattj.com/results",
   },
@@ -84,7 +84,7 @@ export default function ResultsPage() {
                 Could be you next
               </div>
               <h2 className="mt-3 max-w-xl font-display text-4xl font-bold uppercase leading-[0.9] tracking-[-0.01em] text-ink-900 md:text-5xl">
-                Apply for the spring intake.
+                Apply for coaching.
               </h2>
             </div>
             <Link

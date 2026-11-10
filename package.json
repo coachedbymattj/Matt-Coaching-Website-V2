@@ -10,6 +10,7 @@
     "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.9",
     "@phosphor-icons/react": "^2.1.7",
     "fast-xml-parser": "^5.8.0",
     "framer-motion": "^11.11.9",
