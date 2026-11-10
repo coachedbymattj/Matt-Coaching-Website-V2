@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apply for Online 1:1 Coaching · Coached by Matt J",
   description:
-    "Apply for online 1:1 coaching from anywhere in the world, or MELT group coaching. Every application reaches Matt directly — personal reply within 48 hours.",
+    "Apply for online 1:1 coaching from anywhere in the world, or in-person coaching in Amsterdam. Every application reaches Matt directly — personal reply within 48 hours.",
   alternates: {
     canonical: "https://coachedbymattj.com/apply",
   },
@@ -14,7 +14,6 @@ import {
   ArrowUpRight,
   MapPin,
   Globe,
-  UsersThree,
   Clock,
   Lock,
 } from "@phosphor-icons/react/dist/ssr";
@@ -36,7 +35,7 @@ const paths = [
   },
   {
     slug: "online",
-    eyebrow: "02 · Anywhere in the world · €150 / 4 weeks",
+    eyebrow: "02 · Anywhere in the world",
     name: "Online 1:1 Coaching",
     pitch:
       "Bespoke programming, weekly check-ins, voice-note form reviews and a coach in your pocket. Built for working professionals who already know their way around a gym.",
@@ -49,20 +48,6 @@ const paths = [
     badge: "Most popular",
     accent: true,
   },
-  {
-    slug: "melt",
-    eyebrow: "03 · Group programme · €89 / 10 weeks",
-    name: "MELT · Online Group Coaching",
-    pitch:
-      "A 10-week structured fat-loss programme delivered to a small online group. Eight weeks of focused fat loss, then two weeks teaching you how to keep it, the part most programmes skip.",
-    fit: [
-      "You prefer training alongside a community",
-      "You want structure without the bespoke price tag",
-      "You can commit to a fixed 10-week block",
-    ],
-    icon: <UsersThree size={18} weight="regular" />,
-    badge: "Runs three times a year",
-  },
 ];
 
 export default function ApplyPage() {
@@ -73,16 +58,14 @@ export default function ApplyPage() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="md:col-span-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-                Apply · Three coaching paths
+                Apply · Two coaching paths
               </div>
               <h1 className="mt-6 font-display text-[clamp(3rem,7.4vw,5.8rem)] font-bold uppercase leading-[0.86] tracking-[-0.02em] text-ink-900">
                 One coach.<br />
-                <span className="text-ember-grad">Three ways in.</span>
+                <span className="text-ember-grad">Two ways in.</span>
               </h1>
               <p className="mt-7 max-w-[58ch] text-lg leading-relaxed text-ink-600">
-                Pick the path that fits how you actually live, not the one that
-                sounds most impressive. Every form below goes straight to my inbox
-               , I read each one and reply personally inside 48 working hours.
+                Pick the path that fits how you actually live. Every form below goes straight to my inbox. I read each one and reply personally inside 48 working hours.
               </p>
             </div>
             <aside className="md:col-span-4 self-end">
