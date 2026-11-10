@@ -23,7 +23,7 @@ export function CtaBanner() {
             <div className="md:col-span-8">
               <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ember-soft">
                 <span className="h-1.5 w-1.5 rounded-full bg-ember animate-ember-pulse" />
-                Spring intake · 4 spots
+                Applications open
               </div>
               <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.88] tracking-[-0.01em] md:text-7xl">
                 You don't need more motivation.<br />
