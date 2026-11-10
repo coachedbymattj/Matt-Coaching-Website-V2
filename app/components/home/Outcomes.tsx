@@ -4,6 +4,7 @@ import { Reveal } from "../motion";
 import { results } from "../../lib/results";
 
 const rows = results.slice(0, 6);
+const photos = results.slice(0, 4);
 
 export function HomeOutcomes() {
   return (
@@ -45,13 +46,38 @@ export function HomeOutcomes() {
           </Reveal>
         </div>
 
+        {/* before / after photos — the proof, ahead of the numbers */}
+        <div className="strip -mx-6 mt-14 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:overflow-visible md:px-0">
+          <ul className="flex w-max gap-4 md:grid md:w-auto md:grid-cols-4 md:gap-5">
+            {photos.map((c, i) => (
+              <li key={c.slug} className="w-[260px] flex-none md:w-auto">
+                <Reveal delay={i * 0.05}>
+                  <Link
+                    href="/results"
+                    className="group block overflow-hidden rounded-4xl border border-canvas/10 bg-ink-900"
+                  >
+                    <img
+                      src={c.img}
+                      alt={`${c.name} before and after. ${c.headline}, ${c.detail}.`}
+                      width={900}
+                      height={1000}
+                      loading="lazy"
+                      className="block h-auto w-full transition duration-700 group-hover:scale-[1.03]"
+                    />
+                  </Link>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* instrument table */}
         <div className="mt-14">
           <div className="grid grid-cols-12 gap-4 border-b border-canvas/10 pb-3 font-mono text-[10px] uppercase tracking-[0.24em] text-canvas/50">
             <span className="col-span-1">No.</span>
-            <span className="col-span-3">Subject</span>
-            <span className="col-span-4">Result</span>
-            <span className="col-span-4 text-right">Window</span>
+            <span className="col-span-4 md:col-span-3">Subject</span>
+            <span className="col-span-7 md:col-span-4">Result</span>
+            <span className="hidden text-right md:col-span-4 md:block">Window</span>
           </div>
 
           {rows.map((r, i) => (
@@ -63,13 +89,16 @@ export function HomeOutcomes() {
               <span className="col-span-1 font-mono text-[11px] tabular-nums text-canvas/55">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="col-span-3 font-display text-lg font-semibold uppercase tracking-[0.01em] md:text-xl">
+              <span className="col-span-4 font-display text-lg font-semibold uppercase tracking-[0.01em] md:col-span-3 md:text-xl">
                 {r.name}
               </span>
-              <span className="col-span-4 font-mono text-sm tabular-nums text-ember-soft">
+              <span className="col-span-7 font-mono text-sm tabular-nums text-ember-soft md:col-span-4">
                 {r.headline}
+                <span className="mt-1 block text-[11px] uppercase tracking-[0.14em] text-canvas/60 md:hidden">
+                  {r.detail}
+                </span>
               </span>
-              <span className="col-span-4 text-right font-mono text-[12px] uppercase tracking-[0.16em] text-canvas/70">
+              <span className="hidden text-right font-mono text-[12px] uppercase tracking-[0.16em] text-canvas/70 md:col-span-4 md:block">
                 {r.detail}
               </span>
             </Reveal>

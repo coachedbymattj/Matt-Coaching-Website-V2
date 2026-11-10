@@ -2,6 +2,7 @@ import { LogoBar } from "./components/LogoBar";
 import { MessageBox } from "./components/MessageBox";
 import { Positioning } from "./components/Positioning";
 import { HomeHero } from "./components/home/Hero";
+import { HomePaths } from "./components/home/Paths";
 import { HomeDeliveryStack } from "./components/home/DeliveryStack";
 import { HomeOutcomes } from "./components/home/Outcomes";
 import { HomeProcess } from "./components/home/Process";
@@ -51,6 +52,9 @@ export default function HomePage() {
 
       {/* Positioning strap — "total beginner to photoshoot ready" */}
       <Positioning />
+
+      {/* The two coaching paths, with the in-person price */}
+      <HomePaths />
 
       {/* 04 · Delivery stack — editorial channels + LAB instrument panel for the app (intentional seam) */}
       <HomeDeliveryStack />

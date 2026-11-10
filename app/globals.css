@@ -60,7 +60,9 @@ body {
 }
 
 /* Grain layer, fixed, pointer-events: none, never on scrolling containers */
-.grain::after {
+/* Applied once, on <body>. The class on individual sections is inert so the
+   full-screen layer is not stacked many times over. */
+body.grain::after {
   content: "";
   position: fixed;
   inset: 0;
@@ -152,5 +154,30 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Auto-scrolling strips (reviews, gallery). On touch screens there is no hover
+   to pause them, so they become an ordinary swipeable row instead: animation
+   off, snap points on, and the duplicated loop copies hidden. */
+@media (hover: none) {
+  .strip {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .strip::-webkit-scrollbar {
+    display: none;
+  }
+  .strip > .strip-track {
+    animation: none !important;
+    padding-inline: 1.5rem;
+  }
+  .strip > .strip-track > * {
+    scroll-snap-align: center;
+  }
+  .strip .strip-dup {
+    display: none;
   }
 }

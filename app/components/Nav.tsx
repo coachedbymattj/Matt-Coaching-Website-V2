@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 
@@ -76,7 +76,9 @@ export function Nav() {
           </Link>
           <button
             type="button"
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
             className="rounded-full border hairline p-2 md:hidden"
           >
@@ -85,10 +87,13 @@ export function Nav() {
         </div>
       </div>
 
+      <AnimatePresence>
       {open && (
         <motion.div
+          id="mobile-menu"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8, transition: { duration: 0.15 } }}
           transition={{ type: "spring", stiffness: 220, damping: 26 }}
           className="border-t hairline bg-canvas px-6 py-4 md:hidden"
         >
@@ -107,6 +112,7 @@ export function Nav() {
           </ul>
         </motion.div>
       )}
+      </AnimatePresence>
     </header>
   );
 }

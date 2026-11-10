@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 /* Editorial positioning strap. Used near the top of the homepage and the
-   results page so the visitor knows who I coach in one line. Includes a
-   small link down to the transformations gallery on the homepage. */
+   results page so the visitor knows who I coach in one line. On the
+   homepage it links through to the client results. */
 export function Positioning({ compact = false }: { compact?: boolean } = {}) {
   return (
     <section className="border-b hairline bg-canvas">
@@ -38,18 +38,20 @@ export function Positioning({ compact = false }: { compact?: boolean } = {}) {
               </span>
               .
             </p>
+            {!compact && (
             <Link
-              href="/#transformations"
+              href="/results"
               className="group mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-600 transition hover:text-ember-deep"
             >
               <span className="text-ember-deep">→</span>
-              <span>See the transformations gallery</span>
+              <span>See client transformations</span>
               <ArrowUpRight
                 size={12}
                 weight="bold"
                 className="text-ink-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ember-deep"
               />
             </Link>
+            )}
           </div>
         </div>
       </div>
