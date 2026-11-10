@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { LazyGoalWeightCalculator } from "../../components/lazy";
+import { ResultGate } from "../../components/level-zero/ResultGate";
 
 export const metadata: Metadata = {
   title: "Goal Weight Calculator · Level Zero · Coached by Matt J",
@@ -36,7 +37,14 @@ export default function GoalWeightPage() {
         </header>
 
         <div className="mt-10">
-          <LazyGoalWeightCalculator />
+          <ResultGate
+            tool="Goal Weight Calculator"
+            title="Enter your email to start"
+            blurb="Enter your email to open the calculator, then get your goal weight and a full week-by-week plan to reach it."
+            submitLabel="Start the calculator"
+          >
+            <LazyGoalWeightCalculator />
+          </ResultGate>
         </div>
       </div>
     </section>

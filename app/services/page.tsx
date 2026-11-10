@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Online Coaching & More · Coached by Matt J",
   description:
-    "Online 1:1 coaching for working professionals who want the 1:1 standard from anywhere, and in-person 1:1 coaching in Amsterdam.",
+    "Online 1:1 coaching for working professionals who want the 1:1 standard from anywhere. Limited in-person spots in Amsterdam.",
   alternates: {
     canonical: "https://coachedbymattj.com/services",
   },
@@ -16,6 +16,9 @@ import {
   MapPin,
   Globe,
 } from "@phosphor-icons/react/dist/ssr";
+import { GalleryLink } from "../components/GalleryLink";
+import { HomeBeliefs } from "../components/home/Beliefs";
+import { HomePrinciples } from "../components/home/Principles";
 
 const oneToOne = [
   {
@@ -23,8 +26,8 @@ const oneToOne = [
     icon: <MapPin size={16} weight="regular" />,
     eyebrow: "In-Person · 1:1 · Amsterdam",
     name: "Face-to-face coaching",
-    price: "€100",
-    cadence: "per 60-minute session · online support included",
+    price: "By application",
+    cadence: "1-hour sessions · billed how it suits you",
     availability: "Always open · Amsterdam studio",
     pitch:
       "Sessions delivered under my eye, in the studio. The full diagnostic, every set coached, every cue corrected on the floor. Best fit for clients who want hands-on technique work or who train better with someone in the room.",
@@ -44,8 +47,8 @@ const oneToOne = [
     icon: <Globe size={16} weight="regular" />,
     eyebrow: "Online · 1:1",
     name: "Bespoke remote coaching",
-    price: "",
-    cadence: "",
+    price: "By application",
+    cadence: "billed every 4 weeks · cancel any month",
     availability: "Always open",
     pitch:
       "Weekly Loom-based coaching, bespoke programming in the app, and a coach you can message between sessions. Engineered around your gym, your schedule, and your life, the 1:1 standard, from anywhere in the world.",
@@ -97,7 +100,7 @@ export default function ServicesPage() {
             </h1>
             <p className="mt-7 max-w-[58ch] text-lg leading-relaxed text-ink-600">
               Both are written and run by me personally, the difference is
-              where you train and how we stay in touch between sessions.
+              where you train and how you want to be coached.
             </p>
           </div>
           <aside className="md:col-span-3 md:col-start-10 self-end">
@@ -119,6 +122,10 @@ export default function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      {/* What I stand for + How I coach — moved here from the homepage */}
+      <HomeBeliefs />
+      <HomePrinciples />
 
       {/* 1:1 Tiers, asymmetric 5 / 7 split */}
       <section className="bg-canvas py-24 md:py-32">
@@ -175,37 +182,29 @@ export default function ServicesPage() {
                     {tier.pitch}
                   </p>
 
-                  {tier.price ? (
-                    <div
-                      className={`mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t pt-6 ${
-                        tier.accent ? "border-ink-800" : "hairline"
+                  <div
+                    className={`mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t pt-6 ${
+                      tier.accent ? "border-ink-800" : "hairline"
+                    }`}
+                  >
+                    <span
+                      className={`font-mono text-4xl tracking-tight md:text-5xl ${
+                        tier.accent ? "text-canvas" : "text-ink-900"
                       }`}
                     >
-                      <span
-                        className={`font-mono text-4xl tracking-tight md:text-5xl ${
-                          tier.accent ? "text-canvas" : "text-ink-900"
-                        }`}
-                      >
-                        {tier.price}
-                      </span>
-                      <span
-                        className={`text-sm ${
-                          tier.accent ? "text-canvas/60" : "text-ink-500"
-                        }`}
-                      >
-                        {tier.cadence}
-                      </span>
-                    </div>
-                  ) : (
-                    <div
-                      className={`mt-8 border-t ${
-                        tier.accent ? "border-ink-800" : "hairline"
+                      {tier.price}
+                    </span>
+                    <span
+                      className={`text-sm ${
+                        tier.accent ? "text-canvas/60" : "text-ink-500"
                       }`}
-                    />
-                  )}
+                    >
+                      {tier.cadence}
+                    </span>
+                  </div>
 
                   <div
-                    className={`${tier.price ? "mt-3" : "mt-6"} font-mono text-[11px] uppercase tracking-[0.18em] ${
+                    className={`mt-3 font-mono text-[11px] uppercase tracking-[0.18em] ${
                       tier.accent ? "text-canvas/60" : "text-ink-500"
                     }`}
                   >
@@ -276,6 +275,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* See also — homepage transformations gallery */}
+      <GalleryLink />
     </>
   );
 }

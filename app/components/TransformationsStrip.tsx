@@ -54,7 +54,7 @@ export function TransformationsStrip() {
                   src={c.img}
                   alt={`${c.name} transformation: ${c.headline}.`}
                   width={900}
-                  height={825}
+                  height={1000}
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-contain transition duration-700 group-hover:scale-[1.03]"
                 />

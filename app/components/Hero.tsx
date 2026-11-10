@@ -29,7 +29,7 @@ export function Hero() {
                 href="/apply"
                 className="btn-ember group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em]"
               >
-                Apply for coaching
+                Apply for the next intake
                 <ArrowUpRight size={16} weight="bold" className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link

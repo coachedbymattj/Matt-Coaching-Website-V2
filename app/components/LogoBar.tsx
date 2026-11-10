@@ -1,13 +1,13 @@
 export function LogoBar() {
   const names = [
-    "Goldman Sachs",
-    "DeepMind",
-    "Linklaters",
-    "Karolinska",
-    "ICONIQ",
-    "Bain & Co",
-    "Stripe",
-    "ECB",
+    "Mollie",
+    "Diageo",
+    "Manly",
+    "Booking.com",
+    "UiPath",
+    "Olaf",
+    "Costa",
+    "Mastercard",
   ];
   return (
     <section className="border-y hairline bg-canvas">

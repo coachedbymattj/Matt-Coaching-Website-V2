@@ -21,7 +21,7 @@ import {
 const paths = [
   {
     slug: "in-person",
-    eyebrow: "01 · Amsterdam studio · €100 / session",
+    eyebrow: "01 · Amsterdam studio",
     name: "In-Person 1:1 Coaching",
     pitch:
       "Face-to-face coaching in the studio. Every set coached, every cue corrected on the floor, best fit if you want hands-on technique work or if you train better with someone in the room.",
@@ -65,7 +65,9 @@ export default function ApplyPage() {
                 <span className="text-ember-grad">Two ways in.</span>
               </h1>
               <p className="mt-7 max-w-[58ch] text-lg leading-relaxed text-ink-600">
-                Pick the path that fits how you actually live. Every form below goes straight to my inbox. I read each one and reply personally inside 48 working hours.
+                Pick the path that fits how you actually live, not the one that
+                sounds most impressive. Every form below goes straight to my inbox
+               , I read each one and reply personally inside 48 working hours.
               </p>
             </div>
             <aside className="md:col-span-4 self-end">
@@ -106,12 +108,7 @@ export default function ApplyPage() {
         <div className="mx-auto max-w-[1400px] px-6">
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-12">
             {paths.map((p, i) => {
-              const span =
-                i === 0
-                  ? "md:col-span-5"
-                  : i === 1
-                  ? "md:col-span-7"
-                  : "md:col-span-12";
+              const span = i === 0 ? "md:col-span-5" : "md:col-span-7";
               return (
                 <li key={p.slug} className={span}>
                   <Link
@@ -201,11 +198,7 @@ export default function ApplyPage() {
                       >
                         Start application
                       </span>
-                      <span
-                        className={`inline-flex items-center gap-2 text-sm font-medium transition group-hover:gap-3 ${
-                          p.accent ? "text-canvas" : "text-ink-900"
-                        }`}
-                      >
+                      <span className="btn-ember inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition group-hover:gap-3">
                         Open form
                         <ArrowUpRight size={16} weight="bold" />
                       </span>

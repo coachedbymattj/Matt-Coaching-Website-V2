@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { LazySessionBuilder } from "../../components/lazy";
+import { ResultGate } from "../../components/level-zero/ResultGate";
 
 export const metadata: Metadata = {
   title: "Session Builder · Level Zero · Coached by Matt J",
@@ -36,7 +37,14 @@ export default function SessionBuilderPage() {
         </header>
 
         <div className="mt-10">
-          <LazySessionBuilder />
+          <ResultGate
+            tool="Session Builder"
+            title="Enter your email to start"
+            blurb="Enter your email to open the builder, then answer a few quick questions and get your full session."
+            submitLabel="Start building"
+          >
+            <LazySessionBuilder />
+          </ResultGate>
         </div>
       </div>
     </section>
