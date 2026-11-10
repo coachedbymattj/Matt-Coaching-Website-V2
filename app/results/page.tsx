@@ -16,7 +16,6 @@ import { ResultMedia } from "../components/ResultMedia";
 import { results as cases } from "../lib/results";
 import { Reveal } from "../components/motion";
 import { Positioning } from "../components/Positioning";
-import { GalleryLink } from "../components/GalleryLink";
 
 export default function ResultsPage() {
   return (
@@ -98,7 +97,6 @@ export default function ResultsPage() {
       </section>
 
       {/* See also — homepage transformations gallery */}
-      <GalleryLink />
     </>
   );
 }

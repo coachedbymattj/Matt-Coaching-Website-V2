@@ -26,8 +26,8 @@ const oneToOne = [
     icon: <MapPin size={16} weight="regular" />,
     eyebrow: "In-Person · 1:1 · Amsterdam",
     name: "Face-to-face coaching",
-    price: "By application",
-    cadence: "1-hour sessions · billed how it suits you",
+    price: "€100",
+    cadence: "per 60-minute session · online support included",
     availability: "Always open · Amsterdam studio",
     pitch:
       "Sessions delivered under my eye, in the studio. The full diagnostic, every set coached, every cue corrected on the floor. Best fit for clients who want hands-on technique work or who train better with someone in the room.",
@@ -72,7 +72,7 @@ const faqs = [
   },
   {
     q: "What if I'm a complete beginner?",
-    a: "Welcome. Beginners adapt faster than anyone, your first 12 weeks will likely produce results others spend years chasing. In-person 1:1 is the strongest fit; we can move to online once your technique is locked in.",
+    a: "Welcome. Beginners adapt faster than anyone, your first few months will likely produce results others spend years chasing. In-person 1:1 is the strongest fit; we can move to online once your technique is locked in.",
   },
   {
     q: "Can I pause online coaching if life implodes?",

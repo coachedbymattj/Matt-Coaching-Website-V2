@@ -84,7 +84,7 @@ const tools: Tool[] = [
     href: "/level-zero/session-builder",
     icon: "/icons/session-builder.webp",
   },
-  ...Array.from({ length: 4 }, (_, i) => ({
+  ...Array.from({ length: 1 }, (_, i) => ({
     kind: "soon" as const,
     n: String(i + 6).padStart(2, "0"),
     title: "New tool incoming",

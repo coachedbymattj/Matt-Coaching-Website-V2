@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-300">
               Online body transformation coaching for working professionals.
-              Twelve-week protocols engineered around your calendar, your kitchen, and your gym.
+              Built around your calendar, your kitchen, and your gym.
             </p>
             <div className="mt-8">
               <GoogleRatingBadge />

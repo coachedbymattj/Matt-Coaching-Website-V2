@@ -8,10 +8,10 @@ import { useReducedMotion } from "framer-motion";
 // rectangle so the layout stays intact.
 const SLOTS = [
   "/images/gallery/matt-portrait.webp",
-  "/images/gallery/4.png",
+  "/images/gallery/4.webp",
   "/images/gallery/matt-shoot-bts.webp",
   "/images/gallery/matt-guinness.webp",
-  "/images/gallery/5.png",
+  "/images/gallery/5.webp",
   "/images/gallery/matt-shoot-mirror.webp",
 ] as const;
 
@@ -52,9 +52,19 @@ function Slide({ src, n }: { src: string; n: number }) {
 /* Each tile is aspect-[4/5] portrait to match the 1080×1350 source. The
    marquee track renders the loop set twice so it translates -50% without a
    visible snap. */
-function Tile({ src, n }: { src: string; n: number }) {
+function Tile({
+  src,
+  n,
+  className = "",
+}: {
+  src: string;
+  n: number;
+  className?: string;
+}) {
   return (
-    <div className="aspect-[4/5] w-[280px] flex-none overflow-hidden bg-ink-900 sm:w-[340px] md:w-[380px]">
+    <div
+      className={`aspect-[4/5] w-[280px] flex-none overflow-hidden bg-ink-900 sm:w-[340px] md:w-[380px] ${className}`}
+    >
       <Slide src={src} n={n} />
     </div>
   );
@@ -74,7 +84,7 @@ export function HomeGallery() {
         <div className="grid grid-cols-12 gap-6 md:items-end">
           <div className="col-span-12 md:col-span-8">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember-deep">
-              More transformations
+              Behind the scenes
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.01em] text-ink-900 md:text-6xl">
               The gallery.
@@ -84,7 +94,7 @@ export function HomeGallery() {
       </div>
 
       {/* Marquee band — full bleed of the page. Hairline rule top + bottom. */}
-      <div className="relative overflow-hidden border-y hairline bg-canvas">
+      <div className="strip relative overflow-hidden border-y hairline bg-canvas">
         {reduce ? (
           /* Reduced motion: static row of the gallery images. */
           <div className="mx-auto max-w-[1400px] px-6 py-6">
@@ -99,11 +109,16 @@ export function HomeGallery() {
              translating the track -50% lands the second copy exactly where
              the first one started — seamless loop, no snap. */
           <div
-            className="flex w-max gap-4 py-6 animate-marquee hover:[animation-play-state:paused]"
+            className="strip-track flex w-max gap-4 py-6 animate-marquee hover:[animation-play-state:paused]"
             style={{ animationDuration: "50s" }}
           >
             {[...LOOP, ...LOOP].map((src, i) => (
-              <Tile key={`${src}-${i}`} src={src} n={(i % SLOTS.length) + 1} />
+              <Tile
+                key={`${src}-${i}`}
+                src={src}
+                n={(i % SLOTS.length) + 1}
+                className={i >= SLOTS.length ? "strip-dup" : ""}
+              />
             ))}
           </div>
         )}

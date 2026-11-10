@@ -44,7 +44,7 @@ export function HomeReviews() {
         <div className="grid grid-cols-12 gap-6">
           <Reveal className="col-span-12 md:col-span-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              05 / 07 — In their words
+              In their words
             </div>
             <h2 className="mt-4 font-display text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] text-ink-900 md:text-6xl">
               Don&apos;t just take my
@@ -121,14 +121,14 @@ export function HomeReviews() {
                     href="/results"
                     className="text-ember-deep hover:text-ink-900"
                   >
-                    see the case files →
+                    see client results →
                   </Link>
                 </p>
               )}
             </div>
 
             <div className="mt-14 flex items-center justify-between border-t hairline pt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-              <span>Source · Google Business Profile · live</span>
+              <span>From Google reviews</span>
               {data?.profileUrl ? (
                 <a
                   href={data.profileUrl}
@@ -144,7 +144,7 @@ export function HomeReviews() {
                   href="/results"
                   className="inline-flex items-center gap-2 text-ink-700 hover:text-ember-deep"
                 >
-                  See the case files
+                  See client results
                   <ArrowUpRight size={14} weight="bold" />
                 </Link>
               )}

@@ -65,7 +65,7 @@ export function HomeHero() {
         </div>
 
         {/* ── RIGHT — full-bleed gym photo (top / right / bottom edges, no padding) ── */}
-        <div className="relative order-1 h-[70vh] md:order-2 md:col-span-5 md:h-auto md:min-h-[100dvh]">
+        <div className="relative order-1 h-[52vh] md:order-2 md:col-span-5 md:h-auto md:min-h-[100dvh]">
           <img
             src={HERO_SRC}
             srcSet="/hero-gym-sm.webp 760w, /hero-gym.webp 1300w"

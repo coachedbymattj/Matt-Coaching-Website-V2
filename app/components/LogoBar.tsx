@@ -14,7 +14,7 @@ export function LogoBar() {
       <div className="mx-auto max-w-[1400px] px-6 py-8">
         <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-500">
-            Clients write for me from
+            My clients work at
           </span>
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-3">
             {names.map((n) => (

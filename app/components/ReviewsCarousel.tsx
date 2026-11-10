@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useFeaturable } from "../lib/useFeaturable";
 import { GoogleG, Stars } from "./GoogleMark";
@@ -23,6 +24,33 @@ function SkeletonRow() {
   );
 }
 
+// Long reviews are clamped to keep the cards even, with a way to read the rest.
+function ReviewText({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const long = (text?.length ?? 0) > 260;
+  return (
+    <div className="mt-4">
+      <blockquote
+        className={`text-base leading-relaxed text-ink-800 ${
+          open ? "" : "line-clamp-6"
+        }`}
+      >
+        {text}
+      </blockquote>
+      {long && (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ember-deep underline decoration-ember/40 underline-offset-4 hover:decoration-ember"
+        >
+          {open ? "Show less" : "Read more"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export function ReviewsCarousel() {
   const reduce = useReducedMotion();
   const { data, loading } = useFeaturable();
@@ -35,9 +63,9 @@ export function ReviewsCarousel() {
   const items = reduce ? reviews : [...reviews, ...reviews];
 
   return (
-    <div className={`overflow-hidden ${reduce ? "overflow-x-auto" : ""}`}>
+    <div className={`strip overflow-hidden ${reduce ? "overflow-x-auto" : ""}`}>
       <div
-        className={`flex w-max gap-5 ${
+        className={`strip-track flex w-max gap-5 ${
           reduce
             ? "px-6"
             : "animate-marquee hover:[animation-play-state:paused]"
@@ -46,7 +74,9 @@ export function ReviewsCarousel() {
         {items.map((r, i) => (
           <figure
             key={i}
-            className="flex w-[320px] shrink-0 flex-col justify-between gap-6 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm sm:w-[400px]"
+            className={`flex w-[320px] shrink-0 flex-col justify-between gap-6 rounded-4xl border hairline bg-white p-7 shadow-diffusion-sm sm:w-[400px] ${
+              i >= reviews.length ? "strip-dup" : ""
+            }`}
           >
             <div>
               <div className="flex items-center justify-between gap-3">
@@ -62,9 +92,7 @@ export function ReviewsCarousel() {
                   emptyColor="rgba(16,16,16,0.15)"
                 />
               </div>
-              <blockquote className="mt-4 line-clamp-6 text-base leading-relaxed text-ink-800">
-                {r.comment}
-              </blockquote>
+              <ReviewText text={r.comment} />
             </div>
             <figcaption className="flex items-center gap-3">
               {r.reviewer.profilePhotoUrl ? (
